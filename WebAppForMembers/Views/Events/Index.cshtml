@@ -1,0 +1,78 @@
+﻿@model IEnumerable<EventViewModel>
+
+@{
+    ViewData["Title"] = "Your events";
+}
+
+<h2>Your Events</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["SortNameParam"]">Name</a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["SortOrganisationParam"]">Organisation</a>
+            </th>
+            <th>
+                Description
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["SortStartDateParam"]">Start date</a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["SortEndDateParam"]">End date</a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["SortDeadlineParam"]">Deadline for application</a>
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrganisationName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DeadlineForApplication)
+            </td>
+            <td>
+                <a asp-action="Details" asp-route-id="@item.EventId">Details</a> |
+                @if (item.State == EventViewModel.EventState.Accepted)
+                {
+                    <a asp-action="Reject" asp-route-eventId="@item.EventId">Reject</a>
+                }
+                @if (item.State == EventViewModel.EventState.Rejected)
+                {
+                    <a asp-action="Accept" asp-route-eventId="@item.EventId">Accept</a>
+                }
+                @if (item.State != EventViewModel.EventState.Unseen)
+                {
+                    <a asp-action="EditForm" asp-route-eventId="@item.EventId">Edit response</a>
+                }
+                else
+                {
+                    <a asp-action="EditForm" asp-route-eventId="@item.EventId">Respond</a>
+                }
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

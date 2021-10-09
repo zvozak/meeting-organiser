@@ -1,0 +1,84 @@
+﻿@using System
+@using System.Globalization
+@using WebAppForMembers.Models;
+
+@model VenueViewModel
+@{
+    ViewData["Title"] = "Details";
+}
+
+<style>
+    /* Always set the map height explicitly to define the size of the div element that contains the map. */
+    #map {
+        height: 400px;
+    }
+</style>
+
+<div class="contentHead">@Model.Venue.Name</div>
+<div class="contentBody">
+    <table width="600">
+        <tr>
+            <td>
+                <strong>Address:</strong> <br /><br /> @Model.Venue.Address
+            </td>
+
+        </tr>
+        <tr>
+            <td>
+                <strong>Description:</strong> <br /><br /> @Model.Venue.Description
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="contentComment">
+                    <strong>Map:</strong> <br /><br />
+                    <div id="map"></div>
+                </div>
+            </td>
+        </tr>
+        @if (Model.ImageIds != null && Model.ImageIds.Count() > 0)
+        {
+            <tr>
+                <td>
+                    <div class="contentComment">
+                        <strong>Images:</strong><br />
+                        @foreach (Int32 id in Model.ImageIds)
+                        {
+                            <a asp-action="Image" asp-route-id="@id" asp-route-large="@true" target="_blank">
+                                <img src="@Url.Action("Image", new { id = id, large=false })" class="contentImage" />
+                            </a>
+                        }
+                    </div>
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+<div>
+    <a asp-action="Details" asp-route-id="@Model.Venue.EventId">Back to event</a>
+</div>
+
+
+
+@section Scripts
+{
+    <script>
+        function initMap() {
+            var location = {
+                lat: @Model.Venue.LocationX.ToString("F6", CultureInfo.CreateSpecificCulture("en-US")),
+                lng: @Model.Venue.LocationY.ToString("F6", CultureInfo.CreateSpecificCulture("en-US"))
+            };
+            var map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 13,
+                center: location
+            });
+            var marker = new google.maps.Marker({
+                position: location,
+                map: map
+            });
+        }
+    </script>
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=@ViewBag.GoogleMapsApiKey&callback=initMap">
+    </script>
+}

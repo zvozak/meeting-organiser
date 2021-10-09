@@ -1,0 +1,60 @@
+﻿@using WebAppForMembers.Models;
+
+@model EventDetailViewModel
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div>
+    <h4>@Model.Event.Name event at @Model.Event.OrganisationName organisation</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Model.Event.Name
+        </dt>
+        <dt class="col-sm-2">
+            Start: @Model.Event.StartDate
+        </dt>
+        <dt class="col-sm-2">
+            End: @Model.Event.EndDate
+        </dt>
+        <dt class="col-sm-2">
+            Deadline for application: @Model.Event.DeadlineForApplication
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Event.Description
+        </dd>
+    </dl>
+    <table>
+        @* felsoroljuk az épületeket (egy sorban kettőt) *@
+        @for (Int32 i = 0; i < (Model.Venues.Count + 1) / 2; i++)
+        {
+            <tr>
+                @for (Int32 j = i * 2; j < i * 2 + 2 && j < Model.Venues.Count; j++)
+                {
+                    <td>
+                        <table border="0">
+                            <tr class="venueItem">
+                                <td>
+                                    <img src="@Url.Action("ImageForVenue", new {id = Model.Venues[j].Id})" class="contentImage" />
+                                </td>
+                                <td>
+                                    <div class="venueItemHead">
+                                        <a asp-action="VenueDetails" asp-route-venueId="@Model.Venues[j].Id">@Model.Venues[j].Name</a>
+                                    </div>
+                                    <div class="venueItemContent">
+                                        <strong>City: </strong>@Model.Venues[j].Address<br />
+                                        <strong>Description: </strong>@Model.Venues[j].Description.Substring(0, Model.Venues[j].Description.IndexOf(".") + 1)
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                }
+            </tr>
+        }
+    </table>
+</div>
+<div>
+    <a asp-action="Index">Back to Your events</a>
+</div>

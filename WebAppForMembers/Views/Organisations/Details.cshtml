@@ -1,0 +1,71 @@
+﻿@using WebAppForMembers.Models;
+
+@model OrganisationDetailViewModel
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Events of @Model.Organisation.Name</h1>
+
+<div>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Model.Organisation.Name
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Organisation.Description
+        </dd>
+    </dl>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Name of event
+                </th>
+                <th>
+                    Starting date
+                </th>
+                <th>
+                    End date
+                </th>
+                <th>
+                    Deadline for applying
+                </th>
+                <th>
+                    Description
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+            <tbody>
+                @foreach (var item in Model.Events)
+                {
+                <tr>
+                    <td>
+                        @item.Name
+                    </td>
+                    <td>
+                        @item.StartDate
+                    </td>
+                    <td>
+                        @item.EndDate
+                    </td>
+                    <td>
+                        @item.DeadlineForApplication
+                    </td>
+                    <td>
+                        @item.Description
+                    </td>
+                    <td>
+                        <a asp-controller="Events" asp-action="Details" asp-route-id="@item.EventId">Details</a> |
+                        <a asp-controller="Events" asp-action="EditForm" asp-route-eventId="@item.EventId">Respond</a>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div>
+        <a asp-action="Quit" asp-route-id="@Model.Organisation.Id">Quit organisation</a> |
+        <a asp-action="Index">Back to Your organisations</a>
+    </div>

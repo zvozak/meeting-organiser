@@ -1,0 +1,96 @@
+﻿@using System;
+
+@{
+    ViewData["Title"] = "Edit response";
+}
+
+@model EventFormViewModel
+
+<h2>Respond to event by filling in the form below</h2>
+
+<form asp-controller="Events" asp-action="EditForm">
+    @Html.HiddenFor(model => model.EventId)
+    @Html.HiddenFor(model => model.MemberId)
+    @Html.HiddenFor(model => model.IsFixGuest)
+    @Html.HiddenFor(model => model.EventStartDate)
+    @Html.HiddenFor(model => model.EventEndDate)
+
+    <table>
+        <tr>
+            <td colspan="4">
+                <div class="failureNotification">@Html.ValidationSummary(true, "Could not respond to event!")</div>
+            </td>
+        </tr>
+
+        @if (Model.Venues.Count > 1)
+        {
+            <tr>
+                <td>
+                    Select venue:
+                </td>
+            </tr>
+
+            @foreach (var venue in Model.Venues)
+            {
+                <tr>
+                    <td>
+                        <img src="@Url.Action("ImageForVenue", new { id = venue.Id })" class="contentImage" />
+                    </td>
+                    <td>
+                        @venue.Name
+                    </td>
+                    <td>
+                        @Html.RadioButtonFor(model => model.SelectedVenueId, venue.Id)
+                    </td>
+                </tr>
+            }
+
+        }
+        <tr>
+            <td colspan="4">
+                The event starts in @Model.EventStartDate and ends in @Model.EventEndDate. Please choose dates within this interval.
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                Could attend event from:
+            </td>
+            <td class="failureNotification" colspan="2">
+                @Html.TextBoxFor(model => model.StartDate, new { type = "datetime-local", value = Model.StartDate })
+                <span asp-validation-for="StartDate"></span>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                Have to leave until:
+            </td>
+            <td class="failureNotification" colspan="2">
+                @Html.TextBoxFor(model => model.EndDate, new { type = "datetime-local" })
+                <span asp-validation-for="EndDate"></span>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4">
+                I would like to take part in the event
+                @Html.CheckBox("WantToJoin", true)
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4">
+                @Html.TextAreaFor(model => model.Comment)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="submit" value="Submit" class="button" />
+            </td>
+        </tr>
+    </table>
+</form>
+
+@section Scripts
+{
+    @* jQuery Validation használata a kliens oldali validációra *@
+    <partial name="_ValidationScriptsPartial" />
+
+}

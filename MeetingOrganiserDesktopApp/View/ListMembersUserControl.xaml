@@ -1,0 +1,49 @@
+﻿<UserControl x:Class="MeetingOrganiserDesktopApp.View.ListMembersUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MeetingOrganiserDesktopApp.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="30" />
+        </Grid.RowDefinitions>
+
+        <DataGrid Name="memberGrid" Grid.Row="0" Grid.Column="0"  AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding Members}" SelectedItem="{Binding SelectedMember}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
+                <DataGridTextColumn Header="Email" Binding="{Binding Email}"  />
+                <DataGridTextColumn Header="Date of joining" Binding="{Binding DateOfJoining}"  />
+                <DataGridTextColumn Header="Department" Binding="{Binding Department}" />
+                <DataGridTextColumn Header="Role/jobtitle" Binding="{Binding Job}"  />
+                <DataGridTextColumn Header="Supervisor" Binding="{Binding Boss.Name}" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <StackPanel Grid.Row="6" Grid.Column="0" Orientation="Horizontal" Grid.ColumnSpan="2" Visibility="Hidden">
+            <Button Content="Add new" Margin="6,5,0,5" Command="{Binding CreateMemberCommand}" Width="114" IsEnabled="{Binding IsLoaded}" />
+            <Button Content="Edit selected" Margin="6,5,0,5" Command="{Binding UpdateMemberCommand}" CommandParameter="{Binding SelectedMember}" Width="114" IsEnabled="{Binding IsLoaded}" />
+            <Button Content="Delete selected" Margin="6,5,6,5" Command="{Binding DeleteMemberCommand}" CommandParameter="{Binding SelectedMember}" Width="114" IsEnabled="{Binding IsLoaded}" />
+        </StackPanel>
+
+        <DataGrid Name="projectGrid" Grid.Row="2" Grid.Column="0"  AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding SelectedMember.Projects}" SelectedItem="{Binding SelectedProject}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
+                <DataGridTextColumn Header="Importance" Binding="{Binding Weight}"  />
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <StackPanel Grid.Row="6" Grid.Column="0" Orientation="Horizontal" Grid.ColumnSpan="2" Visibility="Hidden">
+            <Button Content="Add existing project to member" Margin="6,5,0,5" Command="{Binding AddProjectCommand}" Width="114" IsEnabled="{Binding IsLoaded}" />
+            <Button Content="Add new" Margin="6,5,0,5" Command="{Binding CreateProjectCommand}" Width="114" IsEnabled="{Binding IsLoaded}" />
+            <Button Content="Edit selected" Margin="6,5,0,5" Command="{Binding UpdateProjectCommand}" CommandParameter="{Binding SelectedEvent}" Width="114" IsEnabled="{Binding IsLoaded}" />
+            <Button Content="Delete selected" Margin="6,5,6,5" Command="{Binding DeleteProjectCommand}" CommandParameter="{Binding SelectedEvent}" Width="114" IsEnabled="{Binding IsLoaded}" />
+        </StackPanel>
+
+    </Grid>
+</UserControl>

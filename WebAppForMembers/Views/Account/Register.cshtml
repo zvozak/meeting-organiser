@@ -1,0 +1,129 @@
+﻿@using WebAppForMembers.Models;
+
+@model RegistrationViewModel
+
+@{
+    ViewData["Title"] = "Register";
+}
+
+@* majd bekérjük/megjelenítjük a foglalás adatait *@
+<form asp-controller="Account" asp-action="Register">
+    @* Automatikus védelem XSRF támadás ellen *@
+
+    <table>
+        <tr>
+            <td colspan="3">
+                <div class="failureNotification">@Html.ValidationSummary(true, "A regisztráció sikertelen!")</div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3">
+                <div class="contentHead">
+                    Personal data:
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td width="120">
+                Name:
+            </td>
+            <td class="failureNotification" colspan="2">
+                <input asp-for="GuestName" size="40" />
+                <span asp-validation-for="GuestName"></span>
+            </td>
+
+        </tr>
+        <tr>
+            <td width="120">
+                Address:
+            </td>
+            <td class="failureNotification" colspan="2">
+                <input asp-for="GuestAddress" size="40" />
+                <span asp-validation-for="GuestAddress"></span>
+            </td>
+        </tr>
+        <tr>
+            <td width="120">
+                Email address:
+            </td>
+            <td class="failureNotification" colspan="2">
+                <input asp-for="GuestEmail" size="40" />
+                <span asp-validation-for="GuestEmail"></span>
+            </td>
+
+        </tr>
+        <tr>
+            <td width="120">
+                Phone number:
+            </td>
+            <td class="failureNotification" colspan="2">
+                <input asp-for="GuestPhoneNumber" size="40" />
+                <span asp-validation-for="GuestPhoneNumber"></span>
+            </td>
+        </tr>
+        <tr>
+            <td width="120">
+                Special diet:
+            </td>
+            <td colspan="2">
+                @for (int i = 0; i < Model.SpecialNeeds.Count(); i++)
+                {
+            <tr>
+                <td>
+                    @Html.CheckBoxFor(m => m.SpecialNeeds[i].IsSelected)
+                </td>
+                <td>
+                    @Html.DisplayFor(m => RegistrationViewModel.NamesOfSpecialNeeds[i])
+                </td>
+            </tr>
+        }
+                </td>
+                </tr>
+                <tr>
+                    <td colspan="3">
+                        <div class="contentHead">
+                            Login informations:
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="150" colspan="2">
+                        Username:
+                    </td>
+                    <td class="failureNotification">
+                        <input asp-for="UserName" />
+                        <span asp-validation-for="UserName"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="150" colspan="2">
+                        Password:
+                    </td>
+                    <td class="failureNotification">
+                        <input asp-for="UserPassword" />
+                        <span asp-validation-for="UserPassword"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="150" colspan="2">
+                        Confirm password:
+                    </td>
+                    <td class="failureNotification">
+                        <input asp-for="UserConfirmPassword" />
+                        <span asp-validation-for="UserConfirmPassword"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3" height="70">
+                        <br />Username and password has to be at least 5, at most 40 characters. They should consist of only alphanumerical characters and dash.<br /><br />
+                        <input type="submit" value="Regisztráció" class="button" />
+                    </td>
+                </tr>
+            </table>
+        </form>
+
+        @section Scripts
+{
+            @* jQuery Validation használata a kliens oldali validációra *@
+            <partial name="_ValidationScriptsPartial" />
+        }

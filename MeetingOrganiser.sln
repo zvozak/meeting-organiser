@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31105.61
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MeetingOrganiserDesktopApp", "MeetingOrganiserDesktopApp\MeetingOrganiserDesktopApp.csproj", "{5E8E2074-6B09-4BDF-9165-88DF214A1C5D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebAppForMembers", "WebAppForMembers\WebAppForMembers.csproj", "{F3E00637-348E-4FFB-9E9C-AD6508FCD26B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CommonData", "CommonData\CommonData.csproj", "{ABC2C2A4-429D-42E2-8D5A-EF48D0C3F64D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServicesForDesktopApp", "ServicesForDesktopApp\ServicesForDesktopApp.csproj", "{3D8800F0-8E08-462D-88D4-BCDA646CA245}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestMeetingOrganiserDesktopApp", "TestMeetingOrganiserDesktopApp\TestMeetingOrganiserDesktopApp.csproj", "{16EE60E3-6809-411A-B8CF-D4FECB6FCCBE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestServicesForDesktopApp", "TestServicesForDesktopApp\TestServicesForDesktopApp.csproj", "{8A90C8A4-E916-4260-9D46-4BE1B6099CE6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5E8E2074-6B09-4BDF-9165-88DF214A1C5D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E8E2074-6B09-4BDF-9165-88DF214A1C5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E8E2074-6B09-4BDF-9165-88DF214A1C5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E8E2074-6B09-4BDF-9165-88DF214A1C5D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F3E00637-348E-4FFB-9E9C-AD6508FCD26B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3E00637-348E-4FFB-9E9C-AD6508FCD26B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3E00637-348E-4FFB-9E9C-AD6508FCD26B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3E00637-348E-4FFB-9E9C-AD6508FCD26B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ABC2C2A4-429D-42E2-8D5A-EF48D0C3F64D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ABC2C2A4-429D-42E2-8D5A-EF48D0C3F64D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ABC2C2A4-429D-42E2-8D5A-EF48D0C3F64D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ABC2C2A4-429D-42E2-8D5A-EF48D0C3F64D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D8800F0-8E08-462D-88D4-BCDA646CA245}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D8800F0-8E08-462D-88D4-BCDA646CA245}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D8800F0-8E08-462D-88D4-BCDA646CA245}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D8800F0-8E08-462D-88D4-BCDA646CA245}.Release|Any CPU.Build.0 = Release|Any CPU
+		{16EE60E3-6809-411A-B8CF-D4FECB6FCCBE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16EE60E3-6809-411A-B8CF-D4FECB6FCCBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{16EE60E3-6809-411A-B8CF-D4FECB6FCCBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{16EE60E3-6809-411A-B8CF-D4FECB6FCCBE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A90C8A4-E916-4260-9D46-4BE1B6099CE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A90C8A4-E916-4260-9D46-4BE1B6099CE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A90C8A4-E916-4260-9D46-4BE1B6099CE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A90C8A4-E916-4260-9D46-4BE1B6099CE6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {825F9A4F-E0B4-4B9D-9100-E2DC82C0515B}
+	EndGlobalSection
+EndGlobal

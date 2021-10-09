@@ -1,0 +1,3 @@
+# Szakdolgozat
+
+Meeting tervező app

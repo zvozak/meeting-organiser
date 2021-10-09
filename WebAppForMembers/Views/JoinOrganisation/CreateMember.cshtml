@@ -1,0 +1,203 @@
+﻿@using WebAppForMembers.Models;
+@using System;
+
+@model CreateMemberViewModel
+
+<h1>Please fill out the form below to join @Model.OrganisationName</h1>
+
+<form asp-controller="JoinOrganisation" asp-action="CreateMember">
+    @Html.HiddenFor(model => model.OrganisationId)
+    @Html.HiddenFor(model => model.OrganisationName)
+    @Html.HiddenFor(model => model.OrganisationTypeOfStructure)
+    @Html.HiddenFor(model => model.DateOfJoining)
+    @if (Model.IdsOfSelectedProjects != null)
+    {
+        for (int i = 0; i < Model.IdsOfSelectedProjects.Count; i++)
+        {
+            Html.HiddenFor(model => Model.IdsOfSelectedProjects[i]);
+        }
+    }
+
+    <table>
+        <tr>
+            <td colspan="3">
+                <div class="failureNotification">@Html.ValidationSummary(true, "Could not join organisation!")</div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                Your jobtitle/role:
+            </td>
+            @if (Model.PossibleJobsAtOrganisation != null)
+            {
+                <td colspan="2">
+                    @Html.DropDownListFor(m =>
+                        m.IdOfSelectedJob,
+                        new SelectList(Model.PossibleJobsAtOrganisation, "Id", "Title")
+                        .Prepend(new SelectListItem("Other", "0", false)),
+                        new { @onchange = "selectedJob_DropdownList_OnChange(this.value)", @id = "jobSelectList" })
+                </td>
+            }
+            <td class="failureNotification" colspan="2">
+                <input id="otherJobTitle" asp-for="OtherJobTitle" type="text" placeholder="Type your role." />
+                @Html.ValidationMessageFor(m => m.OtherJobTitle)
+            </td>
+
+        </tr>
+        <tr>
+            <td colspan="2">
+                Date of joining:
+            </td>
+            <td class="failureNotification" colspan="2">
+                <input asp-for="DateOfJoining.Date"
+                       type="date"
+                       min="1930-01-01"
+                       max=@DateTime.Now.ToShortDateString()
+                       size="40"
+                       value=@DateTime.Now.ToShortDateString()
+                       asp-format="{0:yyyy-MM-dd}" />
+                <span asp-validation-for="DateOfJoining.Date"></span>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                Department:
+            </td>
+            <td class="failureNotification" colspan="2">
+                <input asp-for="Department" size="40" />
+                <span asp-validation-for="Department"></span>
+            </td>
+        </tr>
+        @if (Model.OrganisationTypeOfStructure == CommonData.Entities.TypeOfStructure.Hierarchical)
+        {
+            <tr>
+                <td colspan="2">
+                    Name of Your supervisor:
+                </td>
+                <td class="failureNotification" colspan="2">
+                    <input asp-for="NameOfBoss" size="40" />
+                    <span asp-validation-for="NameOfBoss"></span>
+                </td>
+                <td>
+                    Email address of supervisor:
+                </td>
+                <td class="failureNotification" colspan="2">
+                    <input asp-for="EmailOfBoss" size="40" />
+                    <span asp-validation-for="EmailOfBoss"></span>
+                </td>
+            </tr>
+        }
+        else
+        {
+            <tr>
+                <td>
+                    Your projects:
+                </td>
+                <td>
+                    @Html.DropDownList("IdsOfSelectedProjects",
+new MultiSelectList(Model.PossibleProjectsAtOrganisation, "Id", "Name"),
+new { @multiple = "multiple" })
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    Other projects:
+                </td>
+                <td class="failureNotification" colspan="2">
+                    <input asp-for="OtherProjectName" id="otherProjectName" size="40" />
+                    <span asp-validation-for="OtherProjectName"></span>
+                </td>
+                <td>
+                    <asp:Button id="addProjectButton"
+                                Text="Add project"
+                                OnClick="addProjectButton_Click"
+                                
+                                runat="server" />
+                </td>
+                <td>
+                    <asp:Button id="removeProjectButton"
+                                Text="Remove project"
+                                OnClick="removeProjectButton_Click"
+                                runat="server" />
+                </td>
+            </tr>
+        }
+
+        <tr>
+            <td colspan="2">
+                Your email at organisation:
+            </td>
+            <td class="failureNotification" colspan="2">
+                <input asp-for="Email" size="40" value=@Model.Email />
+                <span asp-validation-for="Email"></span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="submit" value="Submit" class="button" />
+            </td>
+        </tr>
+    </table>
+</form>
+
+@section Scripts
+{
+    @* jQuery Validation használata a kliens oldali validációra *@
+    <partial name="_ValidationScriptsPartial" />
+
+
+
+    <script>
+        function selectedJob_DropdownList_OnChange(selectedId) {
+            var jobTextBox = document.getElementById("otherJobTitle");
+            if (selectedId == 0) {
+                jobTextBox.hidden = false;
+            }
+            else {
+                jobTextBox.hidden = true;
+            }
+        }
+    </script>
+
+
+    @functions
+    {
+        void addProjectButton_Click()
+        {
+            try
+            {
+                <script>var projectTextBox = document.getElementById("otherProjectName");</script>
+                if (!Model.OtherProjectNames.Any(n => n == Model.OtherProjectName) &&
+                (Model.PossibleProjectsAtOrganisation == null || !Model.PossibleProjectsAtOrganisation.Any(p => p.Name == Model.OtherProjectName)))
+                {
+                    Model.OtherProjectNames.Add(Model.OtherProjectName);
+                    <script>projectTextBox.Value = "";</script>
+                    Model.OtherProjectName = "";
+                }
+            }
+            catch (Exception)
+            {
+                return;
+            }
+        }
+
+        void removeProjectButton_Click()
+        {
+            try
+            {
+                <script>var projectTextBox = document.getElementById("otherProjectName");</script>
+                if (Model.OtherProjectNames.Any(n => n == Model.OtherProjectName))
+                {
+                    Model.OtherProjectNames.Remove(Model.OtherProjectName);
+                    <script>projectTextBox.Value = "";</script>
+                    Model.OtherProjectName = "";
+                }
+            }
+            catch (Exception)
+            {
+                return;
+            }
+        }
+    }
+
+}

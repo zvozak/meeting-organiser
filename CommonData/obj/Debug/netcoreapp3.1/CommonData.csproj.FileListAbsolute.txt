@@ -1,0 +1,12 @@
+C:\Users\vozak\Desktop\MeetingOrganiser\CommonData\bin\Debug\netcoreapp3.1\CommonData.deps.json
+C:\Users\vozak\Desktop\MeetingOrganiser\CommonData\bin\Debug\netcoreapp3.1\CommonData.runtimeconfig.json
+C:\Users\vozak\Desktop\MeetingOrganiser\CommonData\bin\Debug\netcoreapp3.1\CommonData.runtimeconfig.dev.json
+C:\Users\vozak\Desktop\MeetingOrganiser\CommonData\bin\Debug\netcoreapp3.1\CommonData.dll
+C:\Users\vozak\Desktop\MeetingOrganiser\CommonData\bin\Debug\netcoreapp3.1\CommonData.pdb
+C:\Users\vozak\Desktop\MeetingOrganiser\CommonData\obj\Debug\netcoreapp3.1\CommonData.csprojAssemblyReference.cache
+C:\Users\vozak\Desktop\MeetingOrganiser\CommonData\obj\Debug\netcoreapp3.1\CommonData.AssemblyInfoInputs.cache
+C:\Users\vozak\Desktop\MeetingOrganiser\CommonData\obj\Debug\netcoreapp3.1\CommonData.AssemblyInfo.cs
+C:\Users\vozak\Desktop\MeetingOrganiser\CommonData\obj\Debug\netcoreapp3.1\CommonData.csproj.CoreCompileInputs.cache
+C:\Users\vozak\Desktop\MeetingOrganiser\CommonData\obj\Debug\netcoreapp3.1\CommonData.dll
+C:\Users\vozak\Desktop\MeetingOrganiser\CommonData\obj\Debug\netcoreapp3.1\CommonData.pdb
+C:\Users\vozak\Desktop\MeetingOrganiser\CommonData\obj\Debug\netcoreapp3.1\CommonData.genruntimeconfig.cache

@@ -1,0 +1,47 @@
+﻿@using WebAppForMembers.Models;
+
+@model JoinViewModel
+
+@{
+    ViewData["Title"] = "Join";
+}
+
+<h1>Join</h1>
+<form asp-controller="JoinOrganisation" asp-action="Join">
+    <table class="table">
+        <tr>
+            <td colspan="2">
+                <div asp-validation-summary="ModelOnly" class="failureNotification"></div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Name of organisation to join:
+            </td>
+            <td class="failureNotification">
+                <input asp-for="OrganisationName" />
+            </td>
+            <td>
+                <span asp-validation-for="OrganisationName"></span>
+            </td>
+        </tr>
+        <tr>
+            <td width="120">
+                The email address given by the organisation:
+            </td>
+            <td class="failureNotification">
+                <input asp-for="EmailAddressAtOrganisation" />
+            </td>
+            <td>
+                <span asp-validation-for="EmailAddressAtOrganisation"></span>
+            </td>
+        </tr>
+    </table>
+    <input type="submit" value="Join Organisation" class="button" />
+</form>
+
+@section Scripts
+{
+    @* jQuery Validation használata a kliens oldali validációra *@
+    <partial name="_ValidationScriptsPartial" />
+}
