@@ -26,6 +26,7 @@ namespace MeetingOrganiserDesktopApp.Persistence
         public MeetingApplicationServicePersistence(HttpClient client)
         {
             this.client = client;
+            log = LogManager.GetLogger("service");
         }
 
 

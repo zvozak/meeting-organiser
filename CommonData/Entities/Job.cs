@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace CommonData.Entities
 {
@@ -12,5 +13,14 @@ namespace CommonData.Entities
         public int OrganisationId { get; set; }
         [Required]
         public virtual Organisation Organisation { get; set; }
+
+        public override Boolean Equals(Object obj)
+        {
+            Job job = obj as Job;
+            return job != null &&
+                OrganisationId == job.OrganisationId && 
+                Title == job.Title;
+        }
+
     }
 }

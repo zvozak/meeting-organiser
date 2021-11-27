@@ -18,7 +18,7 @@ namespace WebAppForMembers.Models
         public IEnumerable<EventViewModel> GetEventsOf(int organisationId);
         public EventViewModel GetEventViewModel(int eventId);
         public Event GetEvent(int eventId);
-        public EventForm GetEventForm(int eventId, int memberId);
+        public EventForm? GetEventForm(int eventId, int memberId);
         public Venue GetVenue(int venueId);
         public IEnumerable<Venue> GetVenues(int eventId);
         public IEnumerable<VenueImage> GetVenueImages(int venueId);
@@ -26,7 +26,7 @@ namespace WebAppForMembers.Models
         public Byte[] GetVenueImage(Int32? imageId, Boolean large);
         public bool CreateOrganisation(Organisation organisation);
         public IEnumerable<int> GetVenueImageIds(int venueId);
-        public DateTime StrictestDeadlineAt(int organisationId);
+        public DateTime? StrictestDeadlineAt(int organisationId);
         public bool IsExistingOrganisation(string organisationName);
         public bool IsMemberOfOrganisation(string organisationName, string realUserName, string userEmail);
         public bool IsMemberOfOrganisation(string organisationName, int userId);

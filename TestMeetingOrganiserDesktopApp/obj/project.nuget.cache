@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "9k77vfv899h5hqVu81+7pKI0Cg08IYrgbOAOxnH5z059t086JNnwlNME1Ei3dht9sQsdAZ7fZUpj+CH/0DBagw==",
+  "dgSpecHash": "joymQnNjp3FzqhVIHwAvyWcLwiybyP5Didjm9jhn7a2CednYauiPK5N3hpNN0hxRQCgsRUjcT3AX8pqOyr6vRQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\vozak\\Desktop\\MeetingOrganiser\\TestMeetingOrganiserDesktopApp\\TestMeetingOrganiserDesktopApp.csproj",
+  "projectFilePath": "C:\\Users\\vozak\\source\\repos\\Szakdolgozat\\TestMeetingOrganiserDesktopApp\\TestMeetingOrganiserDesktopApp.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\vozak\\.nuget\\packages\\coverlet.collector\\1.2.0\\coverlet.collector.1.2.0.nupkg.sha512",
     "C:\\Users\\vozak\\.nuget\\packages\\microsoft.aspnet.webapi.client\\5.2.7\\microsoft.aspnet.webapi.client.5.2.7.nupkg.sha512",

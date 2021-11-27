@@ -54,13 +54,13 @@ namespace MeetingOrganiserDesktopApp.View {
         /// InitializeComponent
         /// </summary>
         [System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [System.CodeDom.Compiler.GeneratedCodeAttribute("PresentationBuildTasks", "5.0.4.0")]
+        [System.CodeDom.Compiler.GeneratedCodeAttribute("PresentationBuildTasks", "5.0.12.0")]
         public void InitializeComponent() {
             if (_contentLoaded) {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/MeetingOrganiserDesktopApp;V1.0.0.0;component/view/loginwindow.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/MeetingOrganiserDesktopApp;component/view/loginwindow.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\View\LoginWindow.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);
@@ -70,7 +70,7 @@ namespace MeetingOrganiserDesktopApp.View {
         }
         
         [System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [System.CodeDom.Compiler.GeneratedCodeAttribute("PresentationBuildTasks", "5.0.4.0")]
+        [System.CodeDom.Compiler.GeneratedCodeAttribute("PresentationBuildTasks", "5.0.12.0")]
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Never)]
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Design", "CA1033:InterfaceMethodsShouldBeCallableByChildTypes")]
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]

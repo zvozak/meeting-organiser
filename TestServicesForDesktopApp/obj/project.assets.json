@@ -29,6 +29,19 @@
           "build/netstandard1.0/coverlet.collector.targets": {}
         }
       },
+      "Microsoft.AspNet.WebApi.Client/5.2.7": {
+        "type": "package",
+        "dependencies": {
+          "Newtonsoft.Json": "10.0.1",
+          "Newtonsoft.Json.Bson": "1.0.1"
+        },
+        "compile": {
+          "lib/netstandard2.0/System.Net.Http.Formatting.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/System.Net.Http.Formatting.dll": {}
+        }
+      },
       "Microsoft.AspNetCore.Authentication/2.2.0": {
         "type": "package",
         "dependencies": {
@@ -779,6 +792,32 @@
           "lib/netcoreapp3.1/Microsoft.Extensions.Configuration.Binder.dll": {}
         }
       },
+      "Microsoft.Extensions.Configuration.FileExtensions/3.1.3": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.Configuration": "3.1.3",
+          "Microsoft.Extensions.FileProviders.Physical": "3.1.3"
+        },
+        "compile": {
+          "lib/netcoreapp3.1/Microsoft.Extensions.Configuration.FileExtensions.dll": {}
+        },
+        "runtime": {
+          "lib/netcoreapp3.1/Microsoft.Extensions.Configuration.FileExtensions.dll": {}
+        }
+      },
+      "Microsoft.Extensions.Configuration.Json/3.1.3": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.Configuration": "3.1.3",
+          "Microsoft.Extensions.Configuration.FileExtensions": "3.1.3"
+        },
+        "compile": {
+          "lib/netcoreapp3.1/Microsoft.Extensions.Configuration.Json.dll": {}
+        },
+        "runtime": {
+          "lib/netcoreapp3.1/Microsoft.Extensions.Configuration.Json.dll": {}
+        }
+      },
       "Microsoft.Extensions.DependencyInjection/3.1.3": {
         "type": "package",
         "dependencies": {
@@ -800,16 +839,38 @@
           "lib/netstandard2.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll": {}
         }
       },
-      "Microsoft.Extensions.FileProviders.Abstractions/2.2.0": {
+      "Microsoft.Extensions.FileProviders.Abstractions/3.1.3": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Extensions.Primitives": "2.2.0"
+          "Microsoft.Extensions.Primitives": "3.1.3"
         },
         "compile": {
-          "lib/netstandard2.0/Microsoft.Extensions.FileProviders.Abstractions.dll": {}
+          "lib/netcoreapp3.1/Microsoft.Extensions.FileProviders.Abstractions.dll": {}
         },
         "runtime": {
-          "lib/netstandard2.0/Microsoft.Extensions.FileProviders.Abstractions.dll": {}
+          "lib/netcoreapp3.1/Microsoft.Extensions.FileProviders.Abstractions.dll": {}
+        }
+      },
+      "Microsoft.Extensions.FileProviders.Physical/3.1.3": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.FileProviders.Abstractions": "3.1.3",
+          "Microsoft.Extensions.FileSystemGlobbing": "3.1.3"
+        },
+        "compile": {
+          "lib/netcoreapp3.1/Microsoft.Extensions.FileProviders.Physical.dll": {}
+        },
+        "runtime": {
+          "lib/netcoreapp3.1/Microsoft.Extensions.FileProviders.Physical.dll": {}
+        }
+      },
+      "Microsoft.Extensions.FileSystemGlobbing/3.1.3": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/Microsoft.Extensions.FileSystemGlobbing.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Microsoft.Extensions.FileSystemGlobbing.dll": {}
         }
       },
       "Microsoft.Extensions.Hosting.Abstractions/2.2.0": {
@@ -1376,6 +1437,74 @@
           }
         }
       },
+      "Microsoft.Xaml.Behaviors.Wpf/1.1.31": {
+        "type": "package",
+        "compile": {
+          "lib/netcoreapp3.1/Microsoft.Xaml.Behaviors.dll": {}
+        },
+        "runtime": {
+          "lib/netcoreapp3.1/Microsoft.Xaml.Behaviors.dll": {}
+        },
+        "frameworkReferences": [
+          "Microsoft.WindowsDesktop.App.WPF"
+        ]
+      },
+      "MiqM.Xceed.Wpf.Toolkit.NETCore/3.5.1.3": {
+        "type": "package",
+        "dependencies": {
+          "System.Reflection.Emit": "4.3.0",
+          "System.Text.Encoding.CodePages": "4.5.0"
+        },
+        "compile": {
+          "lib/netcoreapp3.0/Xceed.Wpf.AvalonDock.Themes.Aero.dll": {},
+          "lib/netcoreapp3.0/Xceed.Wpf.AvalonDock.Themes.Metro.dll": {},
+          "lib/netcoreapp3.0/Xceed.Wpf.AvalonDock.Themes.VS2010.dll": {},
+          "lib/netcoreapp3.0/Xceed.Wpf.AvalonDock.dll": {},
+          "lib/netcoreapp3.0/Xceed.Wpf.Toolkit.dll": {}
+        },
+        "runtime": {
+          "lib/netcoreapp3.0/Xceed.Wpf.AvalonDock.Themes.Aero.dll": {},
+          "lib/netcoreapp3.0/Xceed.Wpf.AvalonDock.Themes.Metro.dll": {},
+          "lib/netcoreapp3.0/Xceed.Wpf.AvalonDock.Themes.VS2010.dll": {},
+          "lib/netcoreapp3.0/Xceed.Wpf.AvalonDock.dll": {},
+          "lib/netcoreapp3.0/Xceed.Wpf.Toolkit.dll": {}
+        },
+        "frameworkReferences": [
+          "Microsoft.WindowsDesktop.App.WPF"
+        ],
+        "resource": {
+          "lib/netcoreapp3.0/de/Xceed.Wpf.AvalonDock.resources.dll": {
+            "locale": "de"
+          },
+          "lib/netcoreapp3.0/es/Xceed.Wpf.AvalonDock.resources.dll": {
+            "locale": "es"
+          },
+          "lib/netcoreapp3.0/fr/Xceed.Wpf.AvalonDock.resources.dll": {
+            "locale": "fr"
+          },
+          "lib/netcoreapp3.0/hu/Xceed.Wpf.AvalonDock.resources.dll": {
+            "locale": "hu"
+          },
+          "lib/netcoreapp3.0/it/Xceed.Wpf.AvalonDock.resources.dll": {
+            "locale": "it"
+          },
+          "lib/netcoreapp3.0/pt-BR/Xceed.Wpf.AvalonDock.resources.dll": {
+            "locale": "pt-BR"
+          },
+          "lib/netcoreapp3.0/ro/Xceed.Wpf.AvalonDock.resources.dll": {
+            "locale": "ro"
+          },
+          "lib/netcoreapp3.0/ru/Xceed.Wpf.AvalonDock.resources.dll": {
+            "locale": "ru"
+          },
+          "lib/netcoreapp3.0/sv/Xceed.Wpf.AvalonDock.resources.dll": {
+            "locale": "sv"
+          },
+          "lib/netcoreapp3.0/zh-Hans/Xceed.Wpf.AvalonDock.resources.dll": {
+            "locale": "zh-Hans"
+          }
+        }
+      },
       "Moq/4.14.1": {
         "type": "package",
         "dependencies": {
@@ -1445,6 +1574,19 @@
         },
         "runtime": {
           "lib/netstandard2.0/Newtonsoft.Json.dll": {}
+        }
+      },
+      "Newtonsoft.Json.Bson/1.0.1": {
+        "type": "package",
+        "dependencies": {
+          "NETStandard.Library": "1.6.1",
+          "Newtonsoft.Json": "10.0.1"
+        },
+        "compile": {
+          "lib/netstandard1.3/Newtonsoft.Json.Bson.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.3/Newtonsoft.Json.Bson.dll": {}
         }
       },
       "NLog/4.7.10": {
@@ -3380,6 +3522,27 @@
           "bin/placeholder/CommonData.dll": {}
         }
       },
+      "MeetingOrganiserDesktopApp/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "dependencies": {
+          "CommonData": "1.0.0",
+          "Microsoft.AspNet.WebApi.Client": "5.2.7",
+          "Microsoft.Extensions.Configuration.Json": "3.1.3",
+          "Microsoft.Xaml.Behaviors.Wpf": "1.1.31",
+          "MiqM.Xceed.Wpf.Toolkit.NETCore": "3.5.1.3",
+          "NLog": "4.7.0"
+        },
+        "compile": {
+          "bin/placeholder/MeetingOrganiserDesktopApp.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/MeetingOrganiserDesktopApp.dll": {}
+        },
+        "frameworkReferences": [
+          "Microsoft.WindowsDesktop.App.WPF"
+        ]
+      },
       "ServicesForDesktopApp/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v3.1",
@@ -3459,6 +3622,23 @@
         "build/netstandard1.0/coverlet.core.pdb",
         "coverlet.collector.1.2.0.nupkg.sha512",
         "coverlet.collector.nuspec"
+      ]
+    },
+    "Microsoft.AspNet.WebApi.Client/5.2.7": {
+      "sha512": "/76fAHknzvFqbznS6Uj2sOyE9rJB3PltY+f53TH8dX9RiGhk02EhuFCWljSj5nnqKaTsmma8DFR50OGyQ4yJ1g==",
+      "type": "package",
+      "path": "microsoft.aspnet.webapi.client/5.2.7",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net45/System.Net.Http.Formatting.dll",
+        "lib/net45/System.Net.Http.Formatting.xml",
+        "lib/netstandard2.0/System.Net.Http.Formatting.dll",
+        "lib/netstandard2.0/System.Net.Http.Formatting.xml",
+        "lib/portable-wp8+netcore45+net45+wp81+wpa81/System.Net.Http.Formatting.dll",
+        "lib/portable-wp8+netcore45+net45+wp81+wpa81/System.Net.Http.Formatting.xml",
+        "microsoft.aspnet.webapi.client.5.2.7.nupkg.sha512",
+        "microsoft.aspnet.webapi.client.nuspec"
       ]
     },
     "Microsoft.AspNetCore.Authentication/2.2.0": {
@@ -4345,6 +4525,38 @@
         "microsoft.extensions.configuration.binder.nuspec"
       ]
     },
+    "Microsoft.Extensions.Configuration.FileExtensions/3.1.3": {
+      "sha512": "elAAhku4duLMFnoambYY3VUp6AWHkMYu1j9ctWQkSfsCPwx9FlQ8luk4LS5oMQmOT0eY8E0zWG8jZM60GXIyNA==",
+      "type": "package",
+      "path": "microsoft.extensions.configuration.fileextensions/3.1.3",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "lib/netcoreapp3.1/Microsoft.Extensions.Configuration.FileExtensions.dll",
+        "lib/netcoreapp3.1/Microsoft.Extensions.Configuration.FileExtensions.xml",
+        "lib/netstandard2.0/Microsoft.Extensions.Configuration.FileExtensions.dll",
+        "lib/netstandard2.0/Microsoft.Extensions.Configuration.FileExtensions.xml",
+        "microsoft.extensions.configuration.fileextensions.3.1.3.nupkg.sha512",
+        "microsoft.extensions.configuration.fileextensions.nuspec"
+      ]
+    },
+    "Microsoft.Extensions.Configuration.Json/3.1.3": {
+      "sha512": "E26XwzU3Y+J4etuXwX0ScOxNwuBdifU/BGM0nI/GwY7SjvVkkBQDgYphUcujaiAZWJ7h7yh1KL9tBAMPgGthqg==",
+      "type": "package",
+      "path": "microsoft.extensions.configuration.json/3.1.3",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "lib/netcoreapp3.1/Microsoft.Extensions.Configuration.Json.dll",
+        "lib/netcoreapp3.1/Microsoft.Extensions.Configuration.Json.xml",
+        "lib/netstandard2.0/Microsoft.Extensions.Configuration.Json.dll",
+        "lib/netstandard2.0/Microsoft.Extensions.Configuration.Json.xml",
+        "microsoft.extensions.configuration.json.3.1.3.nupkg.sha512",
+        "microsoft.extensions.configuration.json.nuspec"
+      ]
+    },
     "Microsoft.Extensions.DependencyInjection/3.1.3": {
       "sha512": "H/d/jt4Pdp2iYx28shLkxfgQpk9S7cCCTEjtS/61PbZcFAT/mc4cemmOlBdED7+CqmEAIDg8X4Fo0KtADaNizg==",
       "type": "package",
@@ -4379,17 +4591,50 @@
         "microsoft.extensions.dependencyinjection.abstractions.nuspec"
       ]
     },
-    "Microsoft.Extensions.FileProviders.Abstractions/2.2.0": {
-      "sha512": "EcnaSsPTqx2MGnHrmWOD0ugbuuqVT8iICqSqPzi45V5/MA1LjUNb0kwgcxBGqizV1R+WeBK7/Gw25Jzkyk9bIw==",
+    "Microsoft.Extensions.FileProviders.Abstractions/3.1.3": {
+      "sha512": "vr1V6dj8NONgaTA/EdlwtJOaNXRBf6f/din15pkWM/RfTbdoqrr0mKcTRx4MD/AGwxgM0+G2rUT2pDQGa2tNtA==",
       "type": "package",
-      "path": "microsoft.extensions.fileproviders.abstractions/2.2.0",
+      "path": "microsoft.extensions.fileproviders.abstractions/3.1.3",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
+        "Icon.png",
+        "lib/netcoreapp3.1/Microsoft.Extensions.FileProviders.Abstractions.dll",
+        "lib/netcoreapp3.1/Microsoft.Extensions.FileProviders.Abstractions.xml",
         "lib/netstandard2.0/Microsoft.Extensions.FileProviders.Abstractions.dll",
         "lib/netstandard2.0/Microsoft.Extensions.FileProviders.Abstractions.xml",
-        "microsoft.extensions.fileproviders.abstractions.2.2.0.nupkg.sha512",
+        "microsoft.extensions.fileproviders.abstractions.3.1.3.nupkg.sha512",
         "microsoft.extensions.fileproviders.abstractions.nuspec"
+      ]
+    },
+    "Microsoft.Extensions.FileProviders.Physical/3.1.3": {
+      "sha512": "CvCLmVfb90Wkm99Ho6izWoZ9WaY/SQbou0LSEvBQxKk0IPAWKfUw29QLqlszIkXp81VR1BwdprlGKFdFfZpZFA==",
+      "type": "package",
+      "path": "microsoft.extensions.fileproviders.physical/3.1.3",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "lib/netcoreapp3.1/Microsoft.Extensions.FileProviders.Physical.dll",
+        "lib/netcoreapp3.1/Microsoft.Extensions.FileProviders.Physical.xml",
+        "lib/netstandard2.0/Microsoft.Extensions.FileProviders.Physical.dll",
+        "lib/netstandard2.0/Microsoft.Extensions.FileProviders.Physical.xml",
+        "microsoft.extensions.fileproviders.physical.3.1.3.nupkg.sha512",
+        "microsoft.extensions.fileproviders.physical.nuspec"
+      ]
+    },
+    "Microsoft.Extensions.FileSystemGlobbing/3.1.3": {
+      "sha512": "bAmmKRNZM7n7cEhmdywgfvd53MF8pUL9u6orliWvJmI3tQCuDaJalNr4z9FfMu/e6Baw5NTSV+ZsWdWIiOi1Rw==",
+      "type": "package",
+      "path": "microsoft.extensions.filesystemglobbing/3.1.3",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "lib/netstandard2.0/Microsoft.Extensions.FileSystemGlobbing.dll",
+        "lib/netstandard2.0/Microsoft.Extensions.FileSystemGlobbing.xml",
+        "microsoft.extensions.filesystemglobbing.3.1.3.nupkg.sha512",
+        "microsoft.extensions.filesystemglobbing.nuspec"
       ]
     },
     "Microsoft.Extensions.Hosting.Abstractions/2.2.0": {
@@ -5358,6 +5603,63 @@
         "version.txt"
       ]
     },
+    "Microsoft.Xaml.Behaviors.Wpf/1.1.31": {
+      "sha512": "LZpuf82ACZWldmfMuv3CTUMDh3o0xo0uHUaybR5HgqVLDBJJ9RZLykplQ/bTJd0/VDt3EhD4iDgUgbdIUAM+Kg==",
+      "type": "package",
+      "path": "microsoft.xaml.behaviors.wpf/1.1.31",
+      "hasTools": true,
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net45/Design/Microsoft.Xaml.Behaviors.Design.dll",
+        "lib/net45/Microsoft.Xaml.Behaviors.dll",
+        "lib/net45/Microsoft.Xaml.Behaviors.pdb",
+        "lib/net45/Microsoft.Xaml.Behaviors.xml",
+        "lib/net5.0-windows7.0/Design/Microsoft.Xaml.Behaviors.DesignTools.dll",
+        "lib/net5.0-windows7.0/Microsoft.Xaml.Behaviors.dll",
+        "lib/net5.0-windows7.0/Microsoft.Xaml.Behaviors.pdb",
+        "lib/net5.0-windows7.0/Microsoft.Xaml.Behaviors.xml",
+        "lib/netcoreapp3.1/Design/Microsoft.Xaml.Behaviors.DesignTools.dll",
+        "lib/netcoreapp3.1/Microsoft.Xaml.Behaviors.dll",
+        "lib/netcoreapp3.1/Microsoft.Xaml.Behaviors.pdb",
+        "lib/netcoreapp3.1/Microsoft.Xaml.Behaviors.xml",
+        "microsoft.xaml.behaviors.wpf.1.1.31.nupkg.sha512",
+        "microsoft.xaml.behaviors.wpf.nuspec",
+        "tools/Install.ps1"
+      ]
+    },
+    "MiqM.Xceed.Wpf.Toolkit.NETCore/3.5.1.3": {
+      "sha512": "PhtgdTIFojIUTK151IeCXOWjnbOj7tv7ri3FtYD+onDHDTl2KPtUTh/AhDkzayImbh6Izwhvo+YqFYLWkAv6OQ==",
+      "type": "package",
+      "path": "miqm.xceed.wpf.toolkit.netcore/3.5.1.3",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/netcoreapp3.0/Xceed.Wpf.AvalonDock.Themes.Aero.dll",
+        "lib/netcoreapp3.0/Xceed.Wpf.AvalonDock.Themes.Aero.pdb",
+        "lib/netcoreapp3.0/Xceed.Wpf.AvalonDock.Themes.Metro.dll",
+        "lib/netcoreapp3.0/Xceed.Wpf.AvalonDock.Themes.Metro.pdb",
+        "lib/netcoreapp3.0/Xceed.Wpf.AvalonDock.Themes.VS2010.dll",
+        "lib/netcoreapp3.0/Xceed.Wpf.AvalonDock.Themes.VS2010.pdb",
+        "lib/netcoreapp3.0/Xceed.Wpf.AvalonDock.dll",
+        "lib/netcoreapp3.0/Xceed.Wpf.AvalonDock.pdb",
+        "lib/netcoreapp3.0/Xceed.Wpf.Toolkit.dll",
+        "lib/netcoreapp3.0/Xceed.Wpf.Toolkit.pdb",
+        "lib/netcoreapp3.0/de/Xceed.Wpf.AvalonDock.resources.dll",
+        "lib/netcoreapp3.0/es/Xceed.Wpf.AvalonDock.resources.dll",
+        "lib/netcoreapp3.0/fr/Xceed.Wpf.AvalonDock.resources.dll",
+        "lib/netcoreapp3.0/hu/Xceed.Wpf.AvalonDock.resources.dll",
+        "lib/netcoreapp3.0/it/Xceed.Wpf.AvalonDock.resources.dll",
+        "lib/netcoreapp3.0/pt-BR/Xceed.Wpf.AvalonDock.resources.dll",
+        "lib/netcoreapp3.0/ro/Xceed.Wpf.AvalonDock.resources.dll",
+        "lib/netcoreapp3.0/ru/Xceed.Wpf.AvalonDock.resources.dll",
+        "lib/netcoreapp3.0/sv/Xceed.Wpf.AvalonDock.resources.dll",
+        "lib/netcoreapp3.0/zh-Hans/Xceed.Wpf.AvalonDock.resources.dll",
+        "license.md",
+        "miqm.xceed.wpf.toolkit.netcore.3.5.1.3.nupkg.sha512",
+        "miqm.xceed.wpf.toolkit.netcore.nuspec"
+      ]
+    },
     "Moq/4.14.1": {
       "sha512": "yRrU+cLNBtZpL9eLVyicOENMPUx7DjOOB+VPgDhrXaCjhfob661d4HJ82YJpPUBmlYoivNA8F4R+NIMfoKbD7g==",
       "type": "package",
@@ -5414,6 +5716,21 @@
         "lib/portable-net45+win8+wp8+wpa81/Newtonsoft.Json.xml",
         "newtonsoft.json.11.0.2.nupkg.sha512",
         "newtonsoft.json.nuspec"
+      ]
+    },
+    "Newtonsoft.Json.Bson/1.0.1": {
+      "sha512": "5PYT/IqQ+UK31AmZiSS102R6EsTo+LGTSI8bp7WAUqDKaF4wHXD8U9u4WxTI1vc64tYi++8p3dk3WWNqPFgldw==",
+      "type": "package",
+      "path": "newtonsoft.json.bson/1.0.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net45/Newtonsoft.Json.Bson.dll",
+        "lib/net45/Newtonsoft.Json.Bson.xml",
+        "lib/netstandard1.3/Newtonsoft.Json.Bson.dll",
+        "lib/netstandard1.3/Newtonsoft.Json.Bson.xml",
+        "newtonsoft.json.bson.1.0.1.nupkg.sha512",
+        "newtonsoft.json.bson.nuspec"
       ]
     },
     "NLog/4.7.10": {
@@ -10302,6 +10619,11 @@
       "path": "../CommonData/CommonData.csproj",
       "msbuildProject": "../CommonData/CommonData.csproj"
     },
+    "MeetingOrganiserDesktopApp/1.0.0": {
+      "type": "project",
+      "path": "../MeetingOrganiserDesktopApp/MeetingOrganiserDesktopApp.csproj",
+      "msbuildProject": "../MeetingOrganiserDesktopApp/MeetingOrganiserDesktopApp.csproj"
+    },
     "ServicesForDesktopApp/1.0.0": {
       "type": "project",
       "path": "../ServicesForDesktopApp/ServicesForDesktopApp.csproj",
@@ -10311,6 +10633,7 @@
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
       "CommonData >= 1.0.0",
+      "MeetingOrganiserDesktopApp >= 1.0.0",
       "Microsoft.AspNetCore.TestHost >= 3.1.3",
       "Microsoft.EntityFrameworkCore.InMemory >= 3.1.3",
       "Microsoft.NET.Test.Sdk >= 16.5.0",
@@ -10329,11 +10652,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\vozak\\Desktop\\MeetingOrganiser\\TestServicesForDesktopApp\\TestServicesForDesktopApp.csproj",
+      "projectUniqueName": "C:\\Users\\vozak\\source\\repos\\Szakdolgozat\\TestServicesForDesktopApp\\TestServicesForDesktopApp.csproj",
       "projectName": "TestServicesForDesktopApp",
-      "projectPath": "C:\\Users\\vozak\\Desktop\\MeetingOrganiser\\TestServicesForDesktopApp\\TestServicesForDesktopApp.csproj",
+      "projectPath": "C:\\Users\\vozak\\source\\repos\\Szakdolgozat\\TestServicesForDesktopApp\\TestServicesForDesktopApp.csproj",
       "packagesPath": "C:\\Users\\vozak\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\vozak\\Desktop\\MeetingOrganiser\\TestServicesForDesktopApp\\obj\\",
+      "outputPath": "C:\\Users\\vozak\\source\\repos\\Szakdolgozat\\TestServicesForDesktopApp\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
@@ -10356,11 +10679,14 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "C:\\Users\\vozak\\Desktop\\MeetingOrganiser\\CommonData\\CommonData.csproj": {
-              "projectPath": "C:\\Users\\vozak\\Desktop\\MeetingOrganiser\\CommonData\\CommonData.csproj"
+            "C:\\Users\\vozak\\source\\repos\\Szakdolgozat\\CommonData\\CommonData.csproj": {
+              "projectPath": "C:\\Users\\vozak\\source\\repos\\Szakdolgozat\\CommonData\\CommonData.csproj"
             },
-            "C:\\Users\\vozak\\Desktop\\MeetingOrganiser\\ServicesForDesktopApp\\ServicesForDesktopApp.csproj": {
-              "projectPath": "C:\\Users\\vozak\\Desktop\\MeetingOrganiser\\ServicesForDesktopApp\\ServicesForDesktopApp.csproj"
+            "C:\\Users\\vozak\\source\\repos\\Szakdolgozat\\MeetingOrganiserDesktopApp\\MeetingOrganiserDesktopApp.csproj": {
+              "projectPath": "C:\\Users\\vozak\\source\\repos\\Szakdolgozat\\MeetingOrganiserDesktopApp\\MeetingOrganiserDesktopApp.csproj"
+            },
+            "C:\\Users\\vozak\\source\\repos\\Szakdolgozat\\ServicesForDesktopApp\\ServicesForDesktopApp.csproj": {
+              "projectPath": "C:\\Users\\vozak\\source\\repos\\Szakdolgozat\\ServicesForDesktopApp\\ServicesForDesktopApp.csproj"
             }
           }
         }
@@ -10422,7 +10748,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.403\\RuntimeIdentifierGraph.json"
       }
     }
   }

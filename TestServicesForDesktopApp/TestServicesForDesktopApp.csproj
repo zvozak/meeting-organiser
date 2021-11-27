@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CommonData\CommonData.csproj" />
+    <ProjectReference Include="..\MeetingOrganiserDesktopApp\MeetingOrganiserDesktopApp.csproj" />
     <ProjectReference Include="..\ServicesForDesktopApp\ServicesForDesktopApp.csproj" />
   </ItemGroup>
 

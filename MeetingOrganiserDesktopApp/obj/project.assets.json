@@ -8080,11 +8080,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\vozak\\Desktop\\MeetingOrganiser\\MeetingOrganiserDesktopApp\\MeetingOrganiserDesktopApp.csproj",
+      "projectUniqueName": "C:\\Users\\vozak\\source\\repos\\Szakdolgozat\\MeetingOrganiserDesktopApp\\MeetingOrganiserDesktopApp.csproj",
       "projectName": "MeetingOrganiserDesktopApp",
-      "projectPath": "C:\\Users\\vozak\\Desktop\\MeetingOrganiser\\MeetingOrganiserDesktopApp\\MeetingOrganiserDesktopApp.csproj",
+      "projectPath": "C:\\Users\\vozak\\source\\repos\\Szakdolgozat\\MeetingOrganiserDesktopApp\\MeetingOrganiserDesktopApp.csproj",
       "packagesPath": "C:\\Users\\vozak\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\vozak\\Desktop\\MeetingOrganiser\\MeetingOrganiserDesktopApp\\obj\\",
+      "outputPath": "C:\\Users\\vozak\\source\\repos\\Szakdolgozat\\MeetingOrganiserDesktopApp\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
@@ -8107,8 +8107,8 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "C:\\Users\\vozak\\Desktop\\MeetingOrganiser\\CommonData\\CommonData.csproj": {
-              "projectPath": "C:\\Users\\vozak\\Desktop\\MeetingOrganiser\\CommonData\\CommonData.csproj"
+            "C:\\Users\\vozak\\source\\repos\\Szakdolgozat\\CommonData\\CommonData.csproj": {
+              "projectPath": "C:\\Users\\vozak\\source\\repos\\Szakdolgozat\\CommonData\\CommonData.csproj"
             }
           }
         }
@@ -8162,7 +8162,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.403\\RuntimeIdentifierGraph.json"
       }
     }
   }

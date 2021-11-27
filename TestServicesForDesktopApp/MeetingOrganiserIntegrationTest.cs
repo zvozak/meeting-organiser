@@ -1,7 +1,7 @@
-﻿using ELTE.TravelAgency.Admin.Persistence;
-using ELTE.TravelAgency.Data;
-using ELTE.TravelAgency.Model;
-using ELTE.TravelAgency.Service.Controllers;
+﻿using CommonData;
+using CommonData.DTOs;
+using CommonData.Entities;
+using MeetingOrganiserDesktopApp.Persistence;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -20,114 +20,157 @@ namespace TestServicesForDesktopApp
 {
     public class MeetingOrganiserIntegrationTest : IDisposable
     {
-        public static IList<City> CityData = new List<City>
-        {
-            new City { Id = 1, Name = "TESTCITY" }
+
+        public static IList<Organisation> OrganisationData = new List<Organisation>
+            {
+                new Organisation {
+                    Name = "Lorem",
+                    TypeOfStructure = TypeOfStructure.Hierarchical,
+                    Description = "Lorem az valami cég.",
+                    PermitNewMembers = true,
+                    Address = "Egyik utca 2.",
+                    AdminId = 1
+                },
+                new Organisation {
+                    Name = "Ipsum",
+                    TypeOfStructure = TypeOfStructure.Hierarchical,
+                    Description = "Az Ipsum az valami másik cég.",
+                    PermitNewMembers = false,
+                    Address = "Másik utca 7.",
+                    AdminId = 2
+                }
         };
 
-        public static IList<Building> BuildingData = new List<Building>
+        public static IList<Event> EventData = new List<Event>
         {
-            new Building
+                new Event
+                {
+                    OrganisationId = OrganisationData[0].Id,
+                    Name = "Első esemény",
+                    DeadlineForApplication = new DateTime(2021, 03, 28),
+                    StartDate = new DateTime(2021, 03, 30),
+                    EndDate = new DateTime(2021, 04, 2)
+                },
+                new Event
+                {
+                    OrganisationId = OrganisationData[0].Id,
+                    Name = "Második esemény",
+                    DeadlineForApplication = new DateTime(2021, 04, 28),
+                    StartDate = new DateTime(2021, 04, 30),
+                    EndDate = new DateTime(2021, 05, 2)
+                },
+                new Event
+                {
+                    OrganisationId = OrganisationData[0].Id,
+                    Name = "Harmadik esemény",
+                    DeadlineForApplication = new DateTime(2021, 03, 28),
+                    StartDate = new DateTime(2021, 03, 30),
+                    EndDate = new DateTime(2021, 04, 2)
+                },
+                new Event
+                {
+                    OrganisationId = OrganisationData[1].Id,
+                    Name = "Negyedik esemény",
+                    DeadlineForApplication = new DateTime(2021, 02, 28),
+                    StartDate = new DateTime(2021, 04, 30),
+                    EndDate = new DateTime(2021, 05, 2)
+                },
+                new Event
+                {
+                    OrganisationId = OrganisationData[1].Id,
+                    Name = "Ötödik esemény",
+                    DeadlineForApplication = new DateTime(2021, 06, 28),
+                    StartDate = new DateTime(2021, 03, 30),
+                    EndDate = new DateTime(2021, 04, 2)
+                }
+        };
+        public static IList<User> UserData = new List<User>
+        {
+            new User
             {
-                Id = 1,
-                CityId = CityData[0].Id,
-                City = CityData[0],
-                Name = "TESTBUILDING1",
-                SeaDistance = 1,
-                Shore = ShoreType.Rocky,
-                Features = Feature.CoastService | Feature.MainRoad
+                UserName = "admin",
+                Name = "Adminisztrátor",
+                Email = "admin@example.com",
+                PhoneNumber = "+36123456789",
+                Address = "Nevesincs utca 1."
             },
-            new Building
+            new User
             {
-                Id = 2,
-                CityId = CityData[0].Id,
-                City = CityData[0],
-                Name = "TESTBUILDING2",
-                SeaDistance = 10,
-                Shore = ShoreType.Gravelly,
-                Features = Feature.None
-            },
-            new Building
-            {
-                Id = 3,
-                CityId = CityData[0].Id,
-                City = CityData[0],
-                Name = "TESTBUILDING3",
-                SeaDistance = 100,
-                Shore = ShoreType.Sandy,
-                Features = Feature.PrivateParking
+                UserName = "user",
+                Name = "Valami User",
+                Email = "user@example.com",
+                PhoneNumber = "+36123456789",
+                Address = "User utca 1."
             }
         };
+        public static String AdminPassword = "Almafa123";
+        public static String UserPassword = "Almafa123";
 
-        private readonly List<CityDTO> _cityDTOs;
-        private readonly List<BuildingDTO> _buildingDTOs;
-        private readonly ITravelAgencyPersistence _persistence;
+        private readonly List<OrganisationDTO> organisationDTOs;
+        private readonly List<EventDTO> eventDTOs;
+        private readonly IMeetingApplicationPersistence persistence;
 
-        private readonly IHost _server;
-        private readonly HttpClient _client;
-
+        private readonly IHost server;
+        private readonly HttpClient client;
         public MeetingOrganiserIntegrationTest()
         {
-            _cityDTOs = CityData.Select(city => new CityDTO
-            {
-                Id = city.Id,
-                Name = city.Name
-            }).ToList();
+            organisationDTOs = OrganisationData.Select(o => (OrganisationDTO)o).ToList();
+            eventDTOs = EventData.Select(e => (EventDTO)e).ToList();
 
-            _buildingDTOs = BuildingData.Select(building => new BuildingDTO
-            {
-                Id = building.Id,
-                Name = building.Name,
-                City = _cityDTOs.Single(city => city.Id == building.CityId),
-                Comment = building.Comment,
-                Images = new List<ImageDTO>(),
-                LocationX = building.LocationX,
-                LocationY = building.LocationY,
-                SeaDistance = building.SeaDistance,
-                Shore = building.Shore,
-                Features = FeatureDTO.Convert(building.Features)
-            }).ToList();
-
-            var hostBuilder = new HostBuilder() // szerver konfiguráció összeállítása
+            var hostBuilder = new HostBuilder()
                 .ConfigureWebHost(webHost =>
                 {
                     webHost
-                        .UseTestServer() // test szerver implementáció használata
+                        .UseTestServer()
                         .UseStartup<TestStartup>()
                         .UseEnvironment("Development");
                 });
 
-            _server = hostBuilder.Start(); // szerver példányosítása és elindítása
+            server = hostBuilder.Start();
 
-            _client = _server.GetTestClient(); // kliens példányosítása
-            _client.DefaultRequestHeaders.Accept.Clear();
-            _client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            client = server.GetTestClient();
+            client.DefaultRequestHeaders.Accept.Clear();
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-            _persistence = new TravelAgencyServicePersistence(_client); // kliens oldali perzisztencia réteg példányosítása
+            persistence = new MeetingApplicationServicePersistence(client);
         }
 
         public void Dispose()
         {
-            var dbContext = _server.Services.GetRequiredService<TravelAgencyContext>();
+            var dbContext = server.Services.GetRequiredService<MeetingApplicationContext>();
             dbContext.Database.EnsureDeleted();
         }
 
         [Fact]
-        public async void GetCityTest()
+        public void GetOrganisationTestWhenOrganisationExistsAndUserIsAdmin()
         {
-            IEnumerable<CityDTO> result = await _persistence.ReadCitiesAsync();
+            var adminUser = UserData.ElementAt(0);
+            string existingOrganisationName = OrganisationData.ElementAt(0).Name;
+            persistence.LoginAsync(adminUser.UserName, AdminPassword, existingOrganisationName);
+
+            OrganisationDTO result = persistence.ReadOrganisationAsync(existingOrganisationName);
 
             // Assert
-            Assert.Equal(_cityDTOs, result);
+            Assert.Equal(organisationDTOs.ElementAt(0), result);
         }
-
         [Fact]
-        public async void GetBuildingTest()
+        public void GetOrganisationTestWhenOrganisationExistsButUserIsNotAdmin()
         {
-            IEnumerable<BuildingDTO> result = await _persistence.ReadBuildingsAsync();
+            string existingOrganisationName = "Lorem";
+            OrganisationDTO result = persistence.ReadOrganisationAsync(existingOrganisationName);
 
             // Assert
-            Assert.Equal(_buildingDTOs, result);
+            Assert.Equal(organisationDTOs.ElementAt(0), result);
         }
+        [Fact]
+        public void GetOrganisationTestWhenOrganisationDoesNotExistAndUserIsAdmin()
+        {
+            string existingOrganisationName = "Lorem";
+            OrganisationDTO result = persistence.ReadOrganisationAsync(existingOrganisationName);
+
+            // Assert
+            Assert.Equal(organisationDTOs.ElementAt(0), result);
+        }
+
     }
 }

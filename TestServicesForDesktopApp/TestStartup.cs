@@ -1,4 +1,5 @@
-﻿using ELTE.TravelAgency.Model;
+﻿using CommonData;
+using CommonData.Entities;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -26,13 +27,32 @@ namespace TestServicesForDesktopApp
         }
 
         public IConfiguration Configuration { get; }
-
+        
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            // Dependency injection beállítása az adatbázis kontextushoz
-            services.AddDbContext<TravelAgencyContext>(options =>
-                options.UseInMemoryDatabase("TravelAgencyTest"));
+            services.AddDbContext<MeetingApplicationContext>(options =>
+                options.UseInMemoryDatabase("MeetingOrganiserTest"));
+
+            services.AddIdentity<User, IdentityRole<int>>()
+                .AddEntityFrameworkStores<MeetingApplicationContext>()
+                .AddDefaultTokenProviders();
+
+            services.Configure<IdentityOptions>(options =>
+            {
+                options.Password.RequireDigit = true;
+                options.Password.RequiredLength = 8;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = true;
+                options.Password.RequireLowercase = false;
+                options.Password.RequiredUniqueChars = 3;
+
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(30);
+                options.Lockout.MaxFailedAccessAttempts = 10;
+                options.Lockout.AllowedForNewUsers = true;
+
+                options.User.RequireUniqueEmail = true;
+            });
 
             services.AddControllers();
         }
@@ -52,12 +72,30 @@ namespace TestServicesForDesktopApp
                 endpoints.MapControllers();
             });
 
-            // adatok inicializációja
-            var dbContext = serviceProvider.GetRequiredService<TravelAgencyContext>();
+            var dbContext = serviceProvider.GetRequiredService<MeetingApplicationContext>();
             dbContext.Database.EnsureCreated();
-            dbContext.Cities.AddRange(MeetingOrganiserIntegrationTest.CityData);
-            dbContext.Buildings.AddRange(MeetingOrganiserIntegrationTest.BuildingData);
+            dbContext.Organisations.AddRange(MeetingOrganiserIntegrationTest.OrganisationData);
+            dbContext.Events.AddRange(MeetingOrganiserIntegrationTest.EventData);
             dbContext.SaveChanges();
+
+            var userManager = serviceProvider.GetRequiredService<UserManager<User>>();
+            var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole<int>>>();
+            
+            var adminRole = new IdentityRole<int>("administrator");
+
+            var result1 = userManager.CreateAsync(
+                MeetingOrganiserIntegrationTest.UserData.ElementAt(0),
+                MeetingOrganiserIntegrationTest.AdminPassword).Result;
+            var result2 = roleManager.CreateAsync(adminRole).Result;
+            var result3 = userManager.AddToRoleAsync(MeetingOrganiserIntegrationTest.UserData.ElementAt(0), adminRole.Name).Result;
+
+            var userRole = new IdentityRole<int>("user");
+
+            var result4 = userManager.CreateAsync(
+                MeetingOrganiserIntegrationTest.UserData.ElementAt(1),
+                MeetingOrganiserIntegrationTest.UserPassword).Result;
+            var result5 = roleManager.CreateAsync(userRole).Result;
+            var result6 = userManager.AddToRoleAsync(MeetingOrganiserIntegrationTest.UserData.ElementAt(1), userRole.Name).Result;
         }
     }
 }

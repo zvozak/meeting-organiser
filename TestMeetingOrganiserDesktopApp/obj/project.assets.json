@@ -9020,11 +9020,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\vozak\\Desktop\\MeetingOrganiser\\TestMeetingOrganiserDesktopApp\\TestMeetingOrganiserDesktopApp.csproj",
+      "projectUniqueName": "C:\\Users\\vozak\\source\\repos\\Szakdolgozat\\TestMeetingOrganiserDesktopApp\\TestMeetingOrganiserDesktopApp.csproj",
       "projectName": "TestMeetingOrganiserDesktopApp",
-      "projectPath": "C:\\Users\\vozak\\Desktop\\MeetingOrganiser\\TestMeetingOrganiserDesktopApp\\TestMeetingOrganiserDesktopApp.csproj",
+      "projectPath": "C:\\Users\\vozak\\source\\repos\\Szakdolgozat\\TestMeetingOrganiserDesktopApp\\TestMeetingOrganiserDesktopApp.csproj",
       "packagesPath": "C:\\Users\\vozak\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\vozak\\Desktop\\MeetingOrganiser\\TestMeetingOrganiserDesktopApp\\obj\\",
+      "outputPath": "C:\\Users\\vozak\\source\\repos\\Szakdolgozat\\TestMeetingOrganiserDesktopApp\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
@@ -9047,8 +9047,8 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "C:\\Users\\vozak\\Desktop\\MeetingOrganiser\\MeetingOrganiserDesktopApp\\MeetingOrganiserDesktopApp.csproj": {
-              "projectPath": "C:\\Users\\vozak\\Desktop\\MeetingOrganiser\\MeetingOrganiserDesktopApp\\MeetingOrganiserDesktopApp.csproj"
+            "C:\\Users\\vozak\\source\\repos\\Szakdolgozat\\MeetingOrganiserDesktopApp\\MeetingOrganiserDesktopApp.csproj": {
+              "projectPath": "C:\\Users\\vozak\\source\\repos\\Szakdolgozat\\MeetingOrganiserDesktopApp\\MeetingOrganiserDesktopApp.csproj"
             }
           }
         }
@@ -9095,7 +9095,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.403\\RuntimeIdentifierGraph.json"
       }
     }
   }

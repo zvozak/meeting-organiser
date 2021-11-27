@@ -50,19 +50,19 @@ namespace WebAppForMembers.Controllers
         private bool IsValidEndDate(DateTime EndDate, DateTime StartDate, DateTime EventEndDate, DateTime EventStartDate)
         {
             bool a = IsBetween(EndDate, EventStartDate, EventEndDate);
-            bool b = (StartDate == null || DateTime.Compare(StartDate, EndDate) < 0);
+            bool b = (StartDate == null || DateTime.Compare(StartDate, EndDate) <= 0);
             return 
                 IsBetween(EndDate, EventStartDate, EventEndDate) &&
-                (StartDate == null || DateTime.Compare(StartDate, EndDate) < 0);
+                (StartDate == null || DateTime.Compare(StartDate, EndDate) <= 0);
 
         }
         private bool IsValidStartDate(DateTime StartDate, DateTime EndDate, DateTime EventEndDate, DateTime EventStartDate)
         {
             bool a = IsBetween(StartDate, EventStartDate, EventEndDate);
-            bool b = (EndDate == null || DateTime.Compare(StartDate, EndDate) < 0);
+            bool b = (EndDate == null || DateTime.Compare(StartDate, EndDate) <= 0);
             return 
                 IsBetween(StartDate, EventStartDate, EventEndDate) &&
-                (EndDate == null || DateTime.Compare(StartDate, EndDate) < 0);
+                (EndDate == null || DateTime.Compare(StartDate, EndDate) <= 0);
 
         }
 

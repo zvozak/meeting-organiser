@@ -50,7 +50,7 @@ namespace WebAppForMembers.Models
             var result = ConvertEventToEventViewModel(e);
 
             int memberId = context.Members
-               .First(member =>
+               .FirstOrDefault(member =>
                member.OrganisationId == e.OrganisationId &&
                IsMemberOfOrganisation(GetOrganisation(e.OrganisationId).Name, userId))
                .Id;
@@ -83,13 +83,20 @@ namespace WebAppForMembers.Models
                 on organisations.Id equals ids
             select organisations;
         }
-        public DateTime StrictestDeadlineAt(int organisationId)
+        public DateTime? StrictestDeadlineAt(int organisationId)
         {
-            return
+            try
+            {
+                return
                 GetEventsOf(organisationId)
                 .OrderBy(info => info.DeadlineForApplication)
                 .Select(info => info.DeadlineForApplication)
-                .FirstOrDefault();
+                .First();
+            }
+            catch
+            {
+                return null;
+            }
         }
         public Organisation GetOrganisation(int organisationId)
         {
@@ -99,6 +106,11 @@ namespace WebAppForMembers.Models
         }
         public IEnumerable<EventViewModel> GetEventsOf(int organisationId)
         {
+            if (context.Events.Count() == 0)
+            {
+                return new HashSet<EventViewModel>();
+            }
+
             var events = context.Events
                 .Where( e => e.OrganisationId == organisationId);
 
@@ -132,13 +144,13 @@ namespace WebAppForMembers.Models
                 context.Events.FirstOrDefault(
                     events => events.Id == eventId));
         }
-        public Event GetEvent(int eventId)
+        public Event? GetEvent(int eventId)
         {
             return
                 context.Events.FirstOrDefault(
                     events => events.Id == eventId);
         }
-        public EventForm GetEventForm(int eventId, int memberId)
+        public EventForm? GetEventForm(int eventId, int memberId)
         {
             return
                context.EventForms.FirstOrDefault(eventform =>
@@ -247,7 +259,7 @@ namespace WebAppForMembers.Models
         {
             Organisation organisation = GetOrganisationByName(organisationName);
             return
-                context.Members.First(member =>
+                context.Members.FirstOrDefault(member =>
                    member.OrganisationId == organisation.Id &&
                    member.Name == realUserName &&
                    member.Email == userEmail
@@ -261,15 +273,15 @@ namespace WebAppForMembers.Models
                 join memberships in context.Memberships
                 on member.Id equals memberships.MemberId
                  where memberships.UserId == userId && member.OrganisationId == organisationId
-                select member.Id).First();
+                select member.Id).FirstOrDefault();
         }
         public User GetUserBy(string userName)
         {
-            return context.Users.First(user => user.UserName == userName);
+            return context.Users.FirstOrDefault(user => user.UserName == userName);
         }
         public User GetUserBy(int userId)
         {
-            return context.Users.First(user => user.Id == userId);
+            return context.Users.FirstOrDefault(user => user.Id == userId);
         }
         public bool IsExistingMembership(int memberId, int userId)
         {
@@ -283,7 +295,7 @@ namespace WebAppForMembers.Models
                 .ToList();
             string userDomain = email.Substring( email.IndexOf('@')+1);
             return 
-                context.Organisations.First(org => org.Name == organisationName).PermitNewMembers &&
+                context.Organisations.FirstOrDefault(org => org.Name == organisationName).PermitNewMembers &&
                 (acceptedEmailDomains.Count == 0 || 
                 acceptedEmailDomains.Any(domain => domain.DomainName.Equals(userDomain)));
         }
@@ -300,14 +312,14 @@ namespace WebAppForMembers.Models
         }
         public Project GetProject(string name, int organisationId)
         {
-            return context.Projects.First(p => 
+            return context.Projects.FirstOrDefault(p => 
                     p.Name == name && 
                     p.OrganisationId == organisationId);
         }
 
         public Job GetJob(string title, int organisationId)
         {
-            return context.Jobs.First(p =>
+            return context.Jobs.FirstOrDefault(p =>
                     p.Title == title &&
                     p.OrganisationId == organisationId);
         }
@@ -371,6 +383,12 @@ namespace WebAppForMembers.Models
 
         public bool CreateJob( string jobTitle, int organisationId)
         {
+            bool isExistingOrganisationId = context.Organisations.Any(o => o.Id == organisationId);
+            if (!isExistingOrganisationId)
+            {
+                return false;
+            }
+
             if(context.Jobs.Any(j => j.Title == jobTitle && j.OrganisationId == organisationId))
             {
                 return true;
@@ -465,14 +483,26 @@ namespace WebAppForMembers.Models
 
         public bool DeleteMembership(int userId, int organisationId)
         {
+            bool isValidUser = context.Users.Any(user => user.Id == userId);
+            bool isValidOrganisation = context.Organisations.Any(o => o.Id == organisationId);
+            if (!isValidUser || !isValidOrganisation)
+            {
+                return false;
+            }
+
             var memberIdsOfOrganisation = context.Members
                     .Where(member => member.OrganisationId == organisationId)
                     .Select(member => member.Id);
             
             var membership =
-                    context.Memberships.First( membership =>
+                    context.Memberships.FirstOrDefault( membership =>
                     membership.UserId == userId &&
                     memberIdsOfOrganisation.Contains(membership.MemberId));
+
+            if (membership == null)
+            {
+                return false;
+            }
             
             context.Memberships.Remove( membership);
 

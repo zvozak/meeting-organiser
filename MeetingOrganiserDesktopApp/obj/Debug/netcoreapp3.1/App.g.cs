@@ -46,7 +46,7 @@ namespace MeetingOrganiserDesktopApp {
         /// </summary>
         [System.STAThreadAttribute()]
         [System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [System.CodeDom.Compiler.GeneratedCodeAttribute("PresentationBuildTasks", "5.0.4.0")]
+        [System.CodeDom.Compiler.GeneratedCodeAttribute("PresentationBuildTasks", "5.0.12.0")]
         public static void Main() {
             MeetingOrganiserDesktopApp.App app = new MeetingOrganiserDesktopApp.App();
             app.Run();

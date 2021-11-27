@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\vozak\\Desktop\\MeetingOrganiser\\TestServicesForDesktopApp\\TestServicesForDesktopApp.csproj": {}
+    "C:\\Users\\vozak\\source\\repos\\Szakdolgozat\\TestServicesForDesktopApp\\TestServicesForDesktopApp.csproj": {}
   },
   "projects": {
-    "C:\\Users\\vozak\\Desktop\\MeetingOrganiser\\CommonData\\CommonData.csproj": {
+    "C:\\Users\\vozak\\source\\repos\\Szakdolgozat\\CommonData\\CommonData.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\vozak\\Desktop\\MeetingOrganiser\\CommonData\\CommonData.csproj",
+        "projectUniqueName": "C:\\Users\\vozak\\source\\repos\\Szakdolgozat\\CommonData\\CommonData.csproj",
         "projectName": "CommonData",
-        "projectPath": "C:\\Users\\vozak\\Desktop\\MeetingOrganiser\\CommonData\\CommonData.csproj",
+        "projectPath": "C:\\Users\\vozak\\source\\repos\\Szakdolgozat\\CommonData\\CommonData.csproj",
         "packagesPath": "C:\\Users\\vozak\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\vozak\\Desktop\\MeetingOrganiser\\CommonData\\obj\\",
+        "outputPath": "C:\\Users\\vozak\\source\\repos\\Szakdolgozat\\CommonData\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
@@ -84,18 +84,18 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.403\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\vozak\\Desktop\\MeetingOrganiser\\ServicesForDesktopApp\\ServicesForDesktopApp.csproj": {
+    "C:\\Users\\vozak\\source\\repos\\Szakdolgozat\\MeetingOrganiserDesktopApp\\MeetingOrganiserDesktopApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\vozak\\Desktop\\MeetingOrganiser\\ServicesForDesktopApp\\ServicesForDesktopApp.csproj",
-        "projectName": "ServicesForDesktopApp",
-        "projectPath": "C:\\Users\\vozak\\Desktop\\MeetingOrganiser\\ServicesForDesktopApp\\ServicesForDesktopApp.csproj",
+        "projectUniqueName": "C:\\Users\\vozak\\source\\repos\\Szakdolgozat\\MeetingOrganiserDesktopApp\\MeetingOrganiserDesktopApp.csproj",
+        "projectName": "MeetingOrganiserDesktopApp",
+        "projectPath": "C:\\Users\\vozak\\source\\repos\\Szakdolgozat\\MeetingOrganiserDesktopApp\\MeetingOrganiserDesktopApp.csproj",
         "packagesPath": "C:\\Users\\vozak\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\vozak\\Desktop\\MeetingOrganiser\\ServicesForDesktopApp\\obj\\",
+        "outputPath": "C:\\Users\\vozak\\source\\repos\\Szakdolgozat\\MeetingOrganiserDesktopApp\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
@@ -118,8 +118,97 @@
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "C:\\Users\\vozak\\Desktop\\MeetingOrganiser\\CommonData\\CommonData.csproj": {
-                "projectPath": "C:\\Users\\vozak\\Desktop\\MeetingOrganiser\\CommonData\\CommonData.csproj"
+              "C:\\Users\\vozak\\source\\repos\\Szakdolgozat\\CommonData\\CommonData.csproj": {
+                "projectPath": "C:\\Users\\vozak\\source\\repos\\Szakdolgozat\\CommonData\\CommonData.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
+          "dependencies": {
+            "Microsoft.AspNet.WebApi.Client": {
+              "target": "Package",
+              "version": "[5.2.7, )"
+            },
+            "Microsoft.Extensions.Configuration.Json": {
+              "target": "Package",
+              "version": "[3.1.3, )"
+            },
+            "Microsoft.Xaml.Behaviors.Wpf": {
+              "target": "Package",
+              "version": "[1.1.31, )"
+            },
+            "MiqM.Xceed.Wpf.Toolkit.NETCore": {
+              "target": "Package",
+              "version": "[3.5.1.3, )"
+            },
+            "NLog": {
+              "target": "Package",
+              "version": "[4.7.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            },
+            "Microsoft.WindowsDesktop.App.WPF": {
+              "privateAssets": "none"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.403\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\vozak\\source\\repos\\Szakdolgozat\\ServicesForDesktopApp\\ServicesForDesktopApp.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\vozak\\source\\repos\\Szakdolgozat\\ServicesForDesktopApp\\ServicesForDesktopApp.csproj",
+        "projectName": "ServicesForDesktopApp",
+        "projectPath": "C:\\Users\\vozak\\source\\repos\\Szakdolgozat\\ServicesForDesktopApp\\ServicesForDesktopApp.csproj",
+        "packagesPath": "C:\\Users\\vozak\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\vozak\\source\\repos\\Szakdolgozat\\ServicesForDesktopApp\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\vozak\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
+            "projectReferences": {
+              "C:\\Users\\vozak\\source\\repos\\Szakdolgozat\\CommonData\\CommonData.csproj": {
+                "projectPath": "C:\\Users\\vozak\\source\\repos\\Szakdolgozat\\CommonData\\CommonData.csproj"
               }
             }
           }
@@ -177,18 +266,18 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.403\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\vozak\\Desktop\\MeetingOrganiser\\TestServicesForDesktopApp\\TestServicesForDesktopApp.csproj": {
+    "C:\\Users\\vozak\\source\\repos\\Szakdolgozat\\TestServicesForDesktopApp\\TestServicesForDesktopApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\vozak\\Desktop\\MeetingOrganiser\\TestServicesForDesktopApp\\TestServicesForDesktopApp.csproj",
+        "projectUniqueName": "C:\\Users\\vozak\\source\\repos\\Szakdolgozat\\TestServicesForDesktopApp\\TestServicesForDesktopApp.csproj",
         "projectName": "TestServicesForDesktopApp",
-        "projectPath": "C:\\Users\\vozak\\Desktop\\MeetingOrganiser\\TestServicesForDesktopApp\\TestServicesForDesktopApp.csproj",
+        "projectPath": "C:\\Users\\vozak\\source\\repos\\Szakdolgozat\\TestServicesForDesktopApp\\TestServicesForDesktopApp.csproj",
         "packagesPath": "C:\\Users\\vozak\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\vozak\\Desktop\\MeetingOrganiser\\TestServicesForDesktopApp\\obj\\",
+        "outputPath": "C:\\Users\\vozak\\source\\repos\\Szakdolgozat\\TestServicesForDesktopApp\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
@@ -211,11 +300,14 @@
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "C:\\Users\\vozak\\Desktop\\MeetingOrganiser\\CommonData\\CommonData.csproj": {
-                "projectPath": "C:\\Users\\vozak\\Desktop\\MeetingOrganiser\\CommonData\\CommonData.csproj"
+              "C:\\Users\\vozak\\source\\repos\\Szakdolgozat\\CommonData\\CommonData.csproj": {
+                "projectPath": "C:\\Users\\vozak\\source\\repos\\Szakdolgozat\\CommonData\\CommonData.csproj"
               },
-              "C:\\Users\\vozak\\Desktop\\MeetingOrganiser\\ServicesForDesktopApp\\ServicesForDesktopApp.csproj": {
-                "projectPath": "C:\\Users\\vozak\\Desktop\\MeetingOrganiser\\ServicesForDesktopApp\\ServicesForDesktopApp.csproj"
+              "C:\\Users\\vozak\\source\\repos\\Szakdolgozat\\MeetingOrganiserDesktopApp\\MeetingOrganiserDesktopApp.csproj": {
+                "projectPath": "C:\\Users\\vozak\\source\\repos\\Szakdolgozat\\MeetingOrganiserDesktopApp\\MeetingOrganiserDesktopApp.csproj"
+              },
+              "C:\\Users\\vozak\\source\\repos\\Szakdolgozat\\ServicesForDesktopApp\\ServicesForDesktopApp.csproj": {
+                "projectPath": "C:\\Users\\vozak\\source\\repos\\Szakdolgozat\\ServicesForDesktopApp\\ServicesForDesktopApp.csproj"
               }
             }
           }
@@ -277,7 +369,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.403\\RuntimeIdentifierGraph.json"
         }
       }
     }

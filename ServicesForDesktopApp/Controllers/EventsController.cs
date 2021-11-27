@@ -33,18 +33,31 @@ namespace ServicesForDesktopApp.Controllers
         [HttpGet("{eventId}")]
         public ActionResult<IEnumerable<EventFormDTO>> GetEventForms(int eventId)
         {
-            return Ok(context.EventForms
-                .Where(e => e.EventId == eventId)
-                .Select(e => (EventFormDTO)e));
+            try {
+                return Ok(context.EventForms
+                    .Where(e => e.EventId == eventId)
+                    .Select(e => (EventFormDTO)e));
+            }
+            catch (ArgumentNullException)
+            {
+                return NotFound();
+            }
         }
 
 
         [HttpGet("{organisationId}")]
         public ActionResult<IEnumerable<EventDTO>> GetEvents(int organisationId)
         {
-            return Ok(context.Events
-                .Where(e => e.OrganisationId == organisationId)
-                .Select(e => (EventDTO)e));
+            try
+            {
+                return Ok(context.Events
+                    .Where(e => e.OrganisationId == organisationId)
+                    .Select(e => (EventDTO)e));
+            }
+            catch (ArgumentNullException)
+            {
+                return NotFound();
+            }
         }
 
 

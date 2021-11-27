@@ -21,5 +21,14 @@ namespace WebAppForMembers.Models
         public int EventId { get; set; }
         public string OrganisationName { get; set; }
         public EventState State {get; set;}
+
+        public override bool Equals(object obj)
+        {
+            EventViewModel e = obj as EventViewModel;
+            return e != null && Object.Equals(this.Name, e.Name) && Object.Equals(this.Description, e.Description) &&
+                Object.Equals(this.StartDate, e.StartDate) && Object.Equals(this.EndDate, e.EndDate) &&
+                Object.Equals(this.DeadlineForApplication, e.DeadlineForApplication) && Object.Equals(this.EventId, e.EventId) &&
+                Object.Equals(this.OrganisationName, e.OrganisationName) && Object.Equals(this.State, e.State);
+        }
     }
 }

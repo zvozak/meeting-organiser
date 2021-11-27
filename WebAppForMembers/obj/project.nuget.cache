@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ahd3Y24Em8IRtk1R/mUwzOEG59BYjirMziyiGQNJyqml0gw0axBIZ2L5Nl7lysSNi0MmDTxb9P0aiadknfnypw==",
+  "dgSpecHash": "fTmQHsY+OOf1OAlW099I1hzzXMPiEzyI5zaOWq0dMPTxgS9+/Uxl/j6YgPS3r4jDJlWOMPtqqrdAsTftAeyAQA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\vozak\\Desktop\\MeetingOrganiser\\WebAppForMembers\\WebAppForMembers.csproj",
+  "projectFilePath": "C:\\Users\\vozak\\source\\repos\\Szakdolgozat\\WebAppForMembers\\WebAppForMembers.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\vozak\\.nuget\\packages\\microsoft.aspnetcore.authentication\\2.2.0\\microsoft.aspnetcore.authentication.2.2.0.nupkg.sha512",
     "C:\\Users\\vozak\\.nuget\\packages\\microsoft.aspnetcore.authentication.abstractions\\2.2.0\\microsoft.aspnetcore.authentication.abstractions.2.2.0.nupkg.sha512",

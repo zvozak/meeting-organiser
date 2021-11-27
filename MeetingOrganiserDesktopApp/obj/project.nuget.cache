@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "uQFLodY/LnOgWpm5wVnJCS8faHx245fQjQCuHqwNJRfcVzw44gLLaLNHE9cJLvSkJ8n1YNNN5IPJGIxcifsoeA==",
+  "dgSpecHash": "E2L66fC5Ey+iKDOkcr5QCg1EPx86Lpnn4AyW03haYYZp239IgVFPmGc6dGNxIQpEEuYq6ztmaGwFjPxP4Up/Yg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\vozak\\Desktop\\MeetingOrganiser\\MeetingOrganiserDesktopApp\\MeetingOrganiserDesktopApp.csproj",
+  "projectFilePath": "C:\\Users\\vozak\\source\\repos\\Szakdolgozat\\MeetingOrganiserDesktopApp\\MeetingOrganiserDesktopApp.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\vozak\\.nuget\\packages\\microsoft.aspnet.webapi.client\\5.2.7\\microsoft.aspnet.webapi.client.5.2.7.nupkg.sha512",
     "C:\\Users\\vozak\\.nuget\\packages\\microsoft.aspnetcore.authentication\\2.2.0\\microsoft.aspnetcore.authentication.2.2.0.nupkg.sha512",

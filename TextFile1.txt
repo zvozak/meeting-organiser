@@ -1,0 +1,4 @@
+TODOs
+
+- Why do we need dtos?
+- Why do we need both BossId and Boss property for MemberDTO?
