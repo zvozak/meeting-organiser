@@ -758,8 +758,8 @@ namespace MeetingOrganiserDesktopApp.Persistence
                 string request = "api/account/login/" + userName + "/" + userPassword + "/" + organisationName;
                 HttpResponseMessage response = await client.GetAsync("api/account/login/" + userName + "/" + userPassword + "/" + organisationName);
 
-                //if (!response.IsSuccessStatusCode)
-                //    log.Warn("LOGIN returned response {0} with reason: {1}", response.StatusCode, response.ReasonPhrase);
+                if (!response.IsSuccessStatusCode)
+                    log.Warn("LOGIN returned response {0} with reason: {1}", response.StatusCode, response.ReasonPhrase);
 
                 return response.IsSuccessStatusCode;
             }

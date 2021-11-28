@@ -28,7 +28,6 @@ namespace ServicesForDesktopApp.Controllers
         }
 
 
-        [Authorize(Roles = "administrator")]
         [HttpGet("{organisationName}")]
         public IActionResult GetOrganisation(string organisationName)
         {

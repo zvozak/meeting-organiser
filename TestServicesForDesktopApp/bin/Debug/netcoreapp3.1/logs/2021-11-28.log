@@ -1,0 +1,2 @@
+2021-11-28 06:34:50.0137|INFO|service|GET query on service http://localhost/, path: api/organisations/getorganisation/Lorem
+2021-11-28 06:34:50.1548|WARN|service|GET query returned response InternalServerError with reason: Internal Server Error

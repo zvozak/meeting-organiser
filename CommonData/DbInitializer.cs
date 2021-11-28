@@ -201,7 +201,7 @@ namespace CommonData
 					Description = "Lorem az valami cég.",
 					PermitNewMembers = true,
 					Address = "Egyik utca 2.",
-					AdminId = 1
+					AdminId = context.Users.First(u => u.UserName == "adminLorem").Id
 				},
 				new Organisation {
 					Name = "Ipsum",
@@ -209,7 +209,7 @@ namespace CommonData
 					Description = "Az Ipsum az valami másik cég.",
 					PermitNewMembers = false,
 					Address = "Másik utca 7.",
-					AdminId = 2
+					AdminId = context.Users.First(u => u.UserName == "adminIpsum").Id
 				}
 			};
 			foreach (var o in orgs)
@@ -304,12 +304,23 @@ namespace CommonData
             }
 			context.SaveChanges();
 
-		}
+		}/*
+		private static void SeedMemberships()
+        {
+			var memberships = new Membership[]
+			{
+				new Membership
+				{
+					MemberId = context.Members.ElementAt(0).Id,
+					UserId = context.Users.ElementAt(1).Id
+				}
+			};
+        }*/
 		private static void SeedUsers()
 		{
 			var adminUser = new User
 			{
-				UserName = "admin",
+				UserName = "adminLorem",
 				Name = "Adminisztrátor",
 				Email = "admin@example.com",
 				PhoneNumber = "+36123456789",
@@ -322,9 +333,22 @@ namespace CommonData
 			var result2 = roleManager.CreateAsync(adminRole).Result;
 			var result3 = userManager.AddToRoleAsync(adminUser, adminRole.Name).Result;
 
+			var adminUser2 = new User
+			{
+				UserName = "adminIpsum",
+				Name = "Adminisztrátor",
+				Email = "a@a.a",
+				PhoneNumber = "+36123456789",
+				Address = "Nevesincs utca 1."
+			};
+			var adminPassword2 = "Almafa123";
+
+			var result4 = userManager.CreateAsync(adminUser2, adminPassword2).Result;
+			var result5 = userManager.AddToRoleAsync(adminUser2, adminRole.Name).Result;
+
 			var user = new User
 			{
-				UserName = "user",
+				UserName = "user00",
 				Name = "Valami User",
 				Email = "user@example.com",
 				PhoneNumber = "+36123456789",
@@ -333,9 +357,10 @@ namespace CommonData
 			var userPassword = "Almafa123";
 			var userRole = new IdentityRole<int>("user");
 
-			var result4 = userManager.CreateAsync(user, userPassword).Result;
-			var result5 = roleManager.CreateAsync(userRole).Result;
-			var result6 = userManager.AddToRoleAsync(user, userRole.Name).Result;
+			var result6 = userManager.CreateAsync(user, userPassword).Result;
+			var result7 = roleManager.CreateAsync(userRole).Result;
+			var result8 = userManager.AddToRoleAsync(user, userRole.Name).Result;
+
 		}
 		private static void SeedVenues()
         {

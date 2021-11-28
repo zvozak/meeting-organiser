@@ -255,3 +255,4 @@ C:\Users\vozak\source\repos\Szakdolgozat\TestServicesForDesktopApp\bin\Debug\net
 C:\Users\vozak\source\repos\Szakdolgozat\TestServicesForDesktopApp\bin\Debug\netcoreapp3.1\zh-Hans\Xceed.Wpf.AvalonDock.resources.dll
 C:\Users\vozak\source\repos\Szakdolgozat\TestServicesForDesktopApp\bin\Debug\netcoreapp3.1\MeetingOrganiserDesktopApp.dll
 C:\Users\vozak\source\repos\Szakdolgozat\TestServicesForDesktopApp\bin\Debug\netcoreapp3.1\MeetingOrganiserDesktopApp.pdb
+C:\Users\vozak\source\repos\Szakdolgozat\TestServicesForDesktopApp\obj\Debug\netcoreapp3.1\TestServicesForDesktopApp.csproj.CopyComplete

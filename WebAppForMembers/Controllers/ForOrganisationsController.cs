@@ -63,11 +63,20 @@ namespace WebAppForMembers.Controllers
 				Address = organisation.Address,
 				AdminId = admin.Id
 			});
-
+			
 			var currentRoles = userManager.GetRolesAsync(admin).Result;
+			IdentityResult result = null;
+			if (successful && !currentRoles.Contains("administrator"))
+			{
+				result = userManager.RemoveFromRolesAsync(admin, currentRoles).Result;
+				if (result.Succeeded)
+				{
+					result = userManager.AddToRoleAsync(admin, "administrator").Result;
+				}
+			}
 
-			if (successful && (currentRoles.Contains("administrator") || userManager.AddToRoleAsync(admin, "administrator").IsCompletedSuccessfully))
-            {
+			if (successful && (result == null || result.Succeeded))
+			{
 				return View("ModificationResult", new ModificationResultViewModel
 				{
 					Action = "Register",
@@ -75,7 +84,7 @@ namespace WebAppForMembers.Controllers
 					Message = "Account for organisation was successfully created."
 				});
 			}
-            else
+			else
             {
 				return View("ModificationResult", new ModificationResultViewModel
 				{

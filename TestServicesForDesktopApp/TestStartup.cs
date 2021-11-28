@@ -78,6 +78,7 @@ namespace TestServicesForDesktopApp
             dbContext.Events.AddRange(MeetingOrganiserIntegrationTest.EventData);
             dbContext.SaveChanges();
 
+            /*
             var userManager = serviceProvider.GetRequiredService<UserManager<User>>();
             var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole<int>>>();
             
@@ -96,6 +97,7 @@ namespace TestServicesForDesktopApp
                 MeetingOrganiserIntegrationTest.UserPassword).Result;
             var result5 = roleManager.CreateAsync(userRole).Result;
             var result6 = userManager.AddToRoleAsync(MeetingOrganiserIntegrationTest.UserData.ElementAt(1), userRole.Name).Result;
+            */
         }
     }
 }

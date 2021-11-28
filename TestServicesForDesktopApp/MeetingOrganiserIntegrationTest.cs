@@ -141,18 +141,18 @@ namespace TestServicesForDesktopApp
             dbContext.Database.EnsureDeleted();
         }
 
+        
         [Fact]
         public void GetOrganisationTestWhenOrganisationExistsAndUserIsAdmin()
         {
-            var adminUser = UserData.ElementAt(0);
             string existingOrganisationName = OrganisationData.ElementAt(0).Name;
-            persistence.LoginAsync(adminUser.UserName, AdminPassword, existingOrganisationName);
 
             OrganisationDTO result = persistence.ReadOrganisationAsync(existingOrganisationName);
 
             // Assert
             Assert.Equal(organisationDTOs.ElementAt(0), result);
         }
+        
         [Fact]
         public void GetOrganisationTestWhenOrganisationExistsButUserIsNotAdmin()
         {
