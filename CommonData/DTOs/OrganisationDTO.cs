@@ -27,6 +27,7 @@ namespace CommonData.DTOs
         {
             Jobs = new List<JobDTO>();
             Projects = new List<ProjectDTO>();
+            AcceptedEmailDomains = new List<AcceptedEmailDomainDTO>();
         }
 
         public static explicit operator OrganisationDTO(Organisation o) => new OrganisationDTO
@@ -48,5 +49,19 @@ namespace CommonData.DTOs
             AdminId = dto.AdminId,
             Address = dto.Address
         };
+
+        
+        public override bool Equals(object obj)
+        {
+            OrganisationDTO o = obj as OrganisationDTO;
+            return o != null &&
+                Id == o.Id &&
+                Name == o.Name &&
+                Description == o.Description &&
+                TypeOfStructure == o.TypeOfStructure &&
+                PermitNewMembers == o.PermitNewMembers &&
+                AdminId == o.AdminId &&
+                Address == o.Address;
+        }
     }
 }

@@ -41,7 +41,11 @@ namespace ServicesForDesktopApp.Controllers
             catch (ArgumentNullException)
             {
                 return NotFound();
-            }            
+            }
+            catch (InvalidOperationException)
+            {
+                return NotFound();
+            }
         }
 
         /*

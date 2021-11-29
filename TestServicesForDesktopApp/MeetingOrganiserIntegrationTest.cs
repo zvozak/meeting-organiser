@@ -29,7 +29,8 @@ namespace TestServicesForDesktopApp
                     Description = "Lorem az valami cég.",
                     PermitNewMembers = true,
                     Address = "Egyik utca 2.",
-                    AdminId = 1
+                    AdminId = 1,
+                    Id = 1
                 },
                 new Organisation {
                     Name = "Ipsum",
@@ -37,7 +38,18 @@ namespace TestServicesForDesktopApp
                     Description = "Az Ipsum az valami másik cég.",
                     PermitNewMembers = false,
                     Address = "Másik utca 7.",
-                    AdminId = 2
+                    AdminId = 2,
+                    Id = 2
+                },
+                new Organisation
+                {
+                    Name = "Has No Events",
+                    TypeOfStructure = TypeOfStructure.Hierarchical,
+                    Description = "",
+                    PermitNewMembers = false,
+                    Address = "Másik utca 7.",
+                    AdminId = 2,
+                    Id = 3
                 }
         };
 
@@ -49,7 +61,8 @@ namespace TestServicesForDesktopApp
                     Name = "Első esemény",
                     DeadlineForApplication = new DateTime(2021, 03, 28),
                     StartDate = new DateTime(2021, 03, 30),
-                    EndDate = new DateTime(2021, 04, 2)
+                    EndDate = new DateTime(2021, 04, 2),
+                    Id = 1
                 },
                 new Event
                 {
@@ -57,7 +70,8 @@ namespace TestServicesForDesktopApp
                     Name = "Második esemény",
                     DeadlineForApplication = new DateTime(2021, 04, 28),
                     StartDate = new DateTime(2021, 04, 30),
-                    EndDate = new DateTime(2021, 05, 2)
+                    EndDate = new DateTime(2021, 05, 2),
+                    Id = 2
                 },
                 new Event
                 {
@@ -65,7 +79,8 @@ namespace TestServicesForDesktopApp
                     Name = "Harmadik esemény",
                     DeadlineForApplication = new DateTime(2021, 03, 28),
                     StartDate = new DateTime(2021, 03, 30),
-                    EndDate = new DateTime(2021, 04, 2)
+                    EndDate = new DateTime(2021, 04, 2),
+                    Id = 3
                 },
                 new Event
                 {
@@ -73,7 +88,8 @@ namespace TestServicesForDesktopApp
                     Name = "Negyedik esemény",
                     DeadlineForApplication = new DateTime(2021, 02, 28),
                     StartDate = new DateTime(2021, 04, 30),
-                    EndDate = new DateTime(2021, 05, 2)
+                    EndDate = new DateTime(2021, 05, 2),
+                    Id = 4
                 },
                 new Event
                 {
@@ -81,7 +97,8 @@ namespace TestServicesForDesktopApp
                     Name = "Ötödik esemény",
                     DeadlineForApplication = new DateTime(2021, 06, 28),
                     StartDate = new DateTime(2021, 03, 30),
-                    EndDate = new DateTime(2021, 04, 2)
+                    EndDate = new DateTime(2021, 04, 2),
+                    Id = 5
                 }
         };
         public static IList<User> UserData = new List<User>
@@ -112,6 +129,9 @@ namespace TestServicesForDesktopApp
 
         private readonly IHost server;
         private readonly HttpClient client;
+        private readonly String notFoundResponse = "NotFound";
+
+
         public MeetingOrganiserIntegrationTest()
         {
             organisationDTOs = OrganisationData.Select(o => (OrganisationDTO)o).ToList();
@@ -143,34 +163,99 @@ namespace TestServicesForDesktopApp
 
         
         [Fact]
-        public void GetOrganisationTestWhenOrganisationExistsAndUserIsAdmin()
+        public void TestGetOrganisationWhenOrganisationExistsShouldReturnOrganisation()
         {
             string existingOrganisationName = OrganisationData.ElementAt(0).Name;
 
             OrganisationDTO result = persistence.ReadOrganisationAsync(existingOrganisationName);
 
-            // Assert
             Assert.Equal(organisationDTOs.ElementAt(0), result);
         }
         
         [Fact]
-        public void GetOrganisationTestWhenOrganisationExistsButUserIsNotAdmin()
+        public void TestGetOrganisationWhenOrganisationDoesNotExistShouldReturnPersistenceUnavailableExceptionWithNoutFoundInnerException()
         {
-            string existingOrganisationName = "Lorem";
-            OrganisationDTO result = persistence.ReadOrganisationAsync(existingOrganisationName);
+            string unknownOrganisationName = "Ismeretlen";
+            string expectedErrorMessage = "Service returned response: " + notFoundResponse;
+            PersistenceUnavailableException actualException = null;
+            OrganisationDTO result = null;
+            try
+            {
+                result = persistence.ReadOrganisationAsync(unknownOrganisationName);
+            }
+            catch(PersistenceUnavailableException e)
+            {
+                actualException = e;
+            }
 
-            // Assert
-            Assert.Equal(organisationDTOs.ElementAt(0), result);
+            Assert.Null(result);
+            Assert.Contains(expectedErrorMessage, actualException.Message);
+        }
+
+        [Fact]
+        public void TestGetEventsWhenOrganisationDoesNotExistShouldReturnEmptyList()
+        {
+            int unknownOrganisationID = 100;
+
+            IEnumerable<EventDTO> result = persistence.ReadEventsAsync(unknownOrganisationID).Result;
+
+            Assert.Empty(result);
+        }
+
+        [Fact]
+        public void TestGetEventsWhenOrganisationHasNoEventsShouldReturnEmptyList()
+        {
+            int organisationWithoutEventsID = 3;
+
+            IEnumerable<EventDTO> result = persistence.ReadEventsAsync(organisationWithoutEventsID).Result;
+
+            Assert.Empty(result);
+        }
+
+        [Fact]
+        public void TestGetEventsWhenOrganisationHasEventsShouldReturnItsEvents()
+        {
+            int organisationID = 1;
+            var expectedResult = eventDTOs.GetRange(0, 3);
+
+            List<EventDTO> result = persistence.ReadEventsAsync(organisationID).Result.ToList();
+
+            Assert.True(result.SequenceEqual(expectedResult));
+        }
+        /* IN memory adatbázissal nem megy
+        [Fact]
+        public void TestPutEventWhenEventExistsShouldEditEvent()
+        {
+            var updatedEvent = eventDTOs.ElementAt(0);
+            updatedEvent.Name = "New Name";
+            updatedEvent.EndDate = new DateTime(2023, 1, 1, 10, 0, 0);
+
+            bool successful = persistence.UpdateEventAsync(updatedEvent).Result;
+            var actualEvent = persistence.ReadEventsAsync(updatedEvent.OrganisationId).Result.Single(e => e.Id == updatedEvent.Id);
+
+            Assert.True(successful);
+            Assert.Equal(updatedEvent, actualEvent);
         }
         [Fact]
-        public void GetOrganisationTestWhenOrganisationDoesNotExistAndUserIsAdmin()
+        public void TestPutEventWhenEventDoesNotExistShouldReturnPersistenceUnavailableExceptionWithNoutFoundInnerException()
         {
-            string existingOrganisationName = "Lorem";
-            OrganisationDTO result = persistence.ReadOrganisationAsync(existingOrganisationName);
+            string unknownOrganisationName = "Ismeretlen";
+            string expectedErrorMessage = "Service returned response: " + notFoundResponse;
+            PersistenceUnavailableException actualException = null;
+            OrganisationDTO result = null;
+            try
+            {
+                result = persistence.ReadOrganisationAsync(unknownOrganisationName);
+            }
+            catch (PersistenceUnavailableException e)
+            {
+                actualException = e;
+            }
 
-            // Assert
-            Assert.Equal(organisationDTOs.ElementAt(0), result);
+            Assert.Null(result);
+            Assert.Contains(expectedErrorMessage, actualException.Message);
         }
+        */
 
     }
 }

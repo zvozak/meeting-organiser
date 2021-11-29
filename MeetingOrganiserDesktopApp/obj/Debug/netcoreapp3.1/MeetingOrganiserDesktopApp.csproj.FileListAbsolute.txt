@@ -222,3 +222,4 @@ C:\Users\vozak\source\repos\Szakdolgozat\MeetingOrganiserDesktopApp\obj\Debug\ne
 C:\Users\vozak\source\repos\Szakdolgozat\MeetingOrganiserDesktopApp\obj\Debug\netcoreapp3.1\MeetingOrganiserDesktopApp.dll
 C:\Users\vozak\source\repos\Szakdolgozat\MeetingOrganiserDesktopApp\obj\Debug\netcoreapp3.1\MeetingOrganiserDesktopApp.pdb
 C:\Users\vozak\source\repos\Szakdolgozat\MeetingOrganiserDesktopApp\obj\Debug\netcoreapp3.1\MeetingOrganiserDesktopApp.genruntimeconfig.cache
+C:\Users\vozak\source\repos\Szakdolgozat\MeetingOrganiserDesktopApp\obj\Debug\netcoreapp3.1\MeetingOrganiserDesktopApp.csproj.CopyComplete

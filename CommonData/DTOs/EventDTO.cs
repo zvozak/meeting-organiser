@@ -105,5 +105,26 @@ namespace CommonData.DTOs
             NumberOfNeighboursWeight = e.NumberOfNeighboursWeight,
             JobWeight = e.JobWeight
         };
+
+        public override bool Equals(object obj)
+        {
+            EventDTO e = obj as EventDTO;
+            return e != null &&
+                OrganisationId == e.OrganisationId &&
+                Id == e.Id &&
+                Name == e.Name &&
+                Description == e.Description &&
+                StartDate == e.StartDate &&
+                EndDate == e.EndDate &&
+                DeadlineForApplication == e.DeadlineForApplication &&
+                GuestLimit == e.GuestLimit &&
+                IsConnectedGraphRequired == e.IsConnectedGraphRequired &&
+                IsWeightRequired == e.IsWeightRequired &&
+                ProjectImportanceWeight == e.ProjectImportanceWeight &&
+                NumberOfProjectsWeight == e.NumberOfProjectsWeight &&
+                NumberOfSubordinatesWeight == e.NumberOfSubordinatesWeight &&
+                NumberOfNeighboursWeight == e.NumberOfNeighboursWeight &&
+                JobWeight == e.JobWeight;
+        }
     }
 }

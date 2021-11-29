@@ -1,0 +1,50 @@
+Basic Administrative Marine     
+Basic Personnel and Administrative Officer      
+Personnel Officer       
+Civil Affairs Officer   
+Personnel Clerk 
+Administrative Officer  
+Unit Diary Clerk        
+Administrative Man      
+Administrative Clerk    
+Postal Officer  
+Postal Clerk    
+Personnel Officer       
+Administrative Control Unit Specialist  
+Adjutant        
+Personnel Chief 
+Trial/Defense Counsel Officer   
+Personnel/Administrative Chief  
+Basic Intelligence Marine       
+Basic Intelligence Officer      
+Intelligence Officer    
+Tactical Intelligence Officer   
+Counterintelligence Officer     
+Counterintelligence Specialist  
+Intelligence Specialist 
+Intelligence Assistant  
+Imagery Interpretation Officer  
+Imagery Interpretation Specialist       
+Interrogation-Translation Officer       
+Interrogation/Translation Specialist    
+Geographic Intelligence Officer 
+Geographic Intelligence Specialist      
+Intelligence Chief      
+Counterintelligence Chief       
+Imagery Interpretation Chief    
+Translator Chief        
+Basic Infantryman       
+Basic Infantry Officer  
+Infantry Officer        
+Light-Armored Vehicle (LAV) Officer     
+Infantry Weapons Officer        
+Rifleman        
+LAV Assaultman  
+LAV Crewman     
+Reconnaissance Man      
+Machinegunner   
+Gunner Heavy Machine-Gun        
+Mortarman       
+Assaultman      
+Antitank Assault Guided Missileman      
+Tank/Assault Guided Missile Man 

@@ -1,2 +1,95 @@
 2021-11-28 06:34:50.0137|INFO|service|GET query on service http://localhost/, path: api/organisations/getorganisation/Lorem
 2021-11-28 06:34:50.1548|WARN|service|GET query returned response InternalServerError with reason: Internal Server Error
+2021-11-28 14:58:21.2635|INFO|service|GET query on service http://localhost/, path: api/organisations/getorganisation/Lorem
+2021-11-28 15:02:47.3482|INFO|service|GET query on service http://localhost/, path: api/organisations/getorganisation/Lorem
+2021-11-28 15:03:03.3991|INFO|service|GET query on service http://localhost/, path: api/organisations/getorganisation/Lorem
+2021-11-28 15:04:44.7301|INFO|service|GET query on service http://localhost/, path: api/organisations/getorganisation/Lorem
+2021-11-28 15:11:11.1726|INFO|service|GET query on service http://localhost/, path: api/organisations/getorganisation/Lorem
+2021-11-28 15:15:20.9883|INFO|service|GET query on service http://localhost/, path: api/organisations/getorganisation/Lorem
+2021-11-28 16:11:00.7023|INFO|service|GET query on service http://localhost/, path: api/organisations/getorganisation/Nem létező
+2021-11-28 16:12:27.7960|WARN|service|GET query returned response InternalServerError with reason: Internal Server Error
+2021-11-28 16:17:05.8903|INFO|service|GET query on service http://localhost/, path: api/organisations/getorganisation/Lorem
+2021-11-28 16:17:41.8957|INFO|service|GET query on service http://localhost/, path: api/organisations/getorganisation/Ismeretlen
+2021-11-28 16:17:52.6233|WARN|service|GET query returned response InternalServerError with reason: Internal Server Error
+2021-11-28 16:20:01.9394|INFO|service|GET query on service http://localhost/, path: api/organisations/getorganisation/Ismeretlen
+2021-11-28 16:20:02.4207|WARN|service|GET query returned response NotFound with reason: Not Found
+2021-11-28 16:21:50.9179|ERROR|service|GET query aborted with exception.
+2021-11-28 16:22:34.0257|INFO|service|GET query on service http://localhost/, path: api/organisations/getorganisation/Ismeretlen
+2021-11-28 16:22:34.4785|WARN|service|GET query returned response NotFound with reason: Not Found
+2021-11-28 16:22:34.5799|ERROR|service|GET query aborted with exception.
+2021-11-28 16:28:12.4838|INFO|service|GET query on service http://localhost/, path: api/organisations/getorganisation/Ismeretlen
+2021-11-28 16:28:12.9584|WARN|service|GET query returned response NotFound with reason: Not Found
+2021-11-28 16:28:13.0582|ERROR|service|GET query aborted with exception.
+2021-11-28 16:28:47.4926|INFO|service|GET query on service http://localhost/, path: api/organisations/getorganisation/Ismeretlen
+2021-11-28 16:28:47.7468|WARN|service|GET query returned response NotFound with reason: Not Found
+2021-11-28 16:28:47.7468|ERROR|service|GET query aborted with exception.
+2021-11-28 16:29:04.8203|INFO|service|GET query on service http://localhost/, path: api/organisations/getorganisation/Ismeretlen
+2021-11-28 16:29:05.1059|WARN|service|GET query returned response NotFound with reason: Not Found
+2021-11-28 16:29:05.1059|ERROR|service|GET query aborted with exception.
+2021-11-28 16:30:08.0193|INFO|service|GET query on service http://localhost/, path: api/organisations/getorganisation/Ismeretlen
+2021-11-28 16:30:08.2799|WARN|service|GET query returned response NotFound with reason: Not Found
+2021-11-28 16:30:08.2799|ERROR|service|GET query aborted with exception.
+2021-11-28 16:42:31.3268|INFO|service|PUT query on service http://localhost/, path: api/organisations/putorganisation
+2021-11-28 16:42:31.3593|TRACE|service|PUT query content: {"Id":1,"Name":"New Name","Description":"Lorem az valami cég.","Address":"Egyik utca 2.","TypeOfStructure":0,"PermitNewMembers":true,"AdminId":1,"Jobs":[],"Projects":[],"AcceptedEmailDomains":[]}
+2021-11-28 16:42:31.4527|WARN|service|PUT query returned response InternalServerError with reason: Internal Server Error
+2021-11-28 16:42:31.4527|INFO|service|GET query on service http://localhost/, path: api/organisations/getorganisation/New Name
+2021-11-28 16:42:31.6460|WARN|service|GET query returned response NotFound with reason: Not Found
+2021-11-28 16:42:31.6460|ERROR|service|GET query aborted with exception.
+2021-11-28 16:43:09.3160|INFO|service|PUT query on service http://localhost/, path: api/organisations/putorganisation
+2021-11-28 16:43:09.3502|TRACE|service|PUT query content: {"Id":1,"Name":"New Name","Description":"Lorem az valami cég.","Address":"Egyik utca 2.","TypeOfStructure":0,"PermitNewMembers":true,"AdminId":1,"Jobs":[],"Projects":[],"AcceptedEmailDomains":[]}
+2021-11-28 16:43:09.4972|WARN|service|PUT query returned response InternalServerError with reason: Internal Server Error
+2021-11-28 16:43:09.4972|INFO|service|GET query on service http://localhost/, path: api/organisations/getorganisation/New Name
+2021-11-28 16:43:09.8534|WARN|service|GET query returned response NotFound with reason: Not Found
+2021-11-28 16:43:09.9352|ERROR|service|GET query aborted with exception.
+2021-11-28 16:43:59.4041|INFO|service|PUT query on service http://localhost/, path: api/organisations/putorganisation
+2021-11-28 16:43:59.4398|TRACE|service|PUT query content: {"Id":1,"Name":"New","Description":"Lorem az valami cég.","Address":"Egyik utca 2.","TypeOfStructure":0,"PermitNewMembers":true,"AdminId":1,"Jobs":[],"Projects":[],"AcceptedEmailDomains":[]}
+2021-11-28 16:43:59.5468|WARN|service|PUT query returned response InternalServerError with reason: Internal Server Error
+2021-11-28 16:43:59.5468|INFO|service|GET query on service http://localhost/, path: api/organisations/getorganisation/New
+2021-11-28 16:43:59.9210|WARN|service|GET query returned response NotFound with reason: Not Found
+2021-11-28 16:44:00.0069|ERROR|service|GET query aborted with exception.
+2021-11-28 16:45:38.9665|INFO|service|PUT query on service http://localhost/, path: api/organisations/putorganisation
+2021-11-28 16:45:38.9991|TRACE|service|PUT query content: {"Id":1,"Name":"New","Description":"Lorem az valami cég.","Address":"Egyik utca 2.","TypeOfStructure":0,"PermitNewMembers":true,"AdminId":1,"Jobs":[],"Projects":[],"AcceptedEmailDomains":[]}
+2021-11-28 16:45:39.1201|WARN|service|PUT query returned response InternalServerError with reason: Internal Server Error
+2021-11-28 16:45:39.1201|INFO|service|GET query on service http://localhost/, path: api/organisations/getorganisation/New
+2021-11-28 16:45:39.5445|WARN|service|GET query returned response NotFound with reason: Not Found
+2021-11-28 16:45:39.6301|ERROR|service|GET query aborted with exception.
+2021-11-28 16:51:09.1938|INFO|service|PUT query on service http://localhost/, path: api/organisations/putorganisation
+2021-11-28 16:51:18.0533|TRACE|service|PUT query content: {"Id":1,"Name":"New","Description":"Lorem az valami cég.","Address":"Egyik utca 2.","TypeOfStructure":0,"PermitNewMembers":true,"AdminId":1,"Jobs":[],"Projects":[],"AcceptedEmailDomains":[]}
+2021-11-28 18:46:27.5362|WARN|service|PUT query returned response InternalServerError with reason: Internal Server Error
+2021-11-28 18:46:27.5507|INFO|service|GET query on service http://localhost/, path: api/organisations/getorganisation/New
+2021-11-28 18:46:27.9724|WARN|service|GET query returned response NotFound with reason: Not Found
+2021-11-28 18:46:28.0475|ERROR|service|GET query aborted with exception.
+2021-11-28 19:01:16.3891|INFO|service|GET query on service http://localhost/, path: api/organisations/getorganisation/Ismeretlen
+2021-11-28 19:01:16.8688|WARN|service|GET query returned response NotFound with reason: Not Found
+2021-11-28 19:03:21.9778|INFO|service|GET query on service http://localhost/, path: api/organisations/getorganisation/Ismeretlen
+2021-11-28 19:03:22.2513|WARN|service|GET query returned response NotFound with reason: Not Found
+2021-11-28 19:07:05.3516|INFO|service|GET query on service http://localhost/, path: api/organisations/getorganisation/Ismeretlen
+2021-11-28 19:07:05.6196|WARN|service|GET query returned response NotFound with reason: Not Found
+2021-11-28 19:10:22.4942|INFO|service|GET query on service http://localhost/, path: api/organisations/getorganisation/Ismeretlen
+2021-11-28 19:10:22.7619|WARN|service|GET query returned response NotFound with reason: Not Found
+2021-11-28 19:10:34.9031|INFO|service|GET query on service http://localhost/, path: api/events/getevents/100
+2021-11-28 19:12:20.5954|INFO|service|GET query on service http://localhost/, path: api/events/getevents/100
+2021-11-28 19:16:40.7741|INFO|service|GET query on service http://localhost/, path: api/events/getevents/3
+2021-11-28 19:21:16.5280|INFO|service|GET query on service http://localhost/, path: api/events/getevents/1
+2021-11-28 19:21:16.9004|INFO|service|GET query on service http://localhost/, path: api/events/getvenues/1
+2021-11-28 19:21:16.9525|INFO|service|GET query on service http://localhost/, path: api/events/getvenues/2
+2021-11-28 19:21:16.9525|INFO|service|GET query on service http://localhost/, path: api/events/getvenues/3
+2021-11-28 19:23:21.5939|INFO|service|GET query on service http://localhost/, path: api/events/getevents/1
+2021-11-28 19:23:21.8978|INFO|service|GET query on service http://localhost/, path: api/events/getvenues/1
+2021-11-28 19:23:21.9385|INFO|service|GET query on service http://localhost/, path: api/events/getvenues/2
+2021-11-28 19:23:21.9385|INFO|service|GET query on service http://localhost/, path: api/events/getvenues/3
+2021-11-28 19:25:15.8670|INFO|service|GET query on service http://localhost/, path: api/events/getevents/1
+2021-11-28 19:25:16.1768|INFO|service|GET query on service http://localhost/, path: api/events/getvenues/1
+2021-11-28 19:25:16.2156|INFO|service|GET query on service http://localhost/, path: api/events/getvenues/2
+2021-11-28 19:25:16.2156|INFO|service|GET query on service http://localhost/, path: api/events/getvenues/3
+2021-11-28 19:28:15.6064|INFO|service|GET query on service http://localhost/, path: api/events/getevents/1
+2021-11-28 19:28:15.9137|INFO|service|GET query on service http://localhost/, path: api/events/getvenues/1
+2021-11-28 19:28:15.9545|INFO|service|GET query on service http://localhost/, path: api/events/getvenues/2
+2021-11-28 19:28:15.9545|INFO|service|GET query on service http://localhost/, path: api/events/getvenues/3
+2021-11-28 19:55:29.7735|INFO|service|PUT query on service http://localhost/, path: api/events/putevent
+2021-11-28 19:55:29.8100|TRACE|service|PUT query content: {"Id":1,"Name":"New Name","Description":null,"StartDate":"2021-03-30T00:00:00","EndDate":"2023-01-01T10:00:00","DeadlineForApplication":"2021-03-28T00:00:00","Venues":[],"ProjectImportanceWeight":0,"NumberOfProjectsWeight":0,"NumberOfSubordinatesWeight":0,"NumberOfNeighboursWeight":0,"JobWeight":0,"GuestLimit":0,"IsConnectedGraphRequired":false,"IsWeightRequired":false,"OrganisationId":1}
+2021-11-28 19:55:29.9277|WARN|service|PUT query returned response InternalServerError with reason: Internal Server Error
+2021-11-28 19:55:29.9334|INFO|service|GET query on service http://localhost/, path: api/events/getevents/1
+2021-11-28 19:55:30.2628|INFO|service|GET query on service http://localhost/, path: api/events/getvenues/1
+2021-11-28 19:55:30.3291|INFO|service|GET query on service http://localhost/, path: api/events/getvenues/2
+2021-11-28 19:55:30.3534|INFO|service|GET query on service http://localhost/, path: api/events/getvenues/3

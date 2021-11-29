@@ -78,7 +78,7 @@ namespace ServicesForDesktopApp
                 endpoints.MapControllers();
             });
 
-            DbInitializer.Initialize(serviceProvider, Configuration.GetValue<string>("ImageStore"));
+            DbInitializerForTwoDifferentTypeOfOrganisations.Initialize(serviceProvider, Configuration.GetValue<string>("ImageStore"));
         }
     }
 }

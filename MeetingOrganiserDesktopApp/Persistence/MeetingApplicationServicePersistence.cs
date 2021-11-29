@@ -71,6 +71,10 @@ namespace MeetingOrganiserDesktopApp.Persistence
                     throw new PersistenceUnavailableException("Service returned response: " + response.StatusCode);
                 }
             }
+            catch (PersistenceUnavailableException ex)
+            {
+                throw ex;
+            }
             catch (Exception ex)
             {
                 log.Error(ex, "GET query aborted with exception.");
@@ -120,6 +124,10 @@ namespace MeetingOrganiserDesktopApp.Persistence
                     throw new PersistenceUnavailableException("Service returned response: " + response.StatusCode);
                 }
             }
+            catch (PersistenceUnavailableException ex)
+            {
+                throw ex;
+            }
             catch (Exception ex)
             {
                 log.Error(ex, "GET query aborted with exception.");
@@ -152,6 +160,10 @@ namespace MeetingOrganiserDesktopApp.Persistence
 
                     throw new PersistenceUnavailableException("Service returned response: " + response.StatusCode);
                 }
+            }
+            catch (PersistenceUnavailableException ex)
+            {
+                throw ex;
             }
             catch (Exception ex)
             {
@@ -189,6 +201,10 @@ namespace MeetingOrganiserDesktopApp.Persistence
 
                     throw new PersistenceUnavailableException("Service returned response: " + response.StatusCode);
                 }
+            }
+            catch (PersistenceUnavailableException ex)
+            {
+                throw ex;
             }
             catch (Exception ex)
             {
