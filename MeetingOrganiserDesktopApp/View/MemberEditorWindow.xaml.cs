@@ -23,11 +23,6 @@ namespace MeetingOrganiserDesktopApp.View
         public MemberEditorWindow()
         {
             InitializeComponent();
-            dateOfJoining.ValueChanged += new RoutedPropertyChangedEventHandler<object>(DateValueChanged);
-        }
-        private void DateValueChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
-        {
-            saveButton.IsEnabled = dateOfJoining.Value <= DateTime.Today;
         }
     }
 }

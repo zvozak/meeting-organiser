@@ -331,27 +331,6 @@ namespace MeetingOrganiserDesktopApp.ViewModel
 
             EditedMember = new MemberDTO(member);
 
-            /*
-            if (member.Job != null)
-            {
-                JobOfEditedMember = new JobDTO
-                {
-                    Id = member.Job.Id,
-                    OrganisationId = member.OrganisationId,
-                    Title = member.Job.Title,
-                    Weight = member.Job.Weight
-                };
-            }
-            if (member.Boss != null)
-            {
-                BossOfEditedMember = new MemberDTO
-                {
-                    Name = member.Boss.Name,
-                    Id = (int)member.BossId
-                };
-            }
-            */
-
             OnMemberEditingStarted();
         }
         private void UpdateJob(JobDTO job)
@@ -502,32 +481,29 @@ namespace MeetingOrganiserDesktopApp.ViewModel
                 OnMessageApplication("Email address for member is required.");
                 return;
             }
-            /*
-            if (model.IsExistingBoss (BossOfEditedMember.Name))
-            {
-                EditedMember.Boss = BossOfEditedMember;
-            }
-            */
+
             if (!model.IsExistingBoss(EditedMember.Boss.Name))
             {
                 OnMessageApplication("There is no member with name " + EditedMember.Boss.Name + ". Please provide an existing one or create a new member with this name.");
                 return;
             }
-            /*
-            if (model.IsExistingJobTitle(JobOfEditedMember.Title))
-            {
-                EditedMember.Job = JobOfEditedMember;
-            }
-            */
+
             if (!model.IsExistingJobTitle(EditedMember.Job.Title))
             {
                 OnMessageApplication("No such role/jobtitle exists. Please provide an existing one or create a new job at Jobs/List jobs menu.");
                 return;
             }
 
+            if (EditedMember.DateOfJoining > DateTime.Today)
+            {
+                OnMessageApplication("Please check date of joining again. Date of joining must be a date in the past.");
+                return;
+            }
+
             if (EditedMember.Id == 0)
             {
                 model.CreateMember(EditedMember);
+                Members.Add(EditedMember);
                 SelectedMember = EditedMember;
             }
             else

@@ -271,9 +271,19 @@ namespace MeetingOrganiserDesktopApp.Model
             bool jobChanged = !organisation.Jobs.Any(j => j.Id == member.Job.Id && j.Title == member.Job.Title);
             if (jobChanged)
             {
-                member.Job = organisation.Jobs.Single(j => j.Title == member.Job.Title);
+                memberToModify.Job = organisation.Jobs.Single(j => j.Title == member.Job.Title);
+                memberToModify.JobId = memberToModify.Job.Id;
             }
-            memberToModify = member;
+            bool bossChanged = !members.Any(m => m.Id == member.Boss.Id && m.Name == member.Boss.Name);
+            if (bossChanged)
+            {
+                memberToModify.Boss = members.Single(m => m.Name == member.Boss.Name);
+                memberToModify.BossId = memberToModify.Boss.Id;
+            }
+            memberToModify.Name = member.Name;
+            memberToModify.Department = member.Department;
+            memberToModify.Email = member.Email;
+            memberToModify.DateOfJoining = member.DateOfJoining;
 
             if (memberFlags.ContainsKey(memberToModify) && memberFlags[memberToModify] == DataFlag.Create)
             {
