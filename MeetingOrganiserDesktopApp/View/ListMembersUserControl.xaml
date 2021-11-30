@@ -20,12 +20,12 @@
                 <DataGridTextColumn Header="Email" Binding="{Binding Email}"  />
                 <DataGridTextColumn Header="Date of joining" Binding="{Binding DateOfJoining}"  />
                 <DataGridTextColumn Header="Department" Binding="{Binding Department}" />
-                <DataGridTextColumn Header="Role/jobtitle" Binding="{Binding Job}"  />
+                <DataGridTextColumn Header="Role/jobtitle" Binding="{Binding Job.Title}"  />
                 <DataGridTextColumn Header="Supervisor" Binding="{Binding Boss.Name}" />
             </DataGrid.Columns>
         </DataGrid>
 
-        <StackPanel Grid.Row="6" Grid.Column="0" Orientation="Horizontal" Grid.ColumnSpan="2" Visibility="Hidden">
+        <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal" Grid.ColumnSpan="2">
             <Button Content="Add new" Margin="6,5,0,5" Command="{Binding CreateMemberCommand}" Width="114" IsEnabled="{Binding IsLoaded}" />
             <Button Content="Edit selected" Margin="6,5,0,5" Command="{Binding UpdateMemberCommand}" CommandParameter="{Binding SelectedMember}" Width="114" IsEnabled="{Binding IsLoaded}" />
             <Button Content="Delete selected" Margin="6,5,6,5" Command="{Binding DeleteMemberCommand}" CommandParameter="{Binding SelectedMember}" Width="114" IsEnabled="{Binding IsLoaded}" />
@@ -34,15 +34,12 @@
         <DataGrid Name="projectGrid" Grid.Row="2" Grid.Column="0"  AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding SelectedMember.Projects}" SelectedItem="{Binding SelectedProject}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
-                <DataGridTextColumn Header="Importance" Binding="{Binding Weight}"  />
             </DataGrid.Columns>
         </DataGrid>
 
-        <StackPanel Grid.Row="6" Grid.Column="0" Orientation="Horizontal" Grid.ColumnSpan="2" Visibility="Hidden">
-            <Button Content="Add existing project to member" Margin="6,5,0,5" Command="{Binding AddProjectCommand}" Width="114" IsEnabled="{Binding IsLoaded}" />
-            <Button Content="Add new" Margin="6,5,0,5" Command="{Binding CreateProjectCommand}" Width="114" IsEnabled="{Binding IsLoaded}" />
-            <Button Content="Edit selected" Margin="6,5,0,5" Command="{Binding UpdateProjectCommand}" CommandParameter="{Binding SelectedEvent}" Width="114" IsEnabled="{Binding IsLoaded}" />
-            <Button Content="Delete selected" Margin="6,5,6,5" Command="{Binding DeleteProjectCommand}" CommandParameter="{Binding SelectedEvent}" Width="114" IsEnabled="{Binding IsLoaded}" />
+        <StackPanel Grid.Row="3" Grid.Column="0" Orientation="Horizontal" Grid.ColumnSpan="2">
+            <Button Content="Add existing project to member" Margin="6,5,0,5" Command="{Binding AddNewProjectToMemberCommand}" Width="114" IsEnabled="{Binding IsLoaded}" />
+            <Button Content="Delete selected" Margin="6,5,6,5" Command="{Binding DeleteProjectFromMemberCommand}" CommandParameter="{Binding SelectedEvent}" Width="114" IsEnabled="{Binding IsLoaded}" />
         </StackPanel>
 
     </Grid>

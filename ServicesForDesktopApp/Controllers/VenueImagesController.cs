@@ -54,14 +54,14 @@ namespace ServicesForDesktopApp.Controllers
 
         [HttpPost]
         [Authorize(Roles = "administrator")]
-        public ActionResult<VenueImageDTO> PostVenueImage(VenueImageDTO eventDTO)
+        public IActionResult PostVenueImage(VenueImageDTO eventDTO)
         {
             context.VenueImages.Add((VenueImage)eventDTO);
             try
             {
                 context.SaveChanges();
 
-                return CreatedAtAction("GetVenueImage", new { id = eventDTO.Id }, eventDTO);
+                return CreatedAtAction(nameof(PostVenueImage), new { id = eventDTO.Id }, eventDTO);
             }
             catch (Exception exception)
             {

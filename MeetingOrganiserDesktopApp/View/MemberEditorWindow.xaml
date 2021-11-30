@@ -1,12 +1,64 @@
 ﻿<Window x:Class="MeetingOrganiserDesktopApp.View.MemberEditorWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:MeetingOrganiserDesktopApp.View"
-        mc:Ignorable="d"
-        Title="MemberEditorWindow" Height="450" Width="800">
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:toolkit="http://schemas.xceed.com/wpf/xaml/toolkit" xmlns:viewmodel="clr-namespace:MeetingOrganiserDesktopApp.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:MainViewModel}"
+        mc:Ignorable="d" 
+      Height="275" Width="410"
+      Title="MemberEditorWindow"
+      >
+
+
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="140"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="*" />
+
+
+        </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="Name:" Margin="20,5,5,5" />
+            <TextBox Grid.Row="0" Grid.Column="1" Width="230" Text="{Binding EditedMember.Name}" Margin="0,5,5,5" HorizontalAlignment="Left" />
+
+            <TextBlock Grid.Row="1" Grid.Column="0" Text="Email:" Margin="20,5,5,5" />
+            <TextBox Grid.Row="1" Grid.Column="1" Width="230" Text="{Binding EditedMember.Email}" Margin="0,5,5,5" HorizontalAlignment="Left" />
+
+            <TextBlock Grid.Row="2" Grid.Column="0" Text="Date of joining:" Margin="20,5,5,5" />
+            <toolkit:DateTimePicker 
+                Grid.Row="2" Grid.Column="1" 
+                HorizontalAlignment="Left" 
+                Height="20"
+                Width="230"
+                Name="dateOfJoining"
+                Language="ENG"
+                Value="{Binding EditedMember.DateOfJoining}" 
+                Minimum="{Binding MinimumDateTime}" 
+                DisplayDefaultValueOnEmptyText="True" 
+                DefaultValue="{Binding DefaultDateTime}"/>
+
+            <TextBlock Grid.Row="3" Grid.Column="0" Text="Department:" Margin="20,5,5,5" />
+            <TextBox Grid.Row="3" Grid.Column="1" Width="230" Text="{Binding EditedMember.Department}" Margin="0,5,5,5" HorizontalAlignment="Left" />
         
+            <TextBlock Grid.Row="4" Grid.Column="0" Text="Role/job title:" Margin="20,5,5,5" />
+        <TextBox Grid.Row="4" Grid.Column="1" Width="230" Text="{Binding EditedMember.Job.Title}" Margin="0,5,5,5" HorizontalAlignment="Left" />
+
+            <TextBlock Grid.Row="5" Grid.Column="0" Text="Name of supervisor:" Margin="20,5,5,5" />
+        <TextBox Grid.Row="5" Grid.Column="1" Width="230" Text="{Binding EditedMember.Boss.Name}" Margin="0,5,5,5" HorizontalAlignment="Left" />
+
+            <StackPanel Grid.Row="6"  Orientation="Horizontal" HorizontalAlignment="Right" Margin="5,10,20,10" Grid.ColumnSpan="2" Width="217" Height="30" VerticalAlignment="Top" >
+                <Button Content="Save" Margin="0,5,0,5" Name="saveButton" Command="{Binding SaveMemberChangesCommand}" Width="100"/>
+                <Button Content="Cancel" Margin="12,5,20,5" Command="{Binding CancelMemberChangesCommand}" Width="100" />
+            </StackPanel>
+
     </Grid>
 </Window>

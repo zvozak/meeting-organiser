@@ -79,14 +79,43 @@ namespace ServicesForDesktopApp.Controllers
         
         [HttpPost]
         [Authorize(Roles = "administrator")]
-        public ActionResult<Member> PostMember(MemberDTO memberDTO)
+        public IActionResult PostMember([FromBody] MemberDTO memberDTO)
         {
-            context.Members.Add ((Member)memberDTO);
+            if (memberDTO.BossId == null && memberDTO.Boss != null)
+            {
+                memberDTO.BossId = context.Members.First(m => m.Name == memberDTO.Boss.Name).Id;
+            }
+            if (memberDTO.JobId == null && memberDTO.Job != null)
+            {
+                memberDTO.JobId = context.Jobs.First(j => j.Title == memberDTO.Job.Title && j.OrganisationId == memberDTO.OrganisationId).Id;
+            }
+
+            var newMember = new Member
+            {
+                Name = memberDTO.Name,
+                Email = memberDTO.Email,
+                Department = memberDTO.Department,
+                DateOfJoining = memberDTO.DateOfJoining,
+                IdAtOrganisation = memberDTO.IdAtOrganisation,
+                OrganisationId = memberDTO.OrganisationId,
+                BossId = memberDTO.BossId,
+                JobId = memberDTO.JobId
+            };
+            
+            context.Members.Add (newMember);
             try
             {
                 context.SaveChanges();
 
-                return CreatedAtAction("GetMember", new { id = memberDTO.Id }, memberDTO);
+                var actionName = nameof(PostMember);
+
+                memberDTO.Id = newMember.Id;
+
+                var result = CreatedAtAction(
+                    actionName: actionName,
+                    routeValues: new { id = memberDTO.Id },
+                    value: memberDTO);
+                return result;
             }
             catch (Exception exception)
             {

@@ -72,6 +72,10 @@ C:\Users\vozak\source\repos\Szakdolgozat\TestWebAppForMembers\bin\Debug\netcorea
 C:\Users\vozak\source\repos\Szakdolgozat\TestWebAppForMembers\bin\Debug\netcoreapp3.1\Moq.dll
 C:\Users\vozak\source\repos\Szakdolgozat\TestWebAppForMembers\bin\Debug\netcoreapp3.1\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll
 C:\Users\vozak\source\repos\Szakdolgozat\TestWebAppForMembers\bin\Debug\netcoreapp3.1\Microsoft.VisualStudio.TestPlatform.TestFramework.dll
+C:\Users\vozak\source\repos\Szakdolgozat\TestWebAppForMembers\bin\Debug\netcoreapp3.1\GalaSoft.MvvmLight.Extras.dll
+C:\Users\vozak\source\repos\Szakdolgozat\TestWebAppForMembers\bin\Debug\netcoreapp3.1\GalaSoft.MvvmLight.Platform.dll
+C:\Users\vozak\source\repos\Szakdolgozat\TestWebAppForMembers\bin\Debug\netcoreapp3.1\GalaSoft.MvvmLight.dll
+C:\Users\vozak\source\repos\Szakdolgozat\TestWebAppForMembers\bin\Debug\netcoreapp3.1\System.Windows.Interactivity.dll
 C:\Users\vozak\source\repos\Szakdolgozat\TestWebAppForMembers\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
 C:\Users\vozak\source\repos\Szakdolgozat\TestWebAppForMembers\bin\Debug\netcoreapp3.1\NuGet.Frameworks.dll
 C:\Users\vozak\source\repos\Szakdolgozat\TestWebAppForMembers\bin\Debug\netcoreapp3.1\nunit.framework.dll
@@ -218,7 +222,7 @@ C:\Users\vozak\source\repos\Szakdolgozat\TestWebAppForMembers\obj\Debug\netcorea
 C:\Users\vozak\source\repos\Szakdolgozat\TestWebAppForMembers\obj\Debug\netcoreapp3.1\TestWebAppForMembers.AssemblyInfoInputs.cache
 C:\Users\vozak\source\repos\Szakdolgozat\TestWebAppForMembers\obj\Debug\netcoreapp3.1\TestWebAppForMembers.AssemblyInfo.cs
 C:\Users\vozak\source\repos\Szakdolgozat\TestWebAppForMembers\obj\Debug\netcoreapp3.1\TestWebAppForMembers.csproj.CoreCompileInputs.cache
+C:\Users\vozak\source\repos\Szakdolgozat\TestWebAppForMembers\obj\Debug\netcoreapp3.1\TestWebAppForMembers.csproj.CopyComplete
 C:\Users\vozak\source\repos\Szakdolgozat\TestWebAppForMembers\obj\Debug\netcoreapp3.1\TestWebAppForMembers.dll
 C:\Users\vozak\source\repos\Szakdolgozat\TestWebAppForMembers\obj\Debug\netcoreapp3.1\TestWebAppForMembers.pdb
 C:\Users\vozak\source\repos\Szakdolgozat\TestWebAppForMembers\obj\Debug\netcoreapp3.1\TestWebAppForMembers.genruntimeconfig.cache
-C:\Users\vozak\source\repos\Szakdolgozat\TestWebAppForMembers\obj\Debug\netcoreapp3.1\TestWebAppForMembers.csproj.CopyComplete

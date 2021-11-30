@@ -94,14 +94,14 @@ namespace ServicesForDesktopApp.Controllers
 
         [HttpPost]
         [Authorize(Roles = "administrator")]
-        public ActionResult<ProjectDTO> PostProject(ProjectDTO eventDTO)
+        public IActionResult PostProject(ProjectDTO eventDTO)
         {
             context.Projects.Add((Project)eventDTO);
             try
             {
                 context.SaveChanges();
 
-                return CreatedAtAction("GetProject", new { id = eventDTO.Id }, eventDTO);
+                return CreatedAtAction(nameof(PostProject), new { id = eventDTO.Id }, eventDTO);
             }
             catch (Exception exception)
             {

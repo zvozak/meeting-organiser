@@ -28,6 +28,7 @@ namespace MeetingOrganiserDesktopApp
         private EventEditorWindow eventEditorView;
         private VenueEditorWindow venueEditorView;
         private MemberEditorWindow memberEditorView;
+        private JobEditorWindow jobEditorView;
         private GuestListWindow guestListView;
 
         public App()
@@ -85,6 +86,10 @@ namespace MeetingOrganiserDesktopApp
             mainViewModel.GuestListCreated += new EventHandler<EventEventArgs>(ViewModel_GuestListCreated);
             mainViewModel.EventEditingStarted += new EventHandler(MainViewModel_EventEditingStarted);
             mainViewModel.EventEditingFinished += new EventHandler(MainViewModel_EventEditingFinished);
+            mainViewModel.MemberEditingStarted += new EventHandler(MainViewModel_MemberEditingStarted);
+            mainViewModel.MemberEditingFinished += new EventHandler(MainViewModel_MemberEditingFinished);
+            mainViewModel.JobEditingStarted += new EventHandler(MainViewModel_JobEditingStarted);
+            mainViewModel.JobEditingFinished += new EventHandler(MainViewModel_JobEditingFinished);
             mainViewModel.VenueEditingStarted += new EventHandler(MainViewModel_VenueEditingStarted);
             mainViewModel.VenueEditingFinished += new EventHandler(MainViewModel_VenueEditingFinished);
             mainViewModel.ImageEditingStarted += new EventHandler<VenueEventArgs>(MainViewModel_ImageEditingStarted);
@@ -122,6 +127,18 @@ namespace MeetingOrganiserDesktopApp
         private void MainViewModel_MemberEditingFinished(object sender, EventArgs e)
         {
             memberEditorView.Close();
+        }
+
+        private void MainViewModel_JobEditingStarted(object sender, EventArgs e)
+        {
+            jobEditorView = new JobEditorWindow();
+            jobEditorView.DataContext = mainViewModel;
+            jobEditorView.Show();
+        }
+
+        private void MainViewModel_JobEditingFinished(object sender, EventArgs e)
+        {
+            jobEditorView.Close();
         }
 
         private void MainViewModel_EventEditingStarted(object sender, EventArgs e)

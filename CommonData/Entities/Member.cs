@@ -16,8 +16,8 @@ namespace CommonData.Entities
 
         public int IdAtOrganisation { get; set; }
 
-		[Required]
 		public virtual Organisation Organisation { get; set; }
+		[Required]
 		public int OrganisationId { get; set; }
 		public virtual Member Boss { get; set; }
 		public int? BossId { get; set; }        

@@ -93,14 +93,14 @@ namespace ServicesForDesktopApp.Controllers
 
         [HttpPost]
         [Authorize(Roles = "administrator")]
-        public ActionResult<OrganisationDTO> PostOrganisation(OrganisationDTO organisationDTO)
+        public IActionResult PostOrganisation(OrganisationDTO organisationDTO)
         {
             context.Organisations.Add((Organisation)organisationDTO);
 
             try
             {
                 context.SaveChanges();
-                return CreatedAtAction("GetOrganisation", new { id = organisationDTO.Id }, organisationDTO);
+                return CreatedAtAction(nameof(PostOrganisation), new { id = organisationDTO.Id }, organisationDTO);
             }
             catch (Exception exception)
             {

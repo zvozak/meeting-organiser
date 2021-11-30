@@ -21,8 +21,9 @@ namespace MeetingOrganiserDesktopApp.Model
         private IMeetingApplicationPersistence persistence;
         private OrganisationDTO organisation;
         private List<MemberDTO> members;
-        private Dictionary<MemberDTO, DataFlag> memberFlags;
         private List<EventDTO> events;
+        private Dictionary<MemberDTO, DataFlag> memberFlags;
+        private Dictionary<JobDTO, DataFlag> jobFlags;
         private Dictionary<EventDTO, DataFlag> eventFlags;
         private Dictionary<VenueDTO, DataFlag> venueFlags;
         private Dictionary<VenueImageDTO, DataFlag> imageFlags;
@@ -79,10 +80,20 @@ namespace MeetingOrganiserDesktopApp.Model
 
 
         public event EventHandler<MemberEventArgs> MemberChanged;
+        public event EventHandler<JobEventArgs> JobChanged;
         public event EventHandler<EventEventArgs> EventChanged;
         public event EventHandler<VenueEventArgs> VenueChanged;
         public event EventHandler<EventEventArgs> GuestListCreated;
 
+
+        public bool IsExistingJobTitle (string jobtitle)
+        {
+            return Organisation.Jobs.Any(j => j.Title == jobtitle);
+        }
+        public bool IsExistingBoss(string name)
+        {
+            return members.Any(m => m.Name == name);
+        }
 
         #region Create
 
@@ -92,10 +103,43 @@ namespace MeetingOrganiserDesktopApp.Model
                 throw new ArgumentNullException(nameof(member));
             if (members.Contains(member))
                 throw new ArgumentException("The member is already in the collection.", nameof(member));
+            if (!organisation.Jobs.Any( j => j.Title == member.Job.Title))
+                throw new ArgumentException("The jobtitle given to member does not exist.", nameof(member));
 
-            member.Id = (members.Count > 0 ? members.Max(b => b.Id) : 0) + 1; // temporary Id
+            if (member.JobId == null)
+            {
+                member.JobId = organisation.Jobs.FirstOrDefault(j => j.Title == member.Job.Title).Id;
+            }
+            if (member.BossId == null)
+            {
+                member.BossId = members.FirstOrDefault(b => b.Name == member.Boss.Name).Id;
+            }
+
+            member.Id = ((members.Count > 0 ? members.Max(b => b.Id) : 0) + 1); // temporary Id
             memberFlags.Add(member, DataFlag.Create);
             members.Add(member);
+        }
+
+
+        public void CreateJob(JobDTO job)
+        {
+            if (job == null)
+                throw new ArgumentNullException(nameof(job));
+            if (organisation.Jobs.Contains(job))
+                throw new ArgumentException("The job is already in the collection.", nameof(job));
+
+            if (organisation.Jobs.Count > 0)
+            {
+                job.Id = organisation.Jobs.Max(j => j.Id) + 1; // temporary Id
+            }
+            else
+            {
+                job.Id = 1; // temporary Id
+            }
+
+            jobFlags.Add(job, DataFlag.Create);
+
+            OnJobChanged(jobId: job.Id);
         }
 
 
@@ -219,6 +263,16 @@ namespace MeetingOrganiserDesktopApp.Model
             if (memberToModify == null)
                 throw new ArgumentException("The member does not exist.", nameof(member));
 
+            if ( !organisation.Jobs.Any(j => j.Title == member.Job.Title))
+            {
+                throw new ArgumentException("The role/job title provided for member does not exist.", nameof(member.Job));
+            }
+
+            bool jobChanged = !organisation.Jobs.Any(j => j.Id == member.Job.Id && j.Title == member.Job.Title);
+            if (jobChanged)
+            {
+                member.Job = organisation.Jobs.Single(j => j.Title == member.Job.Title);
+            }
             memberToModify = member;
 
             if (memberFlags.ContainsKey(memberToModify) && memberFlags[memberToModify] == DataFlag.Create)
@@ -230,7 +284,43 @@ namespace MeetingOrganiserDesktopApp.Model
                 memberFlags[memberToModify] = DataFlag.Update;
             }
 
-            // TODO OnMemberChanged(member.Id);
+            OnMemberChanged(member.Id);
+        }
+
+        public void UpdateJob(JobDTO job)
+        {
+            if (job == null)
+                throw new ArgumentNullException(nameof(job));
+
+            var eventdto = events.FirstOrDefault(e => e.Id == job.Id);
+            if (eventdto == null)
+                throw new ArgumentException("No event exists for this job.", nameof(job));
+
+            JobDTO jobToModify = organisation.Jobs.FirstOrDefault(b => b.Id == job.Id);
+
+            if (jobToModify == null)
+                throw new ArgumentException("The member does not exist.", nameof(job));
+
+            jobToModify.Title = job.Title;
+            jobToModify.Weight = job.Weight;
+
+            if (jobFlags.ContainsKey(jobToModify) && jobFlags[jobToModify] == DataFlag.Create)
+            {
+                jobFlags[jobToModify] = DataFlag.Create;
+            }
+            else
+            {
+                jobFlags[jobToModify] = DataFlag.Update;
+            }
+
+            var membersWithModifiedJob = members.FindAll(m => m.Job.Id == job.Id);
+            foreach (var member in membersWithModifiedJob)
+            {
+                member.Job = job;
+                OnMemberChanged(member.Id);
+            }
+
+            OnJobChanged(jobId: job.Id);
         }
 
         public void UpdateVenue(VenueDTO venue)
@@ -297,6 +387,24 @@ namespace MeetingOrganiserDesktopApp.Model
                 memberFlags[memberToDelete] = DataFlag.Delete;
 
             members.Remove(memberToDelete);
+        }
+
+        public void DeleteJob(JobDTO job)
+        {
+            if (job == null)
+                throw new ArgumentNullException(nameof(job));
+
+            JobDTO jobToDelete = organisation.Jobs.FirstOrDefault(b => b.Id == job.Id);
+
+            if (jobToDelete == null)
+                throw new ArgumentException("The job does not exist.", nameof(job));
+
+            if (jobFlags.ContainsKey(jobToDelete) && jobFlags[jobToDelete] == DataFlag.Create)
+                jobFlags.Remove(jobToDelete);
+            else
+                jobFlags[jobToDelete] = DataFlag.Delete;
+
+            organisation.Jobs.Remove(jobToDelete);
         }
 
         public void DeleteEvent(EventDTO @event)
@@ -431,7 +539,7 @@ namespace MeetingOrganiserDesktopApp.Model
                 }
 
                 if (!result)
-                    throw new InvalidOperationException("Operation " + venueFlags[venueDTO] + " failed on building " + venueDTO.Id);
+                    throw new InvalidOperationException("Operation " + venueFlags[venueDTO] + " failed on venue " + venueDTO.Id);
 
                 venueFlags.Remove(venueDTO);
             }
@@ -484,7 +592,7 @@ namespace MeetingOrganiserDesktopApp.Model
                 }
 
                 if (!result)
-                    throw new InvalidOperationException("Operation " + memberFlags[memberDTO] + " failed on building " + memberDTO.Id);
+                    throw new InvalidOperationException("Operation " + memberFlags[memberDTO] + " failed on member " + memberDTO.Id);
 
                 memberFlags.Remove(memberDTO);
             }
@@ -523,6 +631,16 @@ namespace MeetingOrganiserDesktopApp.Model
             }
         }
 
+        private void OnMemberChanged(Int32 memberId)
+        {
+            if (MemberChanged != null)
+                MemberChanged(this, new MemberEventArgs { MemberId = memberId });
+        }
+        private void OnJobChanged(Int32 jobId)
+        {
+            if (JobChanged != null)
+                JobChanged(this, new JobEventArgs { JobId = jobId });
+        }
         private void OnEventChanged(Int32 eventId)
         {
             if (EventChanged != null)
@@ -540,7 +658,7 @@ namespace MeetingOrganiserDesktopApp.Model
         {
             foreach (var member in members)
             {
-                if (member.BossId != null)
+                if (member.BossId != null && member.BossId > 0)
                 {
                     graph.AddEdge( (int)member.BossId, member.Id);
                 }

@@ -18,4 +18,17 @@
     <ProjectReference Include="..\CommonData\CommonData.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="View\JobEditorWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="View\JobEditorWindow.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+
 </Project>

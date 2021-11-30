@@ -174,13 +174,13 @@ C:\Users\vozak\Desktop\MeetingOrganiser\TestMeetingOrganiserDesktopApp\obj\Debug
 C:\Users\vozak\Desktop\MeetingOrganiser\TestMeetingOrganiserDesktopApp\obj\Debug\netcoreapp3.1\TestMeetingOrganiserDesktopApp.dll
 C:\Users\vozak\Desktop\MeetingOrganiser\TestMeetingOrganiserDesktopApp\obj\Debug\netcoreapp3.1\TestMeetingOrganiserDesktopApp.pdb
 C:\Users\vozak\Desktop\MeetingOrganiser\TestMeetingOrganiserDesktopApp\obj\Debug\netcoreapp3.1\TestMeetingOrganiserDesktopApp.genruntimeconfig.cache
-C:\Users\vozak\source\repos\Szakdolgozat\TestMeetingOrganiserDesktopApp\bin\Debug\netcoreapp3.1\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
-C:\Users\vozak\source\repos\Szakdolgozat\TestMeetingOrganiserDesktopApp\bin\Debug\netcoreapp3.1\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
-C:\Users\vozak\source\repos\Szakdolgozat\TestMeetingOrganiserDesktopApp\bin\Debug\netcoreapp3.1\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
 C:\Users\vozak\source\repos\Szakdolgozat\TestMeetingOrganiserDesktopApp\bin\Debug\netcoreapp3.1\MeetingOrganiserDesktopApp.deps.json
 C:\Users\vozak\source\repos\Szakdolgozat\TestMeetingOrganiserDesktopApp\bin\Debug\netcoreapp3.1\MeetingOrganiserDesktopApp.runtimeconfig.json
 C:\Users\vozak\source\repos\Szakdolgozat\TestMeetingOrganiserDesktopApp\bin\Debug\netcoreapp3.1\MeetingOrganiserDesktopApp.runtimeconfig.dev.json
 C:\Users\vozak\source\repos\Szakdolgozat\TestMeetingOrganiserDesktopApp\bin\Debug\netcoreapp3.1\MeetingOrganiserDesktopApp.exe
+C:\Users\vozak\source\repos\Szakdolgozat\TestMeetingOrganiserDesktopApp\bin\Debug\netcoreapp3.1\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
+C:\Users\vozak\source\repos\Szakdolgozat\TestMeetingOrganiserDesktopApp\bin\Debug\netcoreapp3.1\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
+C:\Users\vozak\source\repos\Szakdolgozat\TestMeetingOrganiserDesktopApp\bin\Debug\netcoreapp3.1\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
 C:\Users\vozak\source\repos\Szakdolgozat\TestMeetingOrganiserDesktopApp\bin\Debug\netcoreapp3.1\TestMeetingOrganiserDesktopApp.deps.json
 C:\Users\vozak\source\repos\Szakdolgozat\TestMeetingOrganiserDesktopApp\bin\Debug\netcoreapp3.1\TestMeetingOrganiserDesktopApp.runtimeconfig.json
 C:\Users\vozak\source\repos\Szakdolgozat\TestMeetingOrganiserDesktopApp\bin\Debug\netcoreapp3.1\TestMeetingOrganiserDesktopApp.runtimeconfig.dev.json
@@ -251,6 +251,10 @@ C:\Users\vozak\source\repos\Szakdolgozat\TestMeetingOrganiserDesktopApp\bin\Debu
 C:\Users\vozak\source\repos\Szakdolgozat\TestMeetingOrganiserDesktopApp\bin\Debug\netcoreapp3.1\Xceed.Wpf.Toolkit.dll
 C:\Users\vozak\source\repos\Szakdolgozat\TestMeetingOrganiserDesktopApp\bin\Debug\netcoreapp3.1\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll
 C:\Users\vozak\source\repos\Szakdolgozat\TestMeetingOrganiserDesktopApp\bin\Debug\netcoreapp3.1\Microsoft.VisualStudio.TestPlatform.TestFramework.dll
+C:\Users\vozak\source\repos\Szakdolgozat\TestMeetingOrganiserDesktopApp\bin\Debug\netcoreapp3.1\GalaSoft.MvvmLight.Extras.dll
+C:\Users\vozak\source\repos\Szakdolgozat\TestMeetingOrganiserDesktopApp\bin\Debug\netcoreapp3.1\GalaSoft.MvvmLight.Platform.dll
+C:\Users\vozak\source\repos\Szakdolgozat\TestMeetingOrganiserDesktopApp\bin\Debug\netcoreapp3.1\GalaSoft.MvvmLight.dll
+C:\Users\vozak\source\repos\Szakdolgozat\TestMeetingOrganiserDesktopApp\bin\Debug\netcoreapp3.1\System.Windows.Interactivity.dll
 C:\Users\vozak\source\repos\Szakdolgozat\TestMeetingOrganiserDesktopApp\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
 C:\Users\vozak\source\repos\Szakdolgozat\TestMeetingOrganiserDesktopApp\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.dll
 C:\Users\vozak\source\repos\Szakdolgozat\TestMeetingOrganiserDesktopApp\bin\Debug\netcoreapp3.1\NLog.dll
@@ -347,7 +351,7 @@ C:\Users\vozak\source\repos\Szakdolgozat\TestMeetingOrganiserDesktopApp\obj\Debu
 C:\Users\vozak\source\repos\Szakdolgozat\TestMeetingOrganiserDesktopApp\obj\Debug\netcoreapp3.1\TestMeetingOrganiserDesktopApp.AssemblyInfoInputs.cache
 C:\Users\vozak\source\repos\Szakdolgozat\TestMeetingOrganiserDesktopApp\obj\Debug\netcoreapp3.1\TestMeetingOrganiserDesktopApp.AssemblyInfo.cs
 C:\Users\vozak\source\repos\Szakdolgozat\TestMeetingOrganiserDesktopApp\obj\Debug\netcoreapp3.1\TestMeetingOrganiserDesktopApp.csproj.CoreCompileInputs.cache
+C:\Users\vozak\source\repos\Szakdolgozat\TestMeetingOrganiserDesktopApp\obj\Debug\netcoreapp3.1\TestMeetingOrganiserDesktopApp.csproj.CopyComplete
 C:\Users\vozak\source\repos\Szakdolgozat\TestMeetingOrganiserDesktopApp\obj\Debug\netcoreapp3.1\TestMeetingOrganiserDesktopApp.dll
 C:\Users\vozak\source\repos\Szakdolgozat\TestMeetingOrganiserDesktopApp\obj\Debug\netcoreapp3.1\TestMeetingOrganiserDesktopApp.pdb
 C:\Users\vozak\source\repos\Szakdolgozat\TestMeetingOrganiserDesktopApp\obj\Debug\netcoreapp3.1\TestMeetingOrganiserDesktopApp.genruntimeconfig.cache
-C:\Users\vozak\source\repos\Szakdolgozat\TestMeetingOrganiserDesktopApp\obj\Debug\netcoreapp3.1\TestMeetingOrganiserDesktopApp.csproj.CopyComplete

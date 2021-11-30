@@ -86,14 +86,14 @@ namespace ServicesForDesktopApp.Controllers
 
         [HttpPost]
         [Authorize(Roles = "administrator")]
-        public ActionResult<AcceptedEmailDomainDTO> PostAcceptedEmailDomain(AcceptedEmailDomainDTO domainDTO)
+        public IActionResult PostAcceptedEmailDomain(AcceptedEmailDomainDTO domainDTO)
         {
             context.AcceptedEmailDomains.Add((AcceptedEmailDomain)domainDTO);
             try
             {
                 context.SaveChanges();
 
-                return CreatedAtAction("GetAcceptedEmailDomain", new { organisationId = domainDTO.OrganisationId, domainName = domainDTO.DomainName}, domainDTO);
+                return CreatedAtAction(nameof(PostAcceptedEmailDomain), new { organisationId = domainDTO.OrganisationId, domainName = domainDTO.DomainName}, domainDTO);
             }
             catch (Exception exception)
             {

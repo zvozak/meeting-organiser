@@ -15,8 +15,10 @@ namespace MeetingOrganiserDesktopApp.ViewModel
         private IMeetingApplicationModel model;
         private ObservableCollection<EventDTO> events;
         private ObservableCollection<MemberDTO> members;
+        private ObservableCollection<JobDTO> jobs;
         private EventDTO selectedEvent;
         private VenueDTO selectedVenue;
+        private JobDTO selectedJob;
         private MemberDTO selectedMember;
         private Boolean isLoaded;
 
@@ -50,7 +52,6 @@ namespace MeetingOrganiserDesktopApp.ViewModel
                 }
             }
         }
-
         public ObservableCollection<MemberDTO> Members
         {
             get { return members; }
@@ -59,6 +60,18 @@ namespace MeetingOrganiserDesktopApp.ViewModel
                 if (members != value)
                 {
                     members = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public ObservableCollection<JobDTO> Jobs
+        {
+            get { return jobs; }
+            private set
+            {
+                if (jobs != value)
+                {
+                    jobs = value;
                     OnPropertyChanged();
                 }
             }
@@ -89,7 +102,6 @@ namespace MeetingOrganiserDesktopApp.ViewModel
                 }
             }
         }
-
         public VenueDTO SelectedVenue
         {
             get { return selectedVenue; }
@@ -102,7 +114,6 @@ namespace MeetingOrganiserDesktopApp.ViewModel
                 }
             }
         }
-
         public MemberDTO SelectedMember
         {
             get { return selectedMember; }
@@ -115,40 +126,60 @@ namespace MeetingOrganiserDesktopApp.ViewModel
                 }
             }
         }
+        public JobDTO SelectedJob
+        {
+            get { return selectedJob; }
+            set
+            {
+                if (selectedJob != value)
+                {
+                    selectedJob = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
 
         public EventDTO EditedEvent { get; private set; }
+        public VenueDTO EditedVenue { get; private set; }
+        public MemberDTO EditedMember { get; private set; }
+        //public JobDTO JobOfEditedMember { get; private set; } // azért kell, mert nem tudom observe-ölni az EditedMember.Job.Title stb. property-ket másképp
+        //public MemberDTO BossOfEditedMember { get; private set; } // -- ii --
+        public JobDTO EditedJob { get; private set; }
 
 
         public DelegateCommand CreateEventCommand { get; private set; }
-
-        public DelegateCommand CreateVenueCommand { get; private set; }
-
-        public DelegateCommand UpdateVenueCommand { get; private set; }
-
-        public DelegateCommand DeleteVenueCommand { get; private set; }
-
-        public DelegateCommand CreateImageCommand { get; private set; }
-
         public DelegateCommand UpdateEventCommand { get; private set; }
-
         public DelegateCommand DeleteEventCommand { get; private set; }
 
+        public DelegateCommand CreateVenueCommand { get; private set; }
+        public DelegateCommand UpdateVenueCommand { get; private set; }
+        public DelegateCommand DeleteVenueCommand { get; private set; }
+
+        public DelegateCommand CreateMemberCommand { get; private set; }
+        public DelegateCommand UpdateMemberCommand { get; private set; }
+        public DelegateCommand DeleteMemberCommand { get; private set; }
+
+        public DelegateCommand CreateJobCommand { get; private set; }
+        public DelegateCommand UpdateJobCommand { get; private set; }
+        public DelegateCommand DeleteJobCommand { get; private set; }
+
+        public DelegateCommand CreateImageCommand { get; private set; }
         public DelegateCommand CreateGuestListCommand { get; private set; }
-        
         public DelegateCommand DeleteImageCommand { get; private set; }
 
         public DelegateCommand SaveEventChangesCommand { get; private set; }
         public DelegateCommand SaveVenueChangesCommand { get; private set; }
+        public DelegateCommand SaveMemberChangesCommand { get; private set; }
+        public DelegateCommand SaveJobChangesCommand { get; private set; }
 
         public DelegateCommand CancelEventChangesCommand { get; private set; }
         public DelegateCommand CancelVenueChangesCommand { get; private set; }
+        public DelegateCommand CancelMemberChangesCommand { get; private set; }
+        public DelegateCommand CancelJobChangesCommand { get; private set; }
 
         public DelegateCommand ExitCommand { get; private set; }
-
         public DelegateCommand LoadCommand { get; private set; }
-
         public DelegateCommand SaveCommand { get; private set; }
-        public VenueDTO EditedVenue { get; private set; }
 
         public event EventHandler<EventEventArgs> GuestListQuery;
 
@@ -160,11 +191,21 @@ namespace MeetingOrganiserDesktopApp.ViewModel
 
         public event EventHandler EventEditingFinished;
 
+        public event EventHandler MemberEditingStarted;
+
+        public event EventHandler MemberEditingFinished;
+
+        public event EventHandler JobEditingStarted;
+
+        public event EventHandler JobEditingFinished;
+
         public event EventHandler VenueEditingStarted;
 
         public event EventHandler VenueEditingFinished;
 
         public event EventHandler<VenueEventArgs> ImageEditingStarted;
+
+
 
         public MainViewModel(IMeetingApplicationModel model)
         {
@@ -174,6 +215,8 @@ namespace MeetingOrganiserDesktopApp.ViewModel
             this.model = model;
             this.model.EventChanged += Model_EventChanged;
             this.model.VenueChanged += Model_VenueChanged;
+            this.model.MemberChanged += Model_MemberChanged;
+            this.model.JobChanged += Model_JobChanged;
             this.model.GuestListCreated += Model_GuestListCreated;
             isLoaded = false;
 
@@ -191,6 +234,34 @@ namespace MeetingOrganiserDesktopApp.ViewModel
             });
             UpdateEventCommand = new DelegateCommand(param => UpdateEvent(param as EventDTO));
             DeleteEventCommand = new DelegateCommand(param => DeleteEvent(param as EventDTO));
+
+            CreateMemberCommand = new DelegateCommand(param =>
+            {
+                EditedMember = new MemberDTO();
+                EditedMember.OrganisationId = model.Organisation.Id;
+
+                EditedMember.DateOfJoining = DefaultDateTime;
+
+                EditedMember.Job = new JobDTO();
+                EditedMember.Boss = new MemberDTO();
+
+                OnMemberEditingStarted();
+            });
+            UpdateMemberCommand = new DelegateCommand(param => UpdateMember(param as MemberDTO));
+            DeleteMemberCommand = new DelegateCommand(param => DeleteMember(param as MemberDTO));
+
+            CreateJobCommand = new DelegateCommand(param =>
+            {
+                EditedJob = new JobDTO();
+
+                EditedJob.OrganisationId = model.Organisation.Id;
+
+                EditedJob.Weight = 0;
+
+                OnJobEditingStarted();
+            });
+            UpdateJobCommand = new DelegateCommand(param => UpdateJob(param as JobDTO));
+            DeleteJobCommand = new DelegateCommand(param => DeleteJob(param as JobDTO));
 
             CreateVenueCommand = new DelegateCommand(param =>
             {
@@ -211,29 +282,19 @@ namespace MeetingOrganiserDesktopApp.ViewModel
 
             SaveEventChangesCommand = new DelegateCommand(param => SaveEventChanges());
             SaveVenueChangesCommand = new DelegateCommand(param => SaveVenueChanges());
+            SaveMemberChangesCommand = new DelegateCommand(param => SaveMemberChanges());
+            SaveJobChangesCommand = new DelegateCommand(param => SaveJobChanges());
             CancelEventChangesCommand = new DelegateCommand(param => CancelEventChanges());
             CancelVenueChangesCommand = new DelegateCommand(param => CancelVenueChanges());
+            CancelMemberChangesCommand = new DelegateCommand(param => CancelMemberChanges());
+            CancelJobChangesCommand = new DelegateCommand(param => CancelJobChanges());
             LoadCommand = new DelegateCommand(param => LoadAsync(param as String));
             SaveCommand = new DelegateCommand(param => SaveAsync());
             ExitCommand = new DelegateCommand(param => OnExitApplication());
         }
 
-        private void Model_GuestListCreated(object sender, EventEventArgs e)
-        {
-            GuestList = model.GuestList;
-            OnGuestListCreated(e.EventId);
-        }
+        
 
-        private void OnGuestListQuery(Int32 eventId)
-        {
-            if (GuestListQuery != null)
-                GuestListQuery(this, new EventEventArgs { EventId = eventId });
-        }
-        private void OnGuestListCreated(Int32 eventId)
-        {
-            if (GuestListCreated != null)
-                GuestListCreated(this, new EventEventArgs { EventId = eventId });
-        }
         private void UpdateEvent(EventDTO @event)
         {
             if (@event == null)
@@ -263,6 +324,52 @@ namespace MeetingOrganiserDesktopApp.ViewModel
 
             OnVenueEditingStarted();
         }
+        private void UpdateMember(MemberDTO member)
+        {
+            if (member == null)
+                return;
+
+            EditedMember = new MemberDTO(member);
+
+            /*
+            if (member.Job != null)
+            {
+                JobOfEditedMember = new JobDTO
+                {
+                    Id = member.Job.Id,
+                    OrganisationId = member.OrganisationId,
+                    Title = member.Job.Title,
+                    Weight = member.Job.Weight
+                };
+            }
+            if (member.Boss != null)
+            {
+                BossOfEditedMember = new MemberDTO
+                {
+                    Name = member.Boss.Name,
+                    Id = (int)member.BossId
+                };
+            }
+            */
+
+            OnMemberEditingStarted();
+        }
+        private void UpdateJob(JobDTO job)
+        {
+            if (job == null)
+                return;
+
+            EditedJob = new JobDTO
+            {
+                Id = job.Id,
+                OrganisationId = job.OrganisationId,
+                Title = job.Title,
+                Weight = job.Weight
+            };
+
+            OnJobEditingStarted();
+        }
+
 
         private void DeleteVenue(VenueDTO venue)
         {
@@ -285,6 +392,32 @@ namespace MeetingOrganiserDesktopApp.ViewModel
                 return;
 
             model.DeleteImage(image);
+        }
+
+        private void DeleteMember(MemberDTO member)
+        {
+            if (member == null || !Members.Contains(member))
+                return;
+
+            Members.Remove(member);
+
+            model.DeleteMember(member);
+        }
+
+        private void DeleteJob(JobDTO job)
+        {
+            if (job == null || !Jobs.Contains(job))
+                return;
+
+            if (members.Any(m => m.Job.Id == job.Id))
+            {
+                OnMessageApplication("This job (Id: " + job.Id + "Title: " + job.Title + ") cannot be deleted because some members use it.");
+                return;
+            }
+
+            Jobs.Remove(job);
+
+            model.DeleteJob(job);
         }
 
         private void SaveEventChanges()
@@ -333,7 +466,6 @@ namespace MeetingOrganiserDesktopApp.ViewModel
             OnEventEditingFinished();
         }
 
-
         private void SaveVenueChanges()
         {
             if (String.IsNullOrEmpty(EditedVenue.Name))
@@ -357,7 +489,94 @@ namespace MeetingOrganiserDesktopApp.ViewModel
             OnVenueEditingFinished();
         }
 
+        private void SaveMemberChanges()
+        {
+            if (String.IsNullOrEmpty(EditedMember.Name))
+            {
+                OnMessageApplication("Name for member is required.");
+                return;
+            }
 
+            if (String.IsNullOrEmpty(EditedMember.Email))
+            {
+                OnMessageApplication("Email address for member is required.");
+                return;
+            }
+            /*
+            if (model.IsExistingBoss (BossOfEditedMember.Name))
+            {
+                EditedMember.Boss = BossOfEditedMember;
+            }
+            */
+            if (!model.IsExistingBoss(EditedMember.Boss.Name))
+            {
+                OnMessageApplication("There is no member with name " + EditedMember.Boss.Name + ". Please provide an existing one or create a new member with this name.");
+                return;
+            }
+            /*
+            if (model.IsExistingJobTitle(JobOfEditedMember.Title))
+            {
+                EditedMember.Job = JobOfEditedMember;
+            }
+            */
+            if (!model.IsExistingJobTitle(EditedMember.Job.Title))
+            {
+                OnMessageApplication("No such role/jobtitle exists. Please provide an existing one or create a new job at Jobs/List jobs menu.");
+                return;
+            }
+
+            if (EditedMember.Id == 0)
+            {
+                model.CreateMember(EditedMember);
+                SelectedMember = EditedMember;
+            }
+            else
+            {
+                model.UpdateMember(EditedMember);
+            }
+
+            EditedMember = null;
+
+            OnMemberEditingFinished();
+        }
+
+        private void SaveJobChanges()
+        {
+            if (String.IsNullOrEmpty(EditedJob.Title))
+            {
+                OnMessageApplication("Title for job is required.");
+                return;
+            }
+
+            if (EditedJob.Id == 0)
+            {
+                model.CreateJob(EditedJob);
+                SelectedJob = EditedJob;
+            }
+            else
+            {
+                model.UpdateJob(EditedJob);
+            }
+
+            EditedJob = null;
+
+            OnJobEditingFinished();
+        }
+
+
+        private void CancelMemberChanges()
+        {
+            EditedMember = null;
+            //JobOfEditedMember = null;
+            //BossOfEditedMember = null;
+            OnMemberEditingFinished();
+        }
+
+        private void CancelJobChanges()
+        {
+            EditedJob = null;
+            OnJobEditingFinished();
+        }
 
         private void CancelEventChanges()
         {
@@ -370,6 +589,7 @@ namespace MeetingOrganiserDesktopApp.ViewModel
             EditedVenue = null;
             OnVenueEditingFinished();
         }
+
 
 
         private async void LoadAsync(String organisationName)
@@ -400,31 +620,19 @@ namespace MeetingOrganiserDesktopApp.ViewModel
             }
         }
 
-        private void Model_EventChanged(object sender, EventEventArgs e)
-        {
-            Int32 index = Events.IndexOf(Events.FirstOrDefault(Event => Event.Id == e.EventId));
-            Events.RemoveAt(index);
-            Events.Insert(index, model.Events[index]);
 
-            SelectedEvent = Events[index];
+        
+        private void OnGuestListQuery(Int32 eventId)
+        {
+            if (GuestListQuery != null)
+                GuestListQuery(this, new EventEventArgs { EventId = eventId });
         }
 
-        private void Model_VenueChanged(object sender, VenueEventArgs e)
+        private void OnGuestListCreated(Int32 eventId)
         {
-            Int32 index = Events.IndexOf(Events.FirstOrDefault(Event => Event.Id == e.EventId));
-            Events.RemoveAt(index);
-            Events.Insert(index, model.Events[index]);
-
-            SelectedVenue = Events[index].Venues.First(v => v.Id == e.VenueId);
-            SelectedEvent = Events[index];
+            if (GuestListCreated != null)
+                GuestListCreated(this, new EventEventArgs { EventId = eventId });
         }
-
-        private void OnExitApplication()
-        {
-            if (ExitApplication != null)
-                ExitApplication(this, EventArgs.Empty);
-        }
-
 
         private void OnEventEditingStarted()
         {
@@ -436,6 +644,30 @@ namespace MeetingOrganiserDesktopApp.ViewModel
         {
             if (EventEditingFinished != null)
                 EventEditingFinished(this, EventArgs.Empty);
+        }
+
+        private void OnMemberEditingStarted()
+        {
+            if (MemberEditingStarted != null)
+                MemberEditingStarted(this, EventArgs.Empty);
+        }
+
+        private void OnMemberEditingFinished()
+        {
+            if (MemberEditingFinished != null)
+                MemberEditingFinished(this, EventArgs.Empty);
+        }
+
+        private void OnJobEditingStarted()
+        {
+            if (JobEditingStarted != null)
+                JobEditingStarted(this, EventArgs.Empty);
+        }
+
+        private void OnJobEditingFinished()
+        {
+            if (JobEditingFinished != null)
+                JobEditingFinished(this, EventArgs.Empty);
         }
 
         private void OnVenueEditingStarted()
@@ -454,6 +686,56 @@ namespace MeetingOrganiserDesktopApp.ViewModel
         {
             if (ImageEditingStarted != null)
                 ImageEditingStarted(this, new VenueEventArgs { VenueId = venueId, EventId = eventId });
+        }
+
+        private void OnExitApplication()
+        {
+            if (ExitApplication != null)
+                ExitApplication(this, EventArgs.Empty);
+        }
+
+
+
+        private void Model_EventChanged(object sender, EventEventArgs e)
+        {
+            Int32 index = Events.IndexOf(Events.FirstOrDefault(Event => Event.Id == e.EventId));
+            Events.RemoveAt(index);
+            Events.Insert(index, model.Events[index]);
+
+            SelectedEvent = Events[index];
+        }
+
+        private void Model_MemberChanged(object sender, MemberEventArgs e)
+        {
+            Int32 index = Members.IndexOf(Members.FirstOrDefault(Member => Member.Id == e.MemberId));
+            Members.RemoveAt(index);
+            Members.Insert(index, model.Members[index]);
+
+            SelectedMember = Members[index];
+        }
+
+        private void Model_JobChanged(object sender, JobEventArgs e)
+        {
+            Int32 index = Jobs.IndexOf(Jobs.FirstOrDefault(Job => Job.Id == e.JobId));
+            Jobs.RemoveAt(index);
+            Jobs.Insert(index, model.Organisation.Jobs[index]);
+
+            SelectedJob = Jobs[index];
+        }
+
+        private void Model_VenueChanged(object sender, VenueEventArgs e)
+        {
+            Int32 index = Events.IndexOf(Events.FirstOrDefault(Event => Event.Id == e.EventId));
+            Events.RemoveAt(index);
+            Events.Insert(index, model.Events[index]);
+
+            SelectedVenue = Events[index].Venues.First(v => v.Id == e.VenueId);
+            SelectedEvent = Events[index];
+        }
+        private void Model_GuestListCreated(object sender, EventEventArgs e)
+        {
+            GuestList = model.GuestList;
+            OnGuestListCreated(e.EventId);
         }
     }
 }

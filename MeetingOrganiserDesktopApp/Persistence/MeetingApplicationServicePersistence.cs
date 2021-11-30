@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace MeetingOrganiserDesktopApp.Persistence
@@ -633,9 +634,11 @@ namespace MeetingOrganiserDesktopApp.Persistence
             try
             {
                 log.Info("POST query on service " + client.BaseAddress + ", path: api/members/postmember");
-                log.Trace("POST query content: " + JsonConvert.SerializeObject(member, Formatting.None));
+                var serializedMember = JsonConvert.SerializeObject(member, Formatting.None);
+                log.Trace("POST query content: " + serializedMember);
 
                 HttpResponseMessage response = await client.PostAsJsonAsync("api/members/postmember", member);
+                member.Id = (await response.Content.ReadAsAsync<MemberDTO>()).Id;
 
                 if (!response.IsSuccessStatusCode)
                     log.Warn("POST query returned response {0} with reason: {1}", response.StatusCode, response.ReasonPhrase);
@@ -658,6 +661,7 @@ namespace MeetingOrganiserDesktopApp.Persistence
                 log.Trace("POST query content: " + JsonConvert.SerializeObject(organisation, Formatting.None));
 
                 HttpResponseMessage response = await client.PostAsJsonAsync("api/organisations/postorganisation", organisation);
+                organisation.Id = (await response.Content.ReadAsAsync<OrganisationDTO>()).Id;
 
                 if (!response.IsSuccessStatusCode)
                     log.Warn("POST query returned response {0} with reason: {1}", response.StatusCode, response.ReasonPhrase);
@@ -680,6 +684,7 @@ namespace MeetingOrganiserDesktopApp.Persistence
                 log.Trace("POST query content: " + JsonConvert.SerializeObject(@event, Formatting.None));
 
                 HttpResponseMessage response = await client.PostAsJsonAsync("api/events/postevent", @event);
+                @event.Id = (await response.Content.ReadAsAsync<EventDTO>()).Id;
 
                 if (!response.IsSuccessStatusCode)
                     log.Warn("POST query returned response {0} with reason: {1}", response.StatusCode, response.ReasonPhrase);
@@ -702,6 +707,7 @@ namespace MeetingOrganiserDesktopApp.Persistence
                 log.Trace("POST query content: " + JsonConvert.SerializeObject(venue, Formatting.None));
 
                 HttpResponseMessage response = await client.PostAsJsonAsync("api/venues/postvenue", venue);
+                venue.Id = (await response.Content.ReadAsAsync<VenueDTO>()).Id;
 
                 if (!response.IsSuccessStatusCode)
                     log.Warn("POST query returned response {0} with reason: {1}", response.StatusCode, response.ReasonPhrase);
@@ -724,6 +730,7 @@ namespace MeetingOrganiserDesktopApp.Persistence
                 log.Trace("POST query content: " + JsonConvert.SerializeObject(image, Formatting.None));
 
                 HttpResponseMessage response = await client.PostAsJsonAsync("api/venueimages/postvenueimage", image);
+                image.Id = (await response.Content.ReadAsAsync<VenueImageDTO>()).Id;
 
                 if (!response.IsSuccessStatusCode)
                     log.Warn("POST query returned response {0} with reason: {1}", response.StatusCode, response.ReasonPhrase);

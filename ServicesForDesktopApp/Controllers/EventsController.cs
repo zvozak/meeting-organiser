@@ -107,7 +107,7 @@ namespace ServicesForDesktopApp.Controllers
 
         [HttpPost]
         [Authorize(Roles = "administrator")]
-        public ActionResult<EventDTO> PostEvent(EventDTO eventDTO)
+        public IActionResult PostEvent(EventDTO eventDTO)
         {
             Event newEvent = (Event)eventDTO;
             context.Events.Add(newEvent);
@@ -115,7 +115,7 @@ namespace ServicesForDesktopApp.Controllers
             {
                 context.SaveChanges();
 
-                return CreatedAtAction("GetEvent", new { id = eventDTO.Id }, eventDTO);
+                return CreatedAtAction(nameof(PostEvent), new { id = eventDTO.Id }, eventDTO);
             }
             
             catch (Exception exception)

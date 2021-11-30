@@ -84,14 +84,14 @@ namespace ServicesForDesktopApp.Controllers
 
         [HttpPost]
         [Authorize(Roles = "administrator")]
-        public ActionResult<JobDTO> PostJob(JobDTO jobDTO)
+        public IActionResult PostJob(JobDTO jobDTO)
         {
             context.Jobs.Add((Job)jobDTO);
             try
             {
                 context.SaveChanges();
 
-                return CreatedAtAction("GetJob", new { id = jobDTO.Id }, jobDTO);
+                return CreatedAtAction(nameof(PostJob), new { id = jobDTO.Id }, jobDTO);
             }
             catch (Exception exception)
             {

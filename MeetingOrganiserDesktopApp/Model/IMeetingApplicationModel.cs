@@ -33,14 +33,20 @@ namespace MeetingOrganiserDesktopApp.Model
 
 
         public event EventHandler<MemberEventArgs> MemberChanged;
+        public event EventHandler<JobEventArgs> JobChanged;
         public event EventHandler<EventEventArgs> EventChanged;
         public event EventHandler<VenueEventArgs> VenueChanged;
         public event EventHandler<EventEventArgs> GuestListCreated;
 
 
+        public bool IsExistingJobTitle(string jobtitle);
+        public bool IsExistingBoss(string name);
+
         #region Create
 
         public void CreateMember(MemberDTO member);
+
+        public void CreateJob(JobDTO job);
 
 
         public void CreateEvent(EventDTO @event);
@@ -61,6 +67,8 @@ namespace MeetingOrganiserDesktopApp.Model
 
         public void UpdateMember(MemberDTO member);
 
+        public void UpdateJob(JobDTO job);
+
 
         public void UpdateOrganisation(OrganisationDTO newOrganisation);
         #endregion
@@ -71,6 +79,7 @@ namespace MeetingOrganiserDesktopApp.Model
         public void DeleteEvent(EventDTO @event);
         public void DeleteVenue(VenueDTO venue);
         public void DeleteMember(MemberDTO member);
+        public void DeleteJob(JobDTO job);
 
         public void DeleteImage(VenueImageDTO image);
 

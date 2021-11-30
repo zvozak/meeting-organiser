@@ -84,14 +84,14 @@ namespace ServicesForDesktopApp.Controllers
 
         [HttpPost]
         [Authorize(Roles = "administrator")]
-        public ActionResult<VenueDTO> PostVenue(VenueDTO eventDTO)
+        public IActionResult PostVenue(VenueDTO eventDTO)
         {
             context.Venues.Add((Venue)eventDTO);
             try
             {
                 context.SaveChanges();
 
-                return CreatedAtAction("GetVenue", new { id = eventDTO.Id }, eventDTO);
+                return CreatedAtAction(nameof(PostVenue), new { id = eventDTO.Id }, eventDTO);
             }
             catch (Exception exception)
             {

@@ -1,0 +1,41 @@
+2021-11-30 08:40:11.2054|INFO|account|LOGIN SUCCESS for user adminH from address ::1
+2021-11-30 09:35:46.3769|INFO|account|LOGIN SUCCESS for user adminH from address ::1
+2021-11-30 10:30:28.9336|INFO|account|LOGIN SUCCESS for user adminH from address ::1
+2021-11-30 10:36:45.5507|INFO|account|LOGIN SUCCESS for user adminH from address ::1
+2021-11-30 10:57:32.1013|INFO|account|LOGIN SUCCESS for user adminH from address ::1
+2021-11-30 11:32:07.0221|INFO|account|LOGIN SUCCESS for user adminH from address ::1
+2021-11-30 12:18:40.3318|INFO|account|LOGIN SUCCESS for user adminH from address ::1
+2021-11-30 12:32:58.8694|INFO|account|LOGIN SUCCESS for user adminH from address ::1
+2021-11-30 12:38:41.3546|INFO|account|LOGIN SUCCESS for user adminH from address ::1
+2021-11-30 12:58:26.3607|INFO|account|LOGIN SUCCESS for user adminH from address ::1
+2021-11-30 13:03:22.3388|ERROR|service|MEMBER POST query failed from address ::1 with content: {"Id":400,"Name":"aa","Email":"a@a.a","Department":"SwS","DateOfJoining":"2021-11-28T13:02:14.19+01:00","Projects":[],"Job":{"Id":0,"Title":"Mortarman","Weight":0,"OrganisationId":0},"Boss":{"Id":0,"Name":"Jesse","Email":null,"Department":null,"DateOfJoining":null,"Projects":[],"Job":null,"Boss":null,"IdAtOrganisation":0,"OrganisationId":0,"BossId":null,"JobId":null},"IdAtOrganisation":0,"OrganisationId":0,"BossId":null,"JobId":null}
+2021-11-30 13:07:18.0250|ERROR|service|MEMBER POST query failed from address ::1 with content: {"Id":400,"Name":"aa","Email":"a@a.a","Department":"SwS","DateOfJoining":"2021-11-28T13:02:14.19+01:00","Projects":[],"Job":{"Id":0,"Title":"Mortarman","Weight":0,"OrganisationId":0},"Boss":{"Id":0,"Name":"Jesse","Email":null,"Department":null,"DateOfJoining":null,"Projects":[],"Job":null,"Boss":null,"IdAtOrganisation":0,"OrganisationId":0,"BossId":null,"JobId":null},"IdAtOrganisation":0,"OrganisationId":0,"BossId":null,"JobId":null}
+2021-11-30 13:12:03.8129|ERROR|service|MEMBER POST query failed from address ::1 with content: {"Id":400,"Name":"aa","Email":"a@a.a","Department":"SwS","DateOfJoining":"2021-11-28T13:02:14.19+01:00","Projects":[],"Job":{"Id":0,"Title":"Mortarman","Weight":0,"OrganisationId":0},"Boss":{"Id":0,"Name":"Jesse","Email":null,"Department":null,"DateOfJoining":null,"Projects":[],"Job":null,"Boss":null,"IdAtOrganisation":0,"OrganisationId":0,"BossId":null,"JobId":null},"IdAtOrganisation":0,"OrganisationId":0,"BossId":null,"JobId":null}
+2021-11-30 13:13:46.9000|INFO|account|LOGIN SUCCESS for user adminH from address ::1
+2021-11-30 13:25:44.5556|INFO|account|LOGIN SUCCESS for user adminH from address ::1
+2021-11-30 13:43:52.4317|INFO|account|LOGIN SUCCESS for user adminH from address ::1
+2021-11-30 14:00:37.8949|INFO|account|LOGIN SUCCESS for user adminH from address ::1
+2021-11-30 14:12:01.9887|INFO|account|LOGIN SUCCESS for user adminH from address ::1
+2021-11-30 14:17:28.8459|INFO|account|LOGIN SUCCESS for user adminH from address ::1
+2021-11-30 14:17:34.3779|INFO|account|LOGIN SUCCESS for user adminH from address ::1
+2021-11-30 14:35:11.2136|INFO|account|LOGIN SUCCESS for user adminH from address ::1
+2021-11-30 14:46:10.5633|INFO|account|LOGIN SUCCESS for user adminH from address ::1
+2021-11-30 14:49:46.1648|INFO|account|LOGIN SUCCESS for user adminH from address ::1
+2021-11-30 14:58:57.9735|INFO|account|LOGIN SUCCESS for user adminH from address ::1
+2021-11-30 15:24:51.4150|INFO|account|LOGIN SUCCESS for user adminH from address ::1
+2021-11-30 15:32:52.9987|INFO|account|LOGIN SUCCESS for user adminH from address ::1
+2021-11-30 15:35:15.8321|INFO|account|LOGIN SUCCESS for user adminH from address ::1
+2021-11-30 15:41:44.6695|INFO|account|LOGIN SUCCESS for user adminH from address ::1
+2021-11-30 15:44:00.5088|INFO|account|LOGIN SUCCESS for user adminH from address ::1
+2021-11-30 15:52:17.4497|INFO|account|LOGIN SUCCESS for user adminH from address ::1
+2021-11-30 16:38:00.0670|INFO|account|LOGIN SUCCESS for user adminH from address ::1
+2021-11-30 16:45:20.9297|INFO|account|LOGIN SUCCESS for user adminH from address ::1
+2021-11-30 16:53:02.6507|INFO|account|LOGIN SUCCESS for user adminH from address ::1
+2021-11-30 16:59:09.6112|INFO|account|LOGIN SUCCESS for user adminH from address ::1
+2021-11-30 17:05:11.7861|INFO|account|LOGIN SUCCESS for user adminH from address ::1
+2021-11-30 17:10:22.6828|INFO|account|LOGIN SUCCESS for user adminH from address ::1
+2021-11-30 17:15:36.9777|INFO|account|LOGIN SUCCESS for user adminH from address ::1
+2021-11-30 17:26:02.0564|INFO|account|LOGIN SUCCESS for user adminH from address ::1
+2021-11-30 17:33:10.7811|INFO|account|LOGIN SUCCESS for user adminH from address ::1
+2021-11-30 17:45:28.8240|INFO|account|LOGIN SUCCESS for user adminH from address ::1
+2021-11-30 17:45:28.8240|INFO|account|LOGIN SUCCESS for user adminH from address ::1

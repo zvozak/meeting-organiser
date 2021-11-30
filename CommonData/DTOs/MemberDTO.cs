@@ -47,5 +47,25 @@ namespace CommonData.DTOs
 			BossId = dto.BossId,
 			JobId = dto.JobId
 		};
+
+		public MemberDTO()
+		{
+			Projects = new List<ProjectDTO>();
+		}
+
+		public MemberDTO(MemberDTO otherMember)
+		{
+			Id = otherMember.Id;
+			Name = otherMember.Name;
+			Email = otherMember.Email;
+			Department = otherMember.Department;
+			DateOfJoining = otherMember.DateOfJoining;
+			IdAtOrganisation = otherMember.IdAtOrganisation;
+			OrganisationId = otherMember.OrganisationId;
+			BossId = otherMember.BossId;
+			JobId = otherMember.JobId;
+			Boss = otherMember.Boss;
+			Job = otherMember.Job;
+		}
 	}
 }
