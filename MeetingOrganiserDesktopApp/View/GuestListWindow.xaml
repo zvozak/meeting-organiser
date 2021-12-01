@@ -21,7 +21,7 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="0" Text="Could not create a guestlist where every attender has an immediate colleague." Visibility="{Binding CouldNotCreateConnectedDominatingSet, Converter={StaticResource BooleanToVisibilityConverter}}" />
+        <TextBlock Margin="5" Grid.Row="0" Text="Could not create a guestlist where every attender has an immediate colleague." Visibility="{Binding CouldNotCreateConnectedDominatingSet, Converter={StaticResource BooleanToVisibilityConverter}}" />
 
         <DataGrid Name="memberGrid" Grid.Row="1" Grid.Column="0"  AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding GuestList}" SelectedItem="{Binding SelectedMember}">
             <DataGrid.Columns>
@@ -29,7 +29,7 @@
                 <DataGridTextColumn Header="Email" Binding="{Binding Email}"  />
                 <DataGridTextColumn Header="Date of joining" Binding="{Binding DateOfJoining}"  />
                 <DataGridTextColumn Header="Department" Binding="{Binding Department}" />
-                <DataGridTextColumn Header="Role/jobtitle" Binding="{Binding Job}"  />
+                <DataGridTextColumn Header="Role/jobtitle" Binding="{Binding Job.Title}"  />
                 <DataGridTextColumn Header="Supervisor" Binding="{Binding Boss.Name}" />
             </DataGrid.Columns>
         </DataGrid>
