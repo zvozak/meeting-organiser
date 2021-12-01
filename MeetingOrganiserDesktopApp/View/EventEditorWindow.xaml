@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:MeetingOrganiserDesktopApp.View"
       xmlns:toolkit="http://schemas.xceed.com/wpf/xaml/toolkit"
       mc:Ignorable="d" 
-      Height="476" Width="852"
+      Height="600" Width="852"
       Title="EventEditorWindow"
       xmlns:System="clr-namespace:System;assembly=mscorlib"
       xmlns:entitiesNameSpace="CommonData.Entities"
@@ -19,14 +19,14 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="221*"/>
-            <ColumnDefinition Width="631*"/>
+            <ColumnDefinition Width="107*"/>
+            <ColumnDefinition Width="177*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="30" />
             <RowDefinition Height="30" />
             <RowDefinition Height="30" />
-            <RowDefinition Height="30" />
+            <RowDefinition Height="150" />
             <RowDefinition Height="30" />
             <RowDefinition Height="30" />
             <RowDefinition Height="30" />
@@ -84,26 +84,28 @@
 
         <CheckBox Grid.Row="2" Content="Considering importance of members required" Margin="49,7,0,5" IsChecked="{Binding EditedEvent.IsWeightRequired}" HorizontalAlignment="Left" Width="282" Grid.Column="1"  />
 
-        <TextBlock Grid.Row="3" Text="Description:" Margin="10,5,0,5" HorizontalAlignment="Left" Width="132" />
-        <TextBox Grid.Row="3" Text="{Binding EditedEvent.Description}" Margin="0,5,0,10" Grid.Column="1" HorizontalAlignment="Center" Width="586" Grid.RowSpan="5"/>
+        <StackPanel Grid.Row="3" Orientation="Horizontal" Grid.ColumnSpan="2">
+            <TextBlock Text="Description:" Margin="10,5,0,5" HorizontalAlignment="Left" Width="132" />
+            <TextBox Text="{Binding EditedEvent.Description}" Margin="0,5,0,10" Grid.Column="1" HorizontalAlignment="Center" Width="586" Grid.RowSpan="5"/>
+        </StackPanel>
+        
+        <TextBlock Grid.Row="4" Text="Formula for weighing importance of members: " Margin="2,5,0,25" Grid.Column="1" />
 
-        <TextBlock Grid.Row="7" Text="Formula for weighing importance of members: " Margin="2,5,0,25" Grid.Column="1" />
-
-        <TextBlock Grid.Row="8" Grid.Column="0" Text="sum of importance of projects" Margin="10,5,5,5"  IsEnabled="{Binding IsProjectBased}"/>
-        <TextBox Grid.Row="8" Grid.Column="1"  Text="{Binding EditedEvent.ProjectImportanceWeight}" Margin="5,5,0,5" HorizontalAlignment="Left" Width="114"/>
-        <TextBlock Grid.Row="9" Grid.Column="0" Text="number of projects" Margin="10,5,10,5"/>
-        <TextBox Grid.Row="9" Grid.Column="1" Text="{Binding EditedEvent.NumberOfProjectsWeight}" Margin="5,5,544,5"/>
-        <TextBlock Grid.Row="10" Grid.Column="0" Text="number of subordinates" Margin="10,5,5,5" />
-        <TextBox Grid.Row="10" Grid.Column="1" Text="{Binding EditedEvent.NumberOfSubordinatesWeight}" Visibility="{Binding IsHierarchical, Converter={StaticResource BooleanToVisibilityConverter}}" Margin="5,5,0,5" HorizontalAlignment="Left" Width="114"/>
-        <TextBlock Grid.Row="11" Grid.Column="0" Text="number of workplace relationships" Margin="10,5,5,1"/>
-        <TextBox Grid.Row="11" Grid.Column="1" Text="{Binding EditedEvent.NumberOfNeighboursWeight}" Margin="5,5,0,5" HorizontalAlignment="Left" Width="114"/>
-        <TextBlock Grid.Row="12" Grid.Column="0" Text="importance of job/role" Margin="10,4,47,0"/>
-        <TextBox Grid.Row="12" Grid.Column="1" Text="{Binding EditedEvent.JobWeight}" Margin="5,5,0,5" HorizontalAlignment="Left" Width="113"/>
+        <TextBlock Grid.Row="5" Grid.Column="0" Text="weight multiplier of sum of importance of projects" Margin="10,5,5,5"  IsEnabled="{Binding IsProjectBased}"/>
+        <TextBox Grid.Row="5" Grid.Column="1"  Text="{Binding EditedEvent.ProjectImportanceWeight}" Margin="5,5,0,5" HorizontalAlignment="Left" Width="113"/>
+        <TextBlock Grid.Row="6" Grid.Column="0" Text="weight multiplier of number of projects" Margin="10,5,10,5"/>
+        <TextBox Grid.Row="6" Grid.Column="1" Text="{Binding EditedEvent.NumberOfProjectsWeight}" Margin="5,5,5,5" Width="113" HorizontalAlignment="Left"/>
+        <TextBlock Grid.Row="7" Grid.Column="0" Text="weight multiplier of number of subordinates" Margin="10,5,5,5" Visibility="{Binding IsHierarchical, Converter={StaticResource BooleanToVisibilityConverter}}" />
+        <TextBox Grid.Row="7" Grid.Column="1" Text="{Binding EditedEvent.NumberOfSubordinatesWeight}" Visibility="{Binding IsHierarchical, Converter={StaticResource BooleanToVisibilityConverter}}" Margin="5,5,0,5" HorizontalAlignment="Left" Width="113"/>
+        <TextBlock Grid.Row="8" Grid.Column="0" Text="weight multiplier of number of workplace relationships" Margin="10,5,5,1"/>
+        <TextBox Grid.Row="8" Grid.Column="1" Text="{Binding EditedEvent.NumberOfNeighboursWeight}" Margin="5,5,0,5" HorizontalAlignment="Left" Width="113"/>
+        <TextBlock Grid.Row="9" Grid.Column="0" Text="weight multiplier of importance of job/role" Margin="10,4,47,0"/>
+        <TextBox Grid.Row="9" Grid.Column="1" Text="{Binding EditedEvent.JobWeight}" Margin="5,5,0,5" HorizontalAlignment="Left" Width="113"/>
 
 
-        <TextBlock Grid.Row="9" Margin="5,0,0,30" Text="Please make sure that the cronological order of set dates is as follows: deadline, start date, end date." Grid.ColumnSpan="2"  />
+        <TextBlock Grid.Row="10" Margin="5" Text="Please make sure that the cronological order of set dates is as follows: deadline, start date, end date." Grid.ColumnSpan="2"  />
 
-        <StackPanel Grid.Row="13"  Orientation="Horizontal" HorizontalAlignment="Left" Margin="10,22,0,0" Grid.ColumnSpan="2" Width="217" Height="30" VerticalAlignment="Top" >
+        <StackPanel Grid.Row="12"  Orientation="Horizontal" HorizontalAlignment="Left" Margin="5,0,0,0" Width="217" Height="30" VerticalAlignment="Top" >
             <Button Content="Save" Margin="6,5,0,5" Name="saveButton" Command="{Binding SaveEventChangesCommand}" Width="100"/>
             <Button Content="Cancel" Margin="5,5,6,5" Command="{Binding CancelEventChangesCommand}" Width="100" />
         </StackPanel>
