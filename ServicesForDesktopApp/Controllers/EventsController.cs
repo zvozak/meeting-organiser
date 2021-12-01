@@ -83,8 +83,19 @@ namespace ServicesForDesktopApp.Controllers
             {
                 Event @event = context.Events.First(e => e.Id == eventDTO.Id);
 
-                @event = (Event)eventDTO;
-                @event.Id = eventDTO.Id;
+                @event.StartDate = eventDTO.StartDate;
+                @event.EndDate = eventDTO.EndDate;
+                @event.DeadlineForApplication = eventDTO.DeadlineForApplication;
+                @event.Description = eventDTO.Description;
+                @event.GuestLimit = eventDTO.GuestLimit;
+                @event.Name = eventDTO.Name;
+                @event.IsConnectedGraphRequired = eventDTO.IsConnectedGraphRequired;
+                @event.ProjectImportanceWeight = eventDTO.ProjectImportanceWeight;
+                @event.NumberOfProjectsWeight = eventDTO.NumberOfProjectsWeight;
+                @event.NumberOfSubordinatesWeight = eventDTO.NumberOfSubordinatesWeight;
+                @event.NumberOfNeighboursWeight = eventDTO.NumberOfNeighboursWeight;
+                @event.JobWeight = eventDTO.JobWeight;
+                @event.IsWeightRequired = eventDTO.IsWeightRequired;
 
                 context.SaveChanges();
 
