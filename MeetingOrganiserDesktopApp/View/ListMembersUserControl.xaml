@@ -37,7 +37,7 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <StackPanel Grid.Row="3" Grid.Column="0" Orientation="Horizontal" Grid.ColumnSpan="2">
+        <StackPanel Grid.Row="3" Grid.Column="0" Orientation="Horizontal" Grid.ColumnSpan="2" Visibility="Hidden">
             <Button Content="Add existing project to member" Margin="6,5,0,5" Command="{Binding AddNewProjectToMemberCommand}" Width="114" IsEnabled="{Binding IsLoaded}" />
             <Button Content="Delete selected" Margin="6,5,6,5" Command="{Binding DeleteProjectFromMemberCommand}" CommandParameter="{Binding SelectedEvent}" Width="114" IsEnabled="{Binding IsLoaded}" />
         </StackPanel>

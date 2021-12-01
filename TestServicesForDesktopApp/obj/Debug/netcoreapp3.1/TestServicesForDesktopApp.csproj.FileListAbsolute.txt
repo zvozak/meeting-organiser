@@ -255,3 +255,4 @@ C:\Users\vozak\source\repos\Szakdolgozat\TestServicesForDesktopApp\obj\Debug\net
 C:\Users\vozak\source\repos\Szakdolgozat\TestServicesForDesktopApp\obj\Debug\netcoreapp3.1\TestServicesForDesktopApp.dll
 C:\Users\vozak\source\repos\Szakdolgozat\TestServicesForDesktopApp\obj\Debug\netcoreapp3.1\TestServicesForDesktopApp.pdb
 C:\Users\vozak\source\repos\Szakdolgozat\TestServicesForDesktopApp\obj\Debug\netcoreapp3.1\TestServicesForDesktopApp.genruntimeconfig.cache
+C:\Users\vozak\source\repos\Szakdolgozat\TestServicesForDesktopApp\obj\Debug\netcoreapp3.1\TestServicesForDesktopApp.csproj.CopyComplete

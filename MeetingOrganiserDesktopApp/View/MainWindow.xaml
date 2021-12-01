@@ -23,11 +23,11 @@
                     <MenuItem Click="ListEventsMenuItem_Click" Header="List events" Command="{Binding LoadCommand}"/>
                     <MenuItem Header="Save events" Command="{Binding SaveCommand}" IsEnabled="{Binding IsLoaded}"/>
                 </MenuItem>
+                <Separator />
                 <MenuItem Header="Members">
                     <MenuItem Click="ListMembersMenuItem_Click"  Header="List members" Command="{Binding LoadCommand}"/>
                     <MenuItem Header="Save members" Command="{Binding SaveCommand}" IsEnabled="{Binding IsLoaded}"/>
                 </MenuItem>
-                <MenuItem Header="Organisation profile"/>
                 <Separator />
                 <MenuItem Header="Exit" Command="{Binding ExitCommand}"/>
             </Menu>
