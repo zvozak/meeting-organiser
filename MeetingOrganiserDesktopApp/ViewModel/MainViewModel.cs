@@ -22,6 +22,7 @@ namespace MeetingOrganiserDesktopApp.ViewModel
         private MemberDTO selectedMember;
         private Boolean isLoaded;
         private Boolean isEventSelected;
+        private Boolean couldCreateConnectedDominatingSet;
 
         public DateTime DefaultDateTime => DateTime.Now;
         public DateTime MinimumDateTime => new DateTime(1980, 1, 1, 0, 0, 0);
@@ -39,6 +40,20 @@ namespace MeetingOrganiserDesktopApp.ViewModel
         public bool IsInvalidEvent
         {
             get { return !IsValidEvent; }
+        }
+        public Boolean CouldNotCreateConnectedDominatingSet {
+            get
+            {
+                return couldCreateConnectedDominatingSet;
+            }
+            private set
+            {
+                if (couldCreateConnectedDominatingSet != value)
+                {
+                    couldCreateConnectedDominatingSet = value;
+                    OnPropertyChanged();
+                }
+            }
         }
 
         public bool IsHierarchical
@@ -626,6 +641,7 @@ namespace MeetingOrganiserDesktopApp.ViewModel
 
         private void OnGuestListCreated(Int32 eventId)
         {
+            CouldNotCreateConnectedDominatingSet = model.CouldNotCreateConnectedDominatingSet;
             if (GuestListCreated != null)
                 GuestListCreated(this, new EventEventArgs { EventId = eventId });
         }

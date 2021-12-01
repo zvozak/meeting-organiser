@@ -30,6 +30,7 @@ namespace MeetingOrganiserDesktopApp.Model
 
 
         public Boolean IsUserLoggedIn { get; }
+        public Boolean CouldNotCreateConnectedDominatingSet { get; }
 
         public Boolean IsHierarchical { get; }
 

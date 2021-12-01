@@ -4,16 +4,34 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MeetingOrganiserDesktopApp.View"
+        xmlns:viewModel="clr-namespace:MeetingOrganiserDesktopApp.ViewModel"
         mc:Ignorable="d"
         Title="GuestListWindow" Height="450" Width="800">
-    <DataGrid Name="memberGrid" Grid.Row="0" Grid.Column="0"  AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding GuestList}" SelectedItem="{Binding SelectedMember}">
-        <DataGrid.Columns>
-            <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
-            <DataGridTextColumn Header="Email" Binding="{Binding Email}"  />
-            <DataGridTextColumn Header="Date of joining" Binding="{Binding DateOfJoining}"  />
-            <DataGridTextColumn Header="Department" Binding="{Binding Department}" />
-            <DataGridTextColumn Header="Role/jobtitle" Binding="{Binding Job}"  />
-            <DataGridTextColumn Header="Supervisor" Binding="{Binding Boss.Name}" />
-        </DataGrid.Columns>
-    </DataGrid>
+
+    <Window.Resources>
+        <viewModel:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    </Window.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Text="Could not create a guestlist where every attender has an immediate colleague." Visibility="{Binding CouldNotCreateConnectedDominatingSet, Converter={StaticResource BooleanToVisibilityConverter}}" />
+
+        <DataGrid Name="memberGrid" Grid.Row="1" Grid.Column="0"  AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding GuestList}" SelectedItem="{Binding SelectedMember}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
+                <DataGridTextColumn Header="Email" Binding="{Binding Email}"  />
+                <DataGridTextColumn Header="Date of joining" Binding="{Binding DateOfJoining}"  />
+                <DataGridTextColumn Header="Department" Binding="{Binding Department}" />
+                <DataGridTextColumn Header="Role/jobtitle" Binding="{Binding Job}"  />
+                <DataGridTextColumn Header="Supervisor" Binding="{Binding Boss.Name}" />
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
 </Window>

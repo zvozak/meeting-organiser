@@ -175,9 +175,12 @@ namespace UnitTests.MeetingOrganiserDesktopApp
             graph.AddNode( new Node(neighbourId));
             graph.AddEdge(nodeId, neighbourId);
 
-            Assert.ThrowsException<Node.NodeIdAlreadyPresent>(
-               new Action(() =>
-               graph.AddEdge(nodeId, neighbourId)));
+            int originalNumberOfNodes = graph.Nodes.Count();
+
+            graph.AddEdge(nodeId, neighbourId);
+
+            Assert.AreEqual(originalNumberOfNodes, graph.Nodes.Count());
+            Assert.AreEqual(originalNumberOfNodes, graph.NumberOfNodes);
         }
         #endregion
 

@@ -11,3 +11,22 @@
             <Button Content="Edit selected" Margin="6,5,0,5" Command="{Binding UpdateProjectCommand}" CommandParameter="{Binding SelectedEvent}" Width="114" IsEnabled="{Binding IsLoaded}" />
             <Button Content="Delete selected" Margin="6,5,6,5" Command="{Binding DeleteProjectCommand}" CommandParameter="{Binding SelectedEvent}" Width="114" IsEnabled="{Binding IsLoaded}" />
         </StackPanel>
+
+
+
+
+
+        public static explicit operator NodeWeightedGraph(Graph generic)
+        {
+            HashSet<WeightedNode> nodes = new HashSet<WeightedNode>(generic.NumberOfNodes);
+            foreach (var node in generic.Nodes)
+            {
+                nodes.Add(new WeightedNode(node.Id, node.NeighbourIds));
+            }
+            return new NodeWeightedGraph
+            {
+                Nodes = nodes,
+                NumberOfNodes = generic.NumberOfNodes,
+                NumberOfEdges = generic.NumberOfEdges
+            };
+        }

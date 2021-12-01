@@ -77,7 +77,7 @@ namespace MeetingOrganiserDesktopApp.Model
 
 
         public Boolean IsUserLoggedIn { get; private set; }
-
+        public Boolean CouldNotCreateConnectedDominatingSet { get; private set; }
 
         public event EventHandler<MemberEventArgs> MemberChanged;
         public event EventHandler<JobEventArgs> JobChanged;
@@ -682,7 +682,7 @@ namespace MeetingOrganiserDesktopApp.Model
         {
             foreach (var project in organisation.Projects)
             {
-                var projectMembers = members.Where(m => m.Projects.Contains(project)).ToList();
+                var projectMembers = members.Where(m => m.Projects.Any(p => p.Id == project.Id)).ToList();
                 foreach (var member in projectMembers)
                 {
                     foreach (var neighbour in projectMembers)
@@ -776,7 +776,7 @@ namespace MeetingOrganiserDesktopApp.Model
 
         private NodeWeightedGraph ConstructWeightedGraph(EventDTO eventDTO)
         {
-            NodeWeightedGraph graph = (NodeWeightedGraph) ConstructGenericGraph((id) => new WeightedNode(id));
+            NodeWeightedGraph graph = new NodeWeightedGraph (ConstructGenericGraph((id) => new WeightedNode(id)));
 
             foreach (var member in members)
             {
@@ -800,21 +800,30 @@ namespace MeetingOrganiserDesktopApp.Model
             return graph;
         }
 
-
+        /*
         public List<MemberDTO> CreateGuestListWithWeights(EventDTO eventDTO)
         {
             NodeWeightedGraph graph = ConstructWeightedGraph(eventDTO);
             HashSet<int> memberIds = new HashSet<int>(eventDTO.GuestLimit);
+            CouldNotCreateConnectedDominatingSet = null;
 
-            
+
 
             if (eventDTO.IsConnectedGraphRequired)
             {
-                memberIds = graph.ConstructCDS_WithCDOM();
+                if (graph.IsGraphConnected())
+                {
+                    memberIds = graph.ConstructConnectedDominatingSet_WithTCDS();
+                }
+                else
+                {
+                    memberIds = graph.ConstructDominatingSetWithWeights();
+                    CouldNotCreateConnectedDominatingSet = false;
+                }
             }
             else
             {
-                memberIds = graph.ConstructDominatingSet();
+                memberIds = graph.ConstructDominatingSetWithWeights();
             }
 
             return members.Join(
@@ -833,7 +842,16 @@ namespace MeetingOrganiserDesktopApp.Model
 
             if (eventDTO.IsConnectedGraphRequired)
             {
-                memberIds = graph.ConstructCDS_WithCDOM();
+                if (graph.IsGraphConnected())
+                {
+                    memberIds = graph.ConstructCDS_WithCDOM();
+                }
+                else
+                {
+                    int maxNumberOfNeighbours = graph.Nodes.Max(n => n.NeighbourIds.Count());
+                    int idOfNodeWithMostNeighbours = graph.Nodes.First(n => n.NeighbourIds.Count() == maxNumberOfNeighbours).Id;
+                    memberIds = graph.ConstructCDSInForest(idOfNodeWithMostNeighbours);
+                }
             }
             else
             {
@@ -886,6 +904,225 @@ namespace MeetingOrganiserDesktopApp.Model
             }
 
             OnGuestListCreated(eventId);
+        }
+        */
+
+
+
+
+
+
+
+        public void CreateGuestList(Int32 eventId)
+        {
+            EventDTO eventDTO = events.Single(e => e.Id == eventId);
+            HashSet<int> memberIds = new HashSet<int>(eventDTO.GuestLimit);
+
+            CouldNotCreateConnectedDominatingSet = false;
+
+            if (organisation.TypeOfStructure == CommonData.Entities.TypeOfStructure.Hierarchical)
+            {
+                memberIds = CreateGuestList_FromHierarchical(eventDTO);
+            }
+            else
+            {
+                memberIds = CreateGuestList_FromProjectBased(eventDTO);
+            }
+
+            GuestList =
+                members.Join(
+                    memberIds,
+                    member => member.Id,
+                    id => id,
+                    (member, id) => member)
+                .ToList();
+
+            OnGuestListCreated(eventId);
+        }
+        public HashSet<int> CreateGuestList_FromHierarchical(EventDTO eventDTO)
+        {
+            if (eventDTO.IsWeightRequired)
+            {
+                return CreateGuestList_FromHierarchical_WithWeights(eventDTO);
+            }
+            else
+            {
+                return CreateGuestList_FromHierarchical_WithoutWeights(eventDTO);
+            }
+        }
+        public HashSet<int> CreateGuestList_FromProjectBased(EventDTO eventDTO)
+        {
+            if (eventDTO.IsWeightRequired)
+            {
+                return CreateGuestList_FromProjectBased_WithWeights(eventDTO);
+            }
+            else
+            {
+                return CreateGuestList_FromProjectBased_WithoutWeights(eventDTO);
+            }
+        }
+
+
+        public HashSet<int> CreateGuestList_FromHierarchical_WithWeights(EventDTO eventDTO)
+        {
+            NodeWeightedGraph graph = ConstructWeightedGraph(eventDTO);
+            if (eventDTO.IsConnectedGraphRequired)
+            {
+                if (graph.IsGraphConnected())
+                {
+                    return CreateGuestList_CDS_FromHierarchical_WithWeights(graph);
+                }
+                else
+                {
+                    CouldNotCreateConnectedDominatingSet = true;
+                    return CreateGuestList_DS_FromHierarchical_WithWeights(graph);
+                }
+            }
+            else
+            {
+                return CreateGuestList_DS_FromHierarchical_WithWeights(graph);
+            }
+        }
+        public HashSet<int> CreateGuestList_FromHierarchical_WithoutWeights(EventDTO eventDTO)
+        {
+            Graph graph = ConstructGraph();
+
+            if (eventDTO.IsConnectedGraphRequired)
+            {
+                if (graph.IsGraphConnected())
+                {
+                    return CreateGuestList_CDS_FromHierarchical_WithoutWeights(graph);
+                }
+                else
+                {
+                    CouldNotCreateConnectedDominatingSet = true;
+                    return CreateGuestList_DS_FromHierarchical_WithoutWeights(graph);
+                }
+            }
+            else
+            {
+                return CreateGuestList_DS_FromHierarchical_WithoutWeights(graph);
+            }
+        }
+
+        public HashSet<int> CreateGuestList_FromProjectBased_WithWeights(EventDTO eventDTO)
+        {
+            NodeWeightedGraph graph = ConstructWeightedGraph(eventDTO);
+
+            if (eventDTO.IsConnectedGraphRequired)
+            {
+                if (graph.IsGraphConnected())
+                {
+                    return CreateGuestList_CDS_FromProjectBased_WithWeights(graph);
+                }
+                else
+                {
+                    CouldNotCreateConnectedDominatingSet = true;
+                    return CreateGuestList_DS_FromProjectBased_WithWeights(graph);
+                }
+            }
+            else
+            {
+                return CreateGuestList_DS_FromProjectBased_WithWeights(graph);
+            }
+        }
+        public HashSet<int> CreateGuestList_FromProjectBased_WithoutWeights(EventDTO eventDTO)
+        {
+            Graph graph = ConstructGraph();
+
+            if (eventDTO.IsConnectedGraphRequired)
+            {
+                if (graph.IsGraphConnected())
+                {
+                    return CreateGuestList_CDS_FromProjectBased_WithoutWeights(graph);
+                }
+                else
+                {
+                    CouldNotCreateConnectedDominatingSet = true;
+                    return CreateGuestList_DS_FromProjectBased_WithoutWeights(graph);
+                }
+            }
+            else
+            {
+                return CreateGuestList_DS_FromProjectBased_WithoutWeights(graph);
+            }
+        }
+
+        
+
+
+        public HashSet<int> CreateGuestList_CDS_FromHierarchical_WithWeights(NodeWeightedGraph graph)
+        {
+            if (graph.IsGraphConnected()) // ilyenkor súlyozással is csak egy megoldás van, ezért fölösleges súlyozni, csak vágjuk le a leveleket
+            {
+                int maxWeightOfNeighbours = graph.Nodes.Max(n => n.Weight);
+                int idOfHeaviestNode = graph.Nodes.First(n => n.Weight == maxWeightOfNeighbours).Id;
+
+                return graph.ConstructCDSInForest(idOfHeaviestNode);
+            }
+            else // itt már lehet különbség súlyozástól függően..
+            {
+                CouldNotCreateConnectedDominatingSet = true;
+                return graph.ConstructDominatingSetWithWeights();
+            }
+        }
+        public HashSet<int> CreateGuestList_DS_FromHierarchical_WithWeights(NodeWeightedGraph graph)
+        {
+            return graph.ConstructDominatingSetWithWeights();
+        }
+
+        public HashSet<int> CreateGuestList_CDS_FromHierarchical_WithoutWeights(Graph graph)
+        {
+            CouldNotCreateConnectedDominatingSet = !graph.IsGraphConnected();
+
+            int maxNumberOfNeighbours = graph.Nodes.Max(n => n.NeighbourIds.Count());
+            int idOfNodeWithMostNeighbours = graph.Nodes.First(n => n.NeighbourIds.Count() == maxNumberOfNeighbours).Id;
+
+            return graph.ConstructCDSInForest(idOfNodeWithMostNeighbours);
+        }
+        public HashSet<int> CreateGuestList_DS_FromHierarchical_WithoutWeights(Graph graph)
+        {
+            return graph.ConstructDominatingSet();
+        }
+
+
+        public HashSet<int> CreateGuestList_CDS_FromProjectBased_WithWeights(NodeWeightedGraph graph)
+        {
+            if (graph.IsGraphConnected())
+            {
+                return graph.ConstructConnectedDominatingSet_WithTCDS();
+            }
+            else
+            {
+                CouldNotCreateConnectedDominatingSet = true;
+                return graph.ConstructDominatingSetWithWeights();
+            }
+        }
+
+        public HashSet<int> CreateGuestList_DS_FromProjectBased_WithWeights(NodeWeightedGraph graph)
+        {
+            return graph.ConstructDominatingSetWithWeights();
+        }
+
+        public HashSet<int> CreateGuestList_CDS_FromProjectBased_WithoutWeights(Graph graph)
+        {
+            if (graph.IsGraphConnected())
+            {
+                return graph.ConstructCDS_WithCDOM();
+            }
+            else
+            {
+                CouldNotCreateConnectedDominatingSet = true;
+
+                int maxNumberOfNeighbours = graph.Nodes.Max(n => n.NeighbourIds.Count());
+                int idOfNodeWithMostNeighbours = graph.Nodes.First(n => n.NeighbourIds.Count() == maxNumberOfNeighbours).Id;
+
+                return graph.ConstructCDSInForest(idOfNodeWithMostNeighbours);
+            }
+        }
+        public HashSet<int> CreateGuestList_DS_FromProjectBased_WithoutWeights(Graph graph)
+        {
+            return graph.ConstructDominatingSet();
         }
     }
 }

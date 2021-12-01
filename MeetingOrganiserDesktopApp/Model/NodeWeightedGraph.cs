@@ -14,6 +14,13 @@ namespace MeetingOrganiserDesktopApp.Model
 
         public NodeWeightedGraph(int potentialNumberOfVertices = DEFAULT_NUMBER_OF_NODES) : base(potentialNumberOfVertices) { }
 
+        public NodeWeightedGraph(GenericGraph<WeightedNode> genericGraph)
+        {
+            Nodes = genericGraph.Nodes;
+            NumberOfEdges = genericGraph.NumberOfEdges;
+            NumberOfNodes = genericGraph.NumberOfNodes;
+        }
+
         public int GetWeightOf(int nodeId)
         {
             CheckNodeIdValidity(nodeId);
@@ -84,11 +91,25 @@ namespace MeetingOrganiserDesktopApp.Model
 
             return ids;
         }
+
+        public HashSet<int> ConstructDominatingSetWithWeights()
+        {
+            HashSet<int> ds = new HashSet<int>(NumberOfNodes);
+
+            ds = UnionOf(ds, GetNeighboursOfLeaves());
+
+            HashSet<int> nodesNotCoveredYet = SetDifferenceOf(
+                GetIdsOfNodes(),
+                UnionOf(ds, GetNeighboursOf(ds)));
+            ds = UnionOf(ds, ConstructDominatingSetFrom(ref nodesNotCoveredYet));
+
+            return ds;
+        }
         public HashSet<int> ConstructConnectedDominatingSet_WithTCDS()
         {
             CheckIfGraphIsConnected();
 
-            HashSet<int> cds = new HashSet<int>(NumberOfNodes);
+            HashSet<int> cds = ConstructDominatingSetWithWeights();
 
             cds = UnionOf(cds, GetNeighboursOfLeaves());
 

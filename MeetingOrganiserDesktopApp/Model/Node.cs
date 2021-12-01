@@ -88,10 +88,7 @@ namespace MeetingOrganiserDesktopApp.Model
         {
             CheckNodeIdValidity(neighbourId);
 
-            if (!NeighbourIds.Add(neighbourId))
-            {
-                throw new NodeIdAlreadyPresent(neighbourId);
-            }
+            NeighbourIds.Add(neighbourId);
         }
         public bool DeleteNeighbour(int neighbourId)
         {

@@ -85,6 +85,21 @@ namespace MeetingOrganiserDesktopApp.Model
             };
         }
 
+        public static explicit operator NodeWeightedGraph(GenericGraph<TNode> generic)
+        {
+            HashSet<WeightedNode> nodes = new HashSet<WeightedNode>(generic.NumberOfNodes);
+            foreach (var node in generic.Nodes)
+            {
+                nodes.Add(new WeightedNode(node.Id, node.NeighbourIds));
+            }
+            return new NodeWeightedGraph
+            {
+                Nodes = nodes,
+                NumberOfNodes = generic.NumberOfNodes,
+                NumberOfEdges = generic.NumberOfEdges
+            };
+        }
+
         public HashSet<int> GetIdsOfNodes()
         {
             return Nodes.Select(node => node.Id).ToHashSet();

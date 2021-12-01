@@ -51,6 +51,11 @@ namespace CommonData
 			userManager = serviceProvider.GetRequiredService<UserManager<User>>();
 			roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole<int>>>();
 
+			if (context.Users.Any())
+			{
+				return;
+			}
+
 			context.Database.EnsureDeleted();
 			context.Database.EnsureCreated();
 
@@ -265,35 +270,71 @@ namespace CommonData
 				Name = "Első esemény",
 				DeadlineForApplication = new DateTime(2021, 03, 28),
 				StartDate = new DateTime(2021, 03, 30),
-				EndDate = new DateTime(2021, 04, 2),
+				EndDate = new DateTime(2021, 04, 2)
 			});
 			context.Events.Add(new Event { 
 				OrganisationId = hierchicalOrganisationID,
 				Name = "Második esemény",
 				DeadlineForApplication = new DateTime(2021, 04, 28),
 				StartDate = new DateTime(2021, 04, 30),
-				EndDate = new DateTime(2021, 05, 2)
+				EndDate = new DateTime(2021, 05, 2),
+				IsConnectedGraphRequired = true
 			});
 			context.Events.Add(new Event { 
 				OrganisationId = hierchicalOrganisationID,
 				Name = "Harmadik esemény",
 				DeadlineForApplication = new DateTime(2021, 03, 28),
 				StartDate = new DateTime(2021, 03, 30),
-				EndDate = new DateTime(2021, 04, 2)
+				EndDate = new DateTime(2021, 04, 2),
+				IsWeightRequired = true
 			});
-			context.Events.Add(new Event { 
-				OrganisationId = projectbasedOrganisationID,
+			context.Events.Add(new Event
+			{
+				OrganisationId = hierchicalOrganisationID,
 				Name = "Negyedik esemény",
-				DeadlineForApplication = new DateTime(2021, 04, 28),
-				StartDate = new DateTime(2021, 04, 30),
-				EndDate = new DateTime(2021, 05, 2)
+				DeadlineForApplication = new DateTime(2021, 03, 28),
+				StartDate = new DateTime(2021, 03, 30),
+				EndDate = new DateTime(2021, 04, 2),
+				IsConnectedGraphRequired = true,
+				IsWeightRequired = true
 			});
-			context.Events.Add(new Event { 
+
+
+			context.Events.Add(new Event
+			{
 				OrganisationId = projectbasedOrganisationID,
-				Name = "Ötödik esemény",
+				Name = "Első esemény",
 				DeadlineForApplication = new DateTime(2021, 03, 28),
 				StartDate = new DateTime(2021, 03, 30),
 				EndDate = new DateTime(2021, 04, 2)
+			});
+			context.Events.Add(new Event
+			{
+				OrganisationId = projectbasedOrganisationID,
+				Name = "Második esemény",
+				DeadlineForApplication = new DateTime(2021, 04, 28),
+				StartDate = new DateTime(2021, 04, 30),
+				EndDate = new DateTime(2021, 05, 2),
+				IsConnectedGraphRequired = true
+			});
+			context.Events.Add(new Event
+			{
+				OrganisationId = projectbasedOrganisationID,
+				Name = "Harmadik esemény",
+				DeadlineForApplication = new DateTime(2021, 03, 28),
+				StartDate = new DateTime(2021, 03, 30),
+				EndDate = new DateTime(2021, 04, 2),
+				IsWeightRequired = true
+			});
+			context.Events.Add(new Event
+			{
+				OrganisationId = projectbasedOrganisationID,
+				Name = "Negyedik esemény",
+				DeadlineForApplication = new DateTime(2021, 03, 28),
+				StartDate = new DateTime(2021, 03, 30),
+				EndDate = new DateTime(2021, 04, 2),
+				IsConnectedGraphRequired = true,
+				IsWeightRequired = true
 			});
 
 			context.SaveChanges();
@@ -436,17 +477,6 @@ namespace CommonData
 				context.SaveChanges();
 			}
 		}
-		/*
-		private static void SeedMemberships()
-        {
-			var memberships = new Membership[]
-			{
-				new Membership
-				{
-					MemberId = context.Members.ElementAt(0).Id,
-					UserId = context.Users.ElementAt(1).Id
-				}
-			};
-        }*/
+		
 	}
 }

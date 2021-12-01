@@ -276,4 +276,3 @@ C:\Users\vozak\source\repos\Szakdolgozat\ServicesForDesktopApp\obj\Debug\netcore
 C:\Users\vozak\source\repos\Szakdolgozat\ServicesForDesktopApp\obj\Debug\netcoreapp3.1\ServicesForDesktopApp.dll
 C:\Users\vozak\source\repos\Szakdolgozat\ServicesForDesktopApp\obj\Debug\netcoreapp3.1\ServicesForDesktopApp.pdb
 C:\Users\vozak\source\repos\Szakdolgozat\ServicesForDesktopApp\obj\Debug\netcoreapp3.1\ServicesForDesktopApp.genruntimeconfig.cache
-C:\Users\vozak\source\repos\Szakdolgozat\ServicesForDesktopApp\obj\Debug\netcoreapp3.1\ServicesForDesktopApp.csproj.CopyComplete
