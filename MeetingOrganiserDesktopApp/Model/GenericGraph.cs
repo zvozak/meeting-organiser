@@ -245,8 +245,8 @@ namespace MeetingOrganiserDesktopApp.Model
 
         public HashSet<int> ConstructCDSInForest(int sourceId)
         {
-            HashSet<TNode> cds = Nodes;
-            foreach (var node in cds)
+            HashSet<TNode> cds = new HashSet<TNode>(Nodes);
+            foreach (var node in Nodes)
             {
                 if (node.GetNumberOfNeighbours() == 1)
                 {

@@ -21,6 +21,7 @@ namespace MeetingOrganiserDesktopApp.ViewModel
         private JobDTO selectedJob;
         private MemberDTO selectedMember;
         private Boolean isLoaded;
+        private Boolean isEventSelected;
 
         public DateTime DefaultDateTime => DateTime.Now;
         public DateTime MinimumDateTime => new DateTime(1980, 1, 1, 0, 0, 0);
@@ -43,6 +44,19 @@ namespace MeetingOrganiserDesktopApp.ViewModel
         public bool IsHierarchical
         {
             get { return model.IsHierarchical; }
+        }
+
+        public bool IsEventSelected
+        {
+            get { return isEventSelected; }
+            private set
+            {
+                if (isEventSelected != value)
+                {
+                    isEventSelected = value;
+                    OnPropertyChanged();
+                }
+            }
         }
 
         public ObservableCollection<EventDTO> Events
@@ -105,6 +119,7 @@ namespace MeetingOrganiserDesktopApp.ViewModel
                     selectedEvent = value;
                     OnPropertyChanged();
                 }
+                IsEventSelected = selectedEvent != null;
             }
         }
         public VenueDTO SelectedVenue

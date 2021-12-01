@@ -50,9 +50,9 @@
 
         <StackPanel Grid.Row="6" Grid.Column="0" Orientation="Horizontal" Grid.ColumnSpan="2">
             <Button Content="Add new" Margin="6,5,0,5" Command="{Binding CreateEventCommand}" Width="114" IsEnabled="{Binding IsLoaded}" />
-            <Button Content="Edit selected" Margin="6,5,0,5" Command="{Binding UpdateEventCommand}" CommandParameter="{Binding SelectedEvent}" Width="114" IsEnabled="{Binding IsLoaded}" />
-            <Button Content="Delete selected" Margin="6,5,6,5" Command="{Binding DeleteEventCommand}" CommandParameter="{Binding SelectedEvent}" Width="114" IsEnabled="{Binding IsLoaded}" />
-            <Button Content="Create guest list" Margin="6,5,6,5" Command="{Binding CreateGuestListCommand}" CommandParameter="{Binding SelectedEvent}" Width="114" IsEnabled="{Binding IsLoaded}" />
+            <Button Content="Edit selected" Margin="6,5,0,5" Command="{Binding UpdateEventCommand}" CommandParameter="{Binding SelectedEvent}" Width="114" IsEnabled="{Binding IsEventSelected}" />
+            <Button Content="Delete selected" Margin="6,5,6,5" Command="{Binding DeleteEventCommand}" CommandParameter="{Binding SelectedEvent}" Width="114" IsEnabled="{Binding IsEventSelected}" />
+            <Button Content="Create guest list" Margin="6,5,6,5" Command="{Binding CreateGuestListCommand}" CommandParameter="{Binding SelectedEvent}" Width="114" IsEnabled="{Binding IsEventSelected}" />
         </StackPanel>
 
 

@@ -30,12 +30,12 @@ namespace CommonData
 
 		static int hierchicalOrganisationID;
 		static int projectbasedOrganisationID;
-		static int firstMemberInHierarchyID;
-		static int lastMemberInHierarchyID;
+		static int firstMemberInHierarchicalID;
+		static int lastMemberInHierarchicalID;
 		static int firstMemberInProjectBasedID;
 		static int lastMemberInProjectBasedID;
-		static int firstJobInHierarchyID;
-		static int lastJobInHierarchyID;
+		static int firstJobInHierarchicalID;
+		static int lastJobInHierarchicalID;
 		static int firstJobInProjectBasedID;
 		static int lastJobInProjectBasedID;
 		static int firstProjectID;
@@ -56,15 +56,116 @@ namespace CommonData
 
 			SeedUsers();
             SeedOrganisations();
-            SeedJobs(maxNumberOfJobs);
-			SeedMembers(maxNumberOfMembers);
-            SeedProjects(maxNumberOfProjects);
-			SeedMemberOfProjects();
 			SeedEvents();
 			SeedVenues();
 			SeedVenueImages(imageDirectory);
+			
+			SeedJobsForProjectBasedOrganisation(maxNumberOfJobs);
+			SeedMembersForProjectBasedOrganisation(maxNumberOfMembers);
+			SeedProjectsForProjectBasedOrganisation(maxNumberOfProjects);
+			SeedMemberOfProjects();
+			
+            SeedJobsForHierarchicalOrganisation(maxNumberOfJobs);
+			SeedMembersForHierarchicalOrganisation(maxNumberOfMembers);
 		}
-		private static void SeedJobs(int numberOfJobs)
+		private static void SeedOrganisations()
+		{
+			var orgs = new Organisation[]
+			{
+				new Organisation {
+					Name = "Hierarchical org",
+					TypeOfStructure = TypeOfStructure.Hierarchical,
+					Description = "",
+					PermitNewMembers = true,
+					Address = "Egyik utca 2.",
+					AdminId = context.Users.Single(u => u.UserName == "adminH").Id
+				},
+				new Organisation {
+					Name = "Project based org",
+					TypeOfStructure = TypeOfStructure.ProjectBased,
+					Description = "",
+					PermitNewMembers = false,
+					Address = "Másik utca 7.",
+					AdminId = context.Users.Single(u => u.UserName == "adminP").Id
+				}
+			};
+			foreach (var o in orgs)
+			{
+				context.Organisations.Add(o);
+			}
+
+			context.SaveChanges();
+
+			hierchicalOrganisationID = context.Organisations.Single(o => o.TypeOfStructure == TypeOfStructure.Hierarchical).Id;
+			projectbasedOrganisationID = context.Organisations.Single(o => o.TypeOfStructure == TypeOfStructure.ProjectBased).Id;
+		}
+		private static void SeedMembersForProjectBasedOrganisation(int numberOfMembers)
+		{
+			context.Members.Add(new Member
+			{
+				Name = possibleNames[0],
+				Email = possibleNames[0].ToLower() + "@gmail.com",
+				Department = "",
+				DateOfJoining = earliestJoiningDate.AddDays(randomNumberGenerator.Next(rangeOfJoiningDates)),
+				OrganisationId = projectbasedOrganisationID,
+				JobId = randomNumberGenerator.Next(firstJobInProjectBasedID, lastJobInProjectBasedID)
+			});
+			context.SaveChanges();
+
+			firstMemberInProjectBasedID = context.Members.First().Id;
+			for (int i = 1; i < numberOfMembers; i++)
+			{
+				context.Members.Add(new Member
+				{
+					Name = possibleNames[i],
+					Email = possibleNames[i].ToLower() + "@gmail.com",
+					Department = "",
+					DateOfJoining = earliestJoiningDate.AddDays(randomNumberGenerator.Next(rangeOfJoiningDates)),
+					OrganisationId = projectbasedOrganisationID,
+					JobId = randomNumberGenerator.Next(firstJobInProjectBasedID, lastJobInProjectBasedID)
+				});
+				context.SaveChanges();
+			}
+
+			lastMemberInProjectBasedID = firstMemberInProjectBasedID + context.Members.Count() - 1;
+		}
+		private static void SeedMembersForHierarchicalOrganisation(int numberOfMembers)
+		{
+			firstMemberInHierarchicalID = lastMemberInProjectBasedID + 1;
+
+			context.Members.Add(new Member
+			{
+				Name = possibleNames[0],
+				Email = possibleNames[0].ToLower() + "@gmail.com",
+				Department = "",
+				DateOfJoining = earliestJoiningDate.AddDays(randomNumberGenerator.Next(rangeOfJoiningDates)),
+				OrganisationId = hierchicalOrganisationID,
+				JobId = randomNumberGenerator.Next(firstJobInProjectBasedID, lastJobInProjectBasedID),
+				BossId = null
+			});
+
+			context.SaveChanges();
+
+			for (int i = 1; i < numberOfMembers; i++)
+			{
+				var member = new Member
+				{
+					Name = possibleNames[i],
+					Email = possibleNames[i].ToLower() + "@gmail.com",
+					Department = "",
+					DateOfJoining = earliestJoiningDate.AddDays(randomNumberGenerator.Next(rangeOfJoiningDates)),
+					OrganisationId = hierchicalOrganisationID,
+					JobId = randomNumberGenerator.Next(firstJobInHierarchicalID, lastJobInHierarchicalID),
+					BossId = randomNumberGenerator.Next(firstMemberInHierarchicalID, firstMemberInHierarchicalID + i - 1)
+				};
+
+				context.Members.Add(member);
+				context.SaveChanges();
+			}
+			
+			lastMemberInHierarchicalID = firstMemberInProjectBasedID + context.Members.Count() - 1;
+		}
+		private static void SeedJobsForHierarchicalOrganisation(int numberOfJobs)
         {
 			
 			if (numberOfJobs > maxNumberOfJobs)
@@ -81,6 +182,20 @@ namespace CommonData
 					Weight = randomNumberGenerator.Next(100)
 				});
 			}
+
+			context.SaveChanges();
+
+			firstJobInHierarchicalID = lastJobInProjectBasedID + 1;
+			lastJobInHierarchicalID = firstJobInProjectBasedID + context.Jobs.Count() - 1;
+		}
+		private static void SeedJobsForProjectBasedOrganisation(int numberOfJobs)
+		{
+
+			if (numberOfJobs > maxNumberOfJobs)
+			{
+				throw new ArgumentException("You can have at most 50 jobs.");
+			}
+
 			for (int i = 0; i < numberOfJobs; i++)
 			{
 				context.Jobs.Add(new Job
@@ -93,12 +208,10 @@ namespace CommonData
 
 			context.SaveChanges();
 
-			firstJobInHierarchyID = context.Jobs.First().Id;
-			lastJobInHierarchyID = firstJobInHierarchyID + context.Jobs.Count() / 2 - 1;
-			firstJobInProjectBasedID = lastJobInHierarchyID + 1;
-			lastJobInProjectBasedID = firstJobInHierarchyID + context.Jobs.Count() - 1;
+			firstJobInProjectBasedID = context.Jobs.First().Id;
+			lastJobInProjectBasedID = firstJobInProjectBasedID + context.Jobs.Count() - 1;
 		}
-		private static void SeedProjects(int numberOfProjects)
+		private static void SeedProjectsForProjectBasedOrganisation(int numberOfProjects)
 		{
 			for (int i = 0; i < numberOfProjects; i++)
 			{
@@ -145,37 +258,6 @@ namespace CommonData
 			
 			context.SaveChanges();
 		}
-		private static void SeedOrganisations()
-		{
-			var orgs = new Organisation[]
-			{
-				new Organisation {
-					Name = "Hierarchical org",
-					TypeOfStructure = TypeOfStructure.Hierarchical,
-					Description = "",
-					PermitNewMembers = true,
-					Address = "Egyik utca 2.",
-					AdminId = context.Users.Single(u => u.UserName == "adminH").Id
-				},
-				new Organisation {
-					Name = "Project based org",
-					TypeOfStructure = TypeOfStructure.ProjectBased,
-					Description = "",
-					PermitNewMembers = false,
-					Address = "Másik utca 7.",
-					AdminId = context.Users.Single(u => u.UserName == "adminP").Id
-				}
-			};
-			foreach (var o in orgs)
-			{
-				context.Organisations.Add(o);
-			}
-
-			context.SaveChanges();
-
-			hierchicalOrganisationID = context.Organisations.Single(o => o.TypeOfStructure == TypeOfStructure.Hierarchical).Id;
-			projectbasedOrganisationID = context.Organisations.Single(o => o.TypeOfStructure == TypeOfStructure.ProjectBased).Id;
-		}
 		private static void SeedEvents()
 		{
 			context.Events.Add(new Event {
@@ -215,53 +297,6 @@ namespace CommonData
 			});
 
 			context.SaveChanges();
-		}
-		private static void SeedMembers(int numberOfMembers)
-		{
-			context.Members.Add(new Member
-			{
-				Name = possibleNames[0],
-				Email = possibleNames[0].ToLower() + "@gmail.com",
-				Department = "",
-				DateOfJoining = earliestJoiningDate.AddDays(randomNumberGenerator.Next(rangeOfJoiningDates)),
-				OrganisationId = hierchicalOrganisationID,
-				JobId = randomNumberGenerator.Next(firstJobInHierarchyID, lastJobInHierarchyID)
-			});
-			context.SaveChanges();
-
-			firstMemberInHierarchyID = context.Members.First().Id;
-			for (int i = 1; i < numberOfMembers; i++)
-			{
-				context.Members.Add(new Member
-				{
-					Name = possibleNames[i],
-					Email = possibleNames[i].ToLower() + "@gmail.com",
-					Department = "",
-					DateOfJoining = earliestJoiningDate.AddDays(randomNumberGenerator.Next(rangeOfJoiningDates)),
-					OrganisationId = hierchicalOrganisationID,
-					BossId = randomNumberGenerator.Next(firstMemberInHierarchyID, firstMemberInHierarchyID + i),
-					JobId = randomNumberGenerator.Next(firstJobInHierarchyID, lastJobInHierarchyID)
-				});
-			}
-
-			for (int i = 0; i < numberOfMembers; i++)
-			{
-				context.Members.Add(new Member
-				{
-					Name = possibleNames[i],
-					Email = possibleNames[i].ToLower() + "@gmail.com",
-					Department = "",
-					DateOfJoining = earliestJoiningDate.AddDays(randomNumberGenerator.Next(rangeOfJoiningDates)),
-					OrganisationId = projectbasedOrganisationID,
-					JobId = randomNumberGenerator.Next(firstJobInProjectBasedID, lastJobInProjectBasedID)
-				});
-			}
-
-			context.SaveChanges();
-
-			lastMemberInHierarchyID = firstMemberInHierarchyID + context.Members.Count() / 2 - 1;
-			firstMemberInProjectBasedID = lastMemberInHierarchyID + 1;
-			lastMemberInProjectBasedID = firstMemberInHierarchyID + context.Members.Count() - 1;
 		}
 		private static void SeedUsers()
 		{

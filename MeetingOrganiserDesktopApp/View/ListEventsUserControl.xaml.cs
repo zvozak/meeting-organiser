@@ -21,6 +21,7 @@ namespace MeetingOrganiserDesktopApp.View
         public ListEventsUserControl()
         {
             InitializeComponent();
+
         }
     }
 }
