@@ -233,6 +233,7 @@ namespace MeetingOrganiserDesktopApp.Model
             eventToModify.GuestLimit                = @event.GuestLimit;
             eventToModify.Name                      = @event.Name;
             eventToModify.IsConnectedGraphRequired  = @event.IsConnectedGraphRequired;
+            eventToModify.IsWeightRequired          = @event.IsWeightRequired;
             eventToModify.ProjectImportanceWeight   = @event.ProjectImportanceWeight;
             eventToModify.NumberOfProjectsWeight    = @event.NumberOfProjectsWeight;
             eventToModify.NumberOfSubordinatesWeight = @event.NumberOfSubordinatesWeight;
@@ -720,31 +721,31 @@ namespace MeetingOrganiserDesktopApp.Model
 
         private int CalculateWeightInHierarchical(int numberOfNeighbours, EventDTO eventDTO, MemberDTO member)
         {
-            if (eventDTO.NumberOfSubordinatesWeight > 0)
-            {
-                int weight = eventDTO.NumberOfSubordinatesWeight * numberOfNeighbours;
-                if (member.Boss != null)
-                {
-                    weight--;
-                }
-                return weight;
-            }
-            else
+            if (eventDTO.NumberOfSubordinatesWeight == 0)
             {
                 return 0;
             }
+            int weight = eventDTO.NumberOfSubordinatesWeight * numberOfNeighbours;
+            if (member.Boss != null)
+            {
+                weight--;
+            }
+            return weight;
         }
         private int CalculateWeightInProjectBased( EventDTO eventDTO, MemberDTO member)
         {
+            if (eventDTO.ProjectImportanceWeight == 0)
+            {
+                return 0;
+            }
+
             int weight = 0;
 
-            if (eventDTO.ProjectImportanceWeight > 0)
+            foreach (var project in member.Projects)
             {
-                foreach(var project in member.Projects)
-                {
-                    weight += eventDTO.ProjectImportanceWeight * project.Weight;
-                }
+                weight += eventDTO.ProjectImportanceWeight * project.Weight;
             }
+
             weight += eventDTO.NumberOfProjectsWeight * member.Projects.Count;
 
             return weight;
@@ -756,7 +757,7 @@ namespace MeetingOrganiserDesktopApp.Model
 
             if (IsHierarchical)
             {
-                weight = CalculateWeightInHierarchical(numberOfNeighbours, eventDTO, member);
+                weight = CalculateWeightInHierarchical(numberOfNeighbours, eventDTO, member) + CalculateWeightInProjectBased(eventDTO, member);
             }
             else
             {
