@@ -1,0 +1,9 @@
+2021-12-01 06:59:45.4853|INFO|service|GET query on service http://localhost/, path: api/events/getevents/100
+2021-12-01 06:59:45.8008|INFO|service|GET query on service http://localhost/, path: api/events/getevents/1
+2021-12-01 06:59:45.8368|INFO|service|GET query on service http://localhost/, path: api/events/getvenues/1
+2021-12-01 06:59:45.8527|INFO|service|GET query on service http://localhost/, path: api/events/getvenues/2
+2021-12-01 06:59:45.8527|INFO|service|GET query on service http://localhost/, path: api/events/getvenues/3
+2021-12-01 06:59:45.8733|INFO|service|GET query on service http://localhost/, path: api/events/getevents/3
+2021-12-01 06:59:45.9077|INFO|service|GET query on service http://localhost/, path: api/organisations/getorganisation/Ismeretlen
+2021-12-01 06:59:45.9317|WARN|service|GET query returned response NotFound with reason: Not Found
+2021-12-01 06:59:45.9549|INFO|service|GET query on service http://localhost/, path: api/organisations/getorganisation/Lorem

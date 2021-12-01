@@ -23,14 +23,6 @@ namespace MeetingOrganiserDesktopApp.View
         public EventEditorWindow()
         {
             InitializeComponent();
-            startDate.ValueChanged += new RoutedPropertyChangedEventHandler<object>(DateValuesChanged);
-            deadlineForApplicationDate.ValueChanged += new RoutedPropertyChangedEventHandler<object>(DateValuesChanged);
-            endDate.ValueChanged += new RoutedPropertyChangedEventHandler<object>(DateValuesChanged);
-        }
-        private void DateValuesChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
-        {
-            saveButton.IsEnabled = deadlineForApplicationDate.Value <= startDate.Value &&
-                                   startDate.Value <= endDate.Value;
         }
     }
 }

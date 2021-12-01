@@ -82,10 +82,6 @@ C:\Users\vozak\source\repos\Szakdolgozat\TestServicesForDesktopApp\bin\Debug\net
 C:\Users\vozak\source\repos\Szakdolgozat\TestServicesForDesktopApp\bin\Debug\netcoreapp3.1\Xceed.Wpf.AvalonDock.dll
 C:\Users\vozak\source\repos\Szakdolgozat\TestServicesForDesktopApp\bin\Debug\netcoreapp3.1\Xceed.Wpf.Toolkit.dll
 C:\Users\vozak\source\repos\Szakdolgozat\TestServicesForDesktopApp\bin\Debug\netcoreapp3.1\Moq.dll
-C:\Users\vozak\source\repos\Szakdolgozat\TestServicesForDesktopApp\bin\Debug\netcoreapp3.1\GalaSoft.MvvmLight.Extras.dll
-C:\Users\vozak\source\repos\Szakdolgozat\TestServicesForDesktopApp\bin\Debug\netcoreapp3.1\GalaSoft.MvvmLight.Platform.dll
-C:\Users\vozak\source\repos\Szakdolgozat\TestServicesForDesktopApp\bin\Debug\netcoreapp3.1\GalaSoft.MvvmLight.dll
-C:\Users\vozak\source\repos\Szakdolgozat\TestServicesForDesktopApp\bin\Debug\netcoreapp3.1\System.Windows.Interactivity.dll
 C:\Users\vozak\source\repos\Szakdolgozat\TestServicesForDesktopApp\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
 C:\Users\vozak\source\repos\Szakdolgozat\TestServicesForDesktopApp\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.dll
 C:\Users\vozak\source\repos\Szakdolgozat\TestServicesForDesktopApp\bin\Debug\netcoreapp3.1\NLog.dll

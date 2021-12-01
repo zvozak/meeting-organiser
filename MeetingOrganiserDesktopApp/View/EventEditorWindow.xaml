@@ -10,7 +10,11 @@
       Title="EventEditorWindow"
       xmlns:System="clr-namespace:System;assembly=mscorlib"
       xmlns:entitiesNameSpace="CommonData.Entities"
-      >
+      xmlns:viewModel="clr-namespace:MeetingOrganiserDesktopApp.ViewModel">
+
+    <Window.Resources>
+        <viewModel:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    </Window.Resources>
 
 
     <Grid>
@@ -87,10 +91,10 @@
 
         <TextBlock Grid.Row="8" Grid.Column="0" Text="sum of importance of projects" Margin="10,5,5,5"  IsEnabled="{Binding IsProjectBased}"/>
         <TextBox Grid.Row="8" Grid.Column="1"  Text="{Binding EditedEvent.ProjectImportanceWeight}" Margin="5,5,0,5" HorizontalAlignment="Left" Width="114"/>
-        <TextBlock Grid.Row="9" Grid.Column="0" Text="number of projects" IsEnabled="{Binding IsProjectBased}" Margin="10,5,10,5"/>
+        <TextBlock Grid.Row="9" Grid.Column="0" Text="number of projects" Margin="10,5,10,5"/>
         <TextBox Grid.Row="9" Grid.Column="1" Text="{Binding EditedEvent.NumberOfProjectsWeight}" Margin="5,5,544,5"/>
-        <TextBlock Grid.Row="10" Grid.Column="0" Text="number of subordinates" Margin="10,5,5,5" IsEnabled="{Binding IsHierarchical}"/>
-        <TextBox Grid.Row="10" Grid.Column="1" Text="{Binding EditedEvent.NumberOfSubordinatesWeight}" Margin="5,5,0,5" HorizontalAlignment="Left" Width="114"/>
+        <TextBlock Grid.Row="10" Grid.Column="0" Text="number of subordinates" Margin="10,5,5,5" />
+        <TextBox Grid.Row="10" Grid.Column="1" Text="{Binding EditedEvent.NumberOfSubordinatesWeight}" Visibility="{Binding IsHierarchical, Converter={StaticResource BooleanToVisibilityConverter}}" Margin="5,5,0,5" HorizontalAlignment="Left" Width="114"/>
         <TextBlock Grid.Row="11" Grid.Column="0" Text="number of workplace relationships" Margin="10,5,5,1"/>
         <TextBox Grid.Row="11" Grid.Column="1" Text="{Binding EditedEvent.NumberOfNeighboursWeight}" Margin="5,5,0,5" HorizontalAlignment="Left" Width="114"/>
         <TextBlock Grid.Row="12" Grid.Column="0" Text="importance of job/role" Margin="10,4,47,0"/>

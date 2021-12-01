@@ -227,7 +227,7 @@ namespace MeetingOrganiserDesktopApp.Model
                 throw new ArgumentException("The event does not exist.", nameof(@event));
 
             eventToModify.StartDate                 = @event.StartDate;
-            eventToModify.EndDate                   = @event.StartDate;
+            eventToModify.EndDate                   = @event.EndDate;
             eventToModify.DeadlineForApplication    = @event.DeadlineForApplication;
             eventToModify.Description               = @event.Description;
             eventToModify.GuestLimit                = @event.GuestLimit;

@@ -40,6 +40,11 @@ namespace MeetingOrganiserDesktopApp.ViewModel
             get { return !IsValidEvent; }
         }
 
+        public bool IsHierarchical
+        {
+            get { return model.IsHierarchical; }
+        }
+
         public ObservableCollection<EventDTO> Events
         {
             get { return events; }

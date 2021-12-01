@@ -12,9 +12,9 @@ TRACE;DEBUG;NETCOREAPP;NETCOREAPP3_1;
 C:\Users\vozak\source\repos\Szakdolgozat\MeetingOrganiserDesktopApp\App.xaml
 92136723650
 
-35748026470
+36-1664246023
 249-1503694837
 View\EventEditorWindow.xaml;View\GuestListWindow.xaml;View\JobEditorWindow.xaml;View\ListEventsUserControl.xaml;View\ListMembersUserControl.xaml;View\LoginWindow.xaml;View\MainWindow.xaml;View\MemberEditorWindow.xaml;View\VenueEditorWindow.xaml;
 
-True
+False
 

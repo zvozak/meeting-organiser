@@ -31,6 +31,8 @@ namespace MeetingOrganiserDesktopApp.Model
 
         public Boolean IsUserLoggedIn { get; }
 
+        public Boolean IsHierarchical { get; }
+
 
         public event EventHandler<MemberEventArgs> MemberChanged;
         public event EventHandler<JobEventArgs> JobChanged;

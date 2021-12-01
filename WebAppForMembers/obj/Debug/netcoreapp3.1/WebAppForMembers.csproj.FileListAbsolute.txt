@@ -208,10 +208,6 @@ C:\Users\vozak\source\repos\Szakdolgozat\WebAppForMembers\bin\Debug\netcoreapp3.
 C:\Users\vozak\source\repos\Szakdolgozat\WebAppForMembers\bin\Debug\netcoreapp3.1\Microsoft.VisualStudio.Web.CodeGeneration.Templating.dll
 C:\Users\vozak\source\repos\Szakdolgozat\WebAppForMembers\bin\Debug\netcoreapp3.1\Microsoft.VisualStudio.Web.CodeGeneration.Utils.dll
 C:\Users\vozak\source\repos\Szakdolgozat\WebAppForMembers\bin\Debug\netcoreapp3.1\Microsoft.VisualStudio.Web.CodeGenerators.Mvc.dll
-C:\Users\vozak\source\repos\Szakdolgozat\WebAppForMembers\bin\Debug\netcoreapp3.1\GalaSoft.MvvmLight.Extras.dll
-C:\Users\vozak\source\repos\Szakdolgozat\WebAppForMembers\bin\Debug\netcoreapp3.1\GalaSoft.MvvmLight.Platform.dll
-C:\Users\vozak\source\repos\Szakdolgozat\WebAppForMembers\bin\Debug\netcoreapp3.1\GalaSoft.MvvmLight.dll
-C:\Users\vozak\source\repos\Szakdolgozat\WebAppForMembers\bin\Debug\netcoreapp3.1\System.Windows.Interactivity.dll
 C:\Users\vozak\source\repos\Szakdolgozat\WebAppForMembers\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
 C:\Users\vozak\source\repos\Szakdolgozat\WebAppForMembers\bin\Debug\netcoreapp3.1\NuGet.Frameworks.dll
 C:\Users\vozak\source\repos\Szakdolgozat\WebAppForMembers\bin\Debug\netcoreapp3.1\System.Composition.AttributedModel.dll
