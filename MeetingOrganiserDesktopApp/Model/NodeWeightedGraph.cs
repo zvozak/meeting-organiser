@@ -101,10 +101,46 @@ namespace MeetingOrganiserDesktopApp.Model
             HashSet<int> nodesNotCoveredYet = SetDifferenceOf(
                 GetIdsOfNodes(),
                 UnionOf(ds, GetNeighboursOf(ds)));
-            ds = UnionOf(ds, ConstructDominatingSetFrom(ref nodesNotCoveredYet));
+            ds = UnionOf(ds, ConstructDominatingSetWithWeightsFrom(ref nodesNotCoveredYet));
 
             return ds;
         }
+
+        public HashSet<int> ConstructDominatingSetWithWeightsFrom(ref HashSet<int> nodeIdsToBeDominated)
+        {
+            CheckIfSubsetOfNodes(nodeIdsToBeDominated);
+
+            HashSet<int> dominatingSet = new HashSet<int>(nodeIdsToBeDominated.Count);
+
+            while (nodeIdsToBeDominated.Count > 0)
+            {
+                int bestCandidate = nodeIdsToBeDominated.ElementAt(0);
+                int maxNumberOfNewlyDominated = 0;
+                foreach (int id in nodeIdsToBeDominated)
+                {
+                    HashSet<int> neighbours = Nodes.Single(node => node.Id == id).NeighbourIds;
+                    int numberOfNewlyDominated = SizeOfIntersection(nodeIdsToBeDominated, neighbours);
+                    if (maxNumberOfNewlyDominated < numberOfNewlyDominated
+                        || (maxNumberOfNewlyDominated == numberOfNewlyDominated
+                        && GetNumberOfNeighbours(id) > GetNumberOfNeighbours(bestCandidate)
+                        || (GetNumberOfNeighbours(id) == GetNumberOfNeighbours(bestCandidate)
+                        && GetWeightOf(id) > GetWeightOf(bestCandidate))))
+                    {
+                        bestCandidate = id;
+                        maxNumberOfNewlyDominated = numberOfNewlyDominated;
+                    }
+                }
+                dominatingSet.Add(bestCandidate);
+                HashSet<int> newlyDominatedNodes = Nodes.Single(node => node.Id == bestCandidate).NeighbourIds;
+                nodeIdsToBeDominated = SetDifferenceOf(nodeIdsToBeDominated, newlyDominatedNodes);
+                nodeIdsToBeDominated.Remove(bestCandidate);
+            }
+
+            return dominatingSet;
+        }
+
+
+
         public HashSet<int> ConstructConnectedDominatingSet_WithTCDS()
         {
             CheckIfGraphIsConnected();

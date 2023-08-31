@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:MeetingOrganiserDesktopApp.View"
         xmlns:viewModel="clr-namespace:MeetingOrganiserDesktopApp.ViewModel"
         mc:Ignorable="d"
-        Title="GuestListWindow" Height="450" Width="800">
+        Title="Guest List" Height="450" Width="800">
 
     <Window.Resources>
         <viewModel:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
@@ -30,7 +30,7 @@
                 <DataGridTextColumn Header="Date of joining" Binding="{Binding DateOfJoining}"  />
                 <DataGridTextColumn Header="Department" Binding="{Binding Department}" />
                 <DataGridTextColumn Header="Role/jobtitle" Binding="{Binding Job.Title}"  />
-                <DataGridTextColumn Header="Supervisor" Binding="{Binding Boss.Name}" />
+                <DataGridTextColumn Header="Manager" Binding="{Binding Boss.Name}" />
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

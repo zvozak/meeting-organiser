@@ -1,0 +1,18 @@
+2022-01-03 22:01:05.2682|INFO|service|GET query on service http://localhost/, path: api/events/getevents/100
+2022-01-03 22:01:05.5811|INFO|service|GET query on service http://localhost/, path: api/events/getevents/1
+2022-01-03 22:01:05.6145|INFO|service|GET query on service http://localhost/, path: api/events/getvenues/1
+2022-01-03 22:01:05.6294|INFO|service|GET query on service http://localhost/, path: api/events/getvenues/2
+2022-01-03 22:01:05.6294|INFO|service|GET query on service http://localhost/, path: api/events/getvenues/3
+2022-01-03 22:01:05.6509|INFO|service|GET query on service http://localhost/, path: api/events/getevents/3
+2022-01-03 22:01:05.6798|INFO|service|GET query on service http://localhost/, path: api/organisations/getorganisation/Ismeretlen
+2022-01-03 22:01:05.7045|WARN|service|GET query returned response NotFound with reason: Not Found
+2022-01-03 22:01:05.7276|INFO|service|GET query on service http://localhost/, path: api/organisations/getorganisation/Lorem
+2022-01-03 22:06:43.5235|INFO|service|GET query on service http://localhost/, path: api/events/getevents/100
+2022-01-03 22:06:43.8250|INFO|service|GET query on service http://localhost/, path: api/events/getevents/1
+2022-01-03 22:06:43.8557|INFO|service|GET query on service http://localhost/, path: api/events/getvenues/1
+2022-01-03 22:06:43.8698|INFO|service|GET query on service http://localhost/, path: api/events/getvenues/2
+2022-01-03 22:06:43.8698|INFO|service|GET query on service http://localhost/, path: api/events/getvenues/3
+2022-01-03 22:06:43.8897|INFO|service|GET query on service http://localhost/, path: api/events/getevents/3
+2022-01-03 22:06:43.9128|INFO|service|GET query on service http://localhost/, path: api/organisations/getorganisation/Ismeretlen
+2022-01-03 22:06:43.9339|WARN|service|GET query returned response NotFound with reason: Not Found
+2022-01-03 22:06:43.9545|INFO|service|GET query on service http://localhost/, path: api/organisations/getorganisation/Lorem

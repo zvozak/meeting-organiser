@@ -4,10 +4,15 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MeetingOrganiserDesktopApp.View"
+             xmlns:viewModel="clr-namespace:MeetingOrganiserDesktopApp.ViewModel"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
     
+    <UserControl.Resources>
+        <viewModel:VenueImageConverter x:Key="VenueImageConverter"/>
+    </UserControl.Resources>
+        
     <Grid Margin="0,0,0,-248">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="539*"/>
@@ -37,20 +42,20 @@
                 <DataGridTextColumn Header="Deadline for application" Binding="{Binding DeadlineForApplication}" />
                 <DataGridTextColumn Header="Are guests required to have immediate working partners invited" Binding="{Binding IsConnectedGraphRequired}" />
                 <DataGridTextColumn Header="Weights required" Binding="{Binding IsWeightRequired}" />
-                <DataGridTextColumn Header="weigh of sum of importance of projects" Binding="{Binding ProjectImportanceWeight}" />
-                <DataGridTextColumn Header="weigh of number of projects" Binding="{Binding NumberOfProjectsWeight}" />
-                <DataGridTextColumn Header="weigh of number of subordinates" Binding="{Binding NumberOfSubordinatesWeight}" />
-                <DataGridTextColumn Header="weigh of number of workplace relationships" Binding="{Binding NumberOfNeighboursWeight}" />
-                <DataGridTextColumn Header="weigh of importance of job/role" Binding="{Binding JobWeight}" />
+                <DataGridTextColumn Header="weight of sum of importance of projects" Binding="{Binding ProjectImportanceWeight}" />
+                <DataGridTextColumn Header="weight of number of projects" Binding="{Binding NumberOfProjectsWeight}" />
+                <DataGridTextColumn Header="weight of number of employees" Binding="{Binding NumberOfSubordinatesWeight}" />
+                <DataGridTextColumn Header="weight of number of workplace relationships" Binding="{Binding NumberOfNeighboursWeight}" />
+                <DataGridTextColumn Header="weight of importance of job/role" Binding="{Binding JobWeight}" />
             </DataGrid.Columns>
         </DataGrid>
 
-        <TextBlock Margin="5,5,5,5" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" ><Underline>Further information:</Underline></TextBlock>
-        <TextBlock Margin="20,5,5,5" Grid.Row="3" Grid.ColumnSpan="2" ><Underline>Description:</Underline></TextBlock>
-        <TextBlock Margin="20,5,5,5" Grid.Row="4" Text="{Binding SelectedEvent.Description}" Grid.ColumnSpan="2" />
+        <TextBlock Margin="20,5,5,5" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" ><Underline>Further information:</Underline></TextBlock>
+        <TextBlock Margin="40,5,5,5" Grid.Row="3" Grid.ColumnSpan="2" ><Underline>Description:</Underline></TextBlock>
+        <TextBlock Margin="40,5,5,5" Grid.Row="4" Text="{Binding SelectedEvent.Description}" Grid.ColumnSpan="2" />
 
-        <StackPanel Grid.Row="6" Grid.Column="0" Orientation="Horizontal" Grid.ColumnSpan="2">
-            <Button Content="Add new" Margin="6,5,0,5" Command="{Binding CreateEventCommand}" Width="114" IsEnabled="{Binding IsLoaded}" />
+        <StackPanel Grid.Row="6" Grid.Column="0" Orientation="Horizontal" Grid.ColumnSpan="2" Margin="20,0,0,0" HorizontalAlignment="Left">
+            <Button Content="Add new" Margin="0,5,0,5" Command="{Binding CreateEventCommand}" Width="114" IsEnabled="{Binding IsLoaded}" />
             <Button Content="Edit selected" Margin="6,5,0,5" Command="{Binding UpdateEventCommand}" CommandParameter="{Binding SelectedEvent}" Width="114" IsEnabled="{Binding IsEventSelected}" />
             <Button Content="Delete selected" Margin="6,5,6,5" Command="{Binding DeleteEventCommand}" CommandParameter="{Binding SelectedEvent}" Width="114" IsEnabled="{Binding IsEventSelected}" />
             <Button Content="Create guest list" Margin="6,5,6,5" Command="{Binding CreateGuestListCommand}" CommandParameter="{Binding SelectedEvent}" Width="114" IsEnabled="{Binding IsEventSelected}" />
@@ -68,8 +73,8 @@
         </DataGrid>
 
 
-        <StackPanel Grid.Row="8" Grid.Column="0" Orientation="Horizontal" Grid.ColumnSpan="2">
-            <Button Content="Add new" Margin="6,5,0,5" Command="{Binding CreateVenueCommand}" CommandParameter="{Binding SelectedEvent.Id}" Width="114" IsEnabled="{Binding IsLoaded}" />
+        <StackPanel Grid.Row="8" Grid.Column="0" Orientation="Horizontal" Grid.ColumnSpan="2" Margin="20,0,0,0" HorizontalAlignment="Left">
+            <Button Content="Add new" Margin="0,5,0,5" Command="{Binding CreateVenueCommand}" CommandParameter="{Binding SelectedEvent.Id}" Width="114" IsEnabled="{Binding IsLoaded}" />
             <Button Content="Edit selected" Margin="6,5,0,5" Command="{Binding UpdateVenueCommand}" CommandParameter="{Binding SelectedVenue}" Width="114" IsEnabled="{Binding IsLoaded}" />
             <Button Content="Delete selected" Margin="6,5,6,5" Command="{Binding DeleteVenueCommand}" CommandParameter="{Binding SelectedVenue}" Width="114" IsEnabled="{Binding IsLoaded}" />
         </StackPanel>
@@ -88,9 +93,9 @@
             </ListBox.ItemTemplate>
         </ListBox>
 
-        <Grid Grid.Row="10" Grid.Column="0" Grid.ColumnSpan="2">
-            <Button Content="Add new" Margin="10,5,0,5" Command="{Binding CreateImageCommand}" CommandParameter="{Binding SelectedVenue}" HorizontalAlignment="Left" Width="120" IsEnabled="{Binding IsLoaded}" />
-            <Button Content="Delete selected" Margin="150,5,0,5" Command="{Binding DeleteImageCommand}" CommandParameter="{Binding ElementName=imageListBox, Path=SelectedItem}" HorizontalAlignment="Left" Width="120" IsEnabled="{Binding IsLoaded}" />
+        <Grid Grid.Row="10" Grid.Column="0" Grid.ColumnSpan="2" Margin="20,0,0,0" HorizontalAlignment="Left">
+            <Button Content="Add new" Margin="0,5,0,5" Command="{Binding CreateImageCommand}" CommandParameter="{Binding SelectedVenue}" HorizontalAlignment="Left" Width="120" IsEnabled="{Binding IsLoaded}" />
+            <Button Content="Delete selected" Margin="130,5,0,5" Command="{Binding DeleteImageCommand}" CommandParameter="{Binding ElementName=imageListBox, Path=SelectedItem}" HorizontalAlignment="Left" Width="120" IsEnabled="{Binding IsLoaded}" />
         </Grid>
     </Grid>
 </UserControl>

@@ -1,0 +1,7 @@
+2021-12-06 12:38:59.3862|INFO|account|LOGIN SUCCESS for user adminLorem from address ::1
+2021-12-06 12:39:29.4375|ERROR|service|MEMBER DELETE query failed from address ::1 with content: 1
+2021-12-06 12:46:18.1653|INFO|account|LOGIN SUCCESS for user adminH from address ::1
+2021-12-06 12:52:07.6928|INFO|account|LOGIN SUCCESS for user adminH from address ::1
+2021-12-06 12:56:17.9815|INFO|account|LOGIN SUCCESS for user adminH from address ::1
+2021-12-06 12:58:56.8866|INFO|account|LOGIN FAILED for user adminH from address ::1
+2021-12-06 12:59:05.4559|INFO|account|LOGIN SUCCESS for user adminH from address ::1

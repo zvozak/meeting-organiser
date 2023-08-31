@@ -5,11 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         xmlns:viewModel="clr-namespace:MeetingOrganiserDesktopApp.ViewModel"
-        Title="MainWindow" Height="750" Width="820">
+        Title="Main" Height="750" Width="820">
 
-    <Window.Resources>
-        <viewModel:VenueImageConverter x:Key="VenueImageConverter"/>
-    </Window.Resources>
 
     <Grid>
         <Grid.RowDefinitions>

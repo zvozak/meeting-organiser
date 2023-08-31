@@ -13,6 +13,9 @@ namespace WebAppForMembers
     {
         public static void Main(string[] args)
         {
+            System.Globalization.CultureInfo cultureInfo = new System.Globalization.CultureInfo("en-US");
+            System.Threading.Thread.CurrentThread.CurrentCulture = cultureInfo;
+            System.Threading.Thread.CurrentThread.CurrentUICulture = cultureInfo;
             CreateHostBuilder(args).Build().Run();
         }
 

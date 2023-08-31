@@ -249,7 +249,7 @@ namespace MeetingOrganiserDesktopApp.Model
                 }
             }
 
-            return visitedIds.Count == NumberOfNodes;
+            return visitedIds.Count == Nodes.Count;
         }
 
         public HashSet<int> ConstructCDS_WithCDOM()

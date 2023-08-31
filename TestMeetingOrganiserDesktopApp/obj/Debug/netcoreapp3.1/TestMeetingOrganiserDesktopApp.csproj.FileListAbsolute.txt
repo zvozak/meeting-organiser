@@ -350,4 +350,3 @@ C:\Users\vozak\source\repos\Szakdolgozat\TestMeetingOrganiserDesktopApp\obj\Debu
 C:\Users\vozak\source\repos\Szakdolgozat\TestMeetingOrganiserDesktopApp\obj\Debug\netcoreapp3.1\TestMeetingOrganiserDesktopApp.dll
 C:\Users\vozak\source\repos\Szakdolgozat\TestMeetingOrganiserDesktopApp\obj\Debug\netcoreapp3.1\TestMeetingOrganiserDesktopApp.pdb
 C:\Users\vozak\source\repos\Szakdolgozat\TestMeetingOrganiserDesktopApp\obj\Debug\netcoreapp3.1\TestMeetingOrganiserDesktopApp.genruntimeconfig.cache
-C:\Users\vozak\source\repos\Szakdolgozat\TestMeetingOrganiserDesktopApp\obj\Debug\netcoreapp3.1\TestMeetingOrganiserDesktopApp.csproj.CopyComplete

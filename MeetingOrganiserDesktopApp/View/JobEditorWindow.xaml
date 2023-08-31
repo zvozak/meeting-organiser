@@ -5,8 +5,8 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:viewModel="clr-namespace:MeetingOrganiserDesktopApp.ViewModel"
         mc:Ignorable="d" 
-      Height="130" Width="230"
-      Title="JobEditorWindow">
+      Height="130" Width="250"
+      Title="Job Editor">
 
     <Window.Resources>
         <viewModel:WeightConverter x:Key="weightConverter" />
@@ -15,8 +15,8 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="60"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="65"/>
+            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="30" />
@@ -24,17 +24,17 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="0" Grid.Column="0" Text="Title:" Margin="5" />
-        <TextBox Grid.Row="0" Grid.Column="1" Width="150" Text="{Binding EditedJob.Title}" Margin="5" HorizontalAlignment="Left" />
+        <TextBlock Grid.Row="0" Grid.Column="0" Text="Title:" Margin="20,5,5,5" />
+        <TextBox Grid.Row="0" Grid.Column="1" Width="150" Text="{Binding EditedJob.Title}" Margin="5,5,0,5" HorizontalAlignment="Left" />
 
 
-        <TextBlock Grid.Row="1" Grid.Column="0" Text="Weight:" Margin="5" />
-        <TextBox Grid.Row="1" Grid.Column="1" Width="30" Text="{Binding EditedJob.Weight, Converter={StaticResource weightConverter}, UpdateSourceTrigger=PropertyChanged}" Margin="5" HorizontalAlignment="Left" />
+        <TextBlock Grid.Row="1" Grid.Column="0" Text="Weight:" Margin="20,5,5,5" />
+        <TextBox Grid.Row="1" Grid.Column="1" Width="30" Text="{Binding EditedJob.Weight, Converter={StaticResource weightConverter}, UpdateSourceTrigger=PropertyChanged}" Margin="5,5,0,5" HorizontalAlignment="Left" />
 
 
-        <StackPanel Grid.Row="2"  Orientation="Horizontal" HorizontalAlignment="Left" Margin="10,22,0,0" Grid.ColumnSpan="2" Width="217" Height="30" VerticalAlignment="Top" >
-            <Button Content="Save" Margin="6,5,0,5" Name="saveButton" Command="{Binding SaveJobChangesCommand}" Width="100"/>
-            <Button Content="Cancel" Margin="5,5,6,5" Command="{Binding CancelJobChangesCommand}" Width="100" />
+        <StackPanel Grid.Row="2"  Orientation="Horizontal" HorizontalAlignment="Left" Margin="20,0,0,0" Grid.ColumnSpan="2" Width="217" Height="30" VerticalAlignment="Center" >
+            <Button Content="Save" Margin="5" Name="saveButton" Command="{Binding SaveJobChangesCommand}" Width="100"/>
+            <Button Content="Cancel" Margin="5,5,7,5" Command="{Binding CancelJobChangesCommand}" Width="100" />
         </StackPanel>
 
     </Grid>

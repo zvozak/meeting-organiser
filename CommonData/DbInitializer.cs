@@ -12,6 +12,10 @@ namespace CommonData
 {
 	public class DbInitializer
 	{
+		static Random randomNumberGenerator = new Random();
+		static readonly DateTime earliestJoiningDate = new DateTime(1990, 1, 1);
+		static readonly int rangeOfJoiningDates = (DateTime.Today - earliestJoiningDate).Days;
+
 		private static MeetingApplicationContext context;
 		private static UserManager<User> userManager;
 		private static RoleManager<IdentityRole<int>> roleManager;
@@ -22,7 +26,15 @@ namespace CommonData
 			userManager = serviceProvider.GetRequiredService<UserManager<User>>();
 			roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole<int>>>();
 
-			context.Database.Migrate();
+            try
+            {
+				context.Database.Migrate();
+            }
+            catch
+            {
+
+            }
+
 
 			if (!context.Users.Any())
             {
@@ -33,24 +45,31 @@ namespace CommonData
 				SeedOrganisations();
 				SeedEvents();
 				SeedVenues();
+				SeedJobs();
 			}
-            if (!context.Members.Any())
-            {
-				SeedMembers();
-            }
-            if (!context.AcceptedEmailDomains.Any())
-            {
-				SeedAcceptedEmailDomains();
-            }
             if (!context.Jobs.Any())
             {
 				SeedJobs();
             }
+            if (!context.Members.Any())
+            {
+				SeedMembers();
+				SeedMemberships();
+			}
+            if (!context.AcceptedEmailDomains.Any())
+            {
+				SeedAcceptedEmailDomains();
+            }
             if (!context.Projects.Any())
             {
 				SeedProjects();
+				SeedMemberOfProjects();
             }
-            if (!context.Venues.Any())
+			if (!context.MemberOfProjects.Any())
+			{
+				SeedMemberOfProjects();
+			}
+			if (!context.Venues.Any())
             {
 				SeedVenues();
 				SeedVenueImages(imageDirectory);
@@ -73,58 +92,75 @@ namespace CommonData
 				new Job
 				{
 					OrganisationId = organisationIds[0],
-					Title = "Junior Programmer",
-					Weight = 5
+					Title = "Junior Software Engineer",
+					Weight = 2
 				},
 				new Job
 				{
 					OrganisationId = organisationIds[0],
-					Title = "Senior Programmer",
-					Weight = 10
+					Title = "Senior Software Engineer",
+					Weight = 4
 				},
 				new Job
 				{
 					OrganisationId = organisationIds[0],
-					Title = "Intern Programmer",
+					Title = "Software Engineer Intern",
 					Weight = 1
 				},
 				new Job
 				{
 					OrganisationId = organisationIds[0],
-					Title = "Manager",
-					Weight = 5
+					Title = "Engineering Manager",
+					Weight = 6
+				},
+				new Job
+				{
+					OrganisationId = organisationIds[0],
+					Title = "Senior Engineering Manager",
+					Weight = 9
 				},
 				new Job
 				{
 					OrganisationId = organisationIds[1],
-					Title = "Junior Data Analyst",
-					Weight = 5
+					Title = "Junior Software Engineer",
+					Weight = 2
+				},
+				new Job
+				{
+					OrganisationId = organisationIds[1],
+					Title = "Senior Software Engineer",
+					Weight = 4
+				},
+				new Job
+				{
+					OrganisationId = organisationIds[1],
+					Title = "Software Engineer Intern",
+					Weight = 1
 				},
 				new Job
 				{
 					OrganisationId = organisationIds[1],
 					Title = "Senior Data Analyst",
-					Weight = 10
+					Weight = 4
 				},
 				new Job
 				{
 					OrganisationId = organisationIds[1],
-					Title = "Intern Data Analyst",
+					Title = "Junior Data Analyst",
 					Weight = 1
 				},
 				new Job
 				{
 					OrganisationId = organisationIds[1],
-					Title = "Manager",
-					Weight = 5
+					Title = "Scrum master",
+					Weight = 9
 				}
 			};
 			foreach (var j in jobs)
 			{
 				context.Jobs.Add(j);
+				context.SaveChanges();
 			}
-
-			context.SaveChanges();
 		}
 		private static void SeedProjects()
 		{
@@ -134,31 +170,67 @@ namespace CommonData
 			{
 				new Project
 				{
-					Name = "Első projekt",
-					OrganisationId = organisationIds[0],
-					Weight = 10
-				},
-				new Project
-				{
-					Name = "Második projekt",
-					OrganisationId = organisationIds[0],
-					Weight = 10
-				},
-				new Project
-				{
-					Name = "Harmadik projekt",
-					OrganisationId = organisationIds[0],
-					Weight = 10
-				},
-				new Project
-				{
-					Name = "Negyedik projekt",
+					Name = "CI/CD",
 					OrganisationId = organisationIds[1],
 					Weight = 10
 				},
 				new Project
 				{
-					Name = "Ötödik projekt",
+					Name = "Security",
+					OrganisationId = organisationIds[1],
+					Weight = 10
+				},
+				new Project
+				{
+					Name = "Infrastructure",
+					OrganisationId = organisationIds[1],
+					Weight = 10
+				},
+				new Project
+				{
+					Name = "Testing",
+					OrganisationId = organisationIds[1],
+					Weight = 10
+				},
+				new Project
+				{
+					Name = "Frontend",
+					OrganisationId = organisationIds[1],
+					Weight = 10
+				},
+				new Project
+				{
+					Name = "Automation",
+					OrganisationId = organisationIds[1],
+					Weight = 10
+				},
+				new Project
+				{
+					Name = "Graphics",
+					OrganisationId = organisationIds[1],
+					Weight = 10
+				},
+				new Project
+				{
+					Name = "Design",
+					OrganisationId = organisationIds[1],
+					Weight = 10
+				},
+				new Project
+				{
+					Name = "Critical Systems",
+					OrganisationId = organisationIds[1],
+					Weight = 10
+				},
+				new Project
+				{
+					Name = "API",
+					OrganisationId = organisationIds[1],
+					Weight = 10
+				},
+				new Project
+				{
+					Name = "Support",
 					OrganisationId = organisationIds[1],
 					Weight = 10
 				}
@@ -167,7 +239,146 @@ namespace CommonData
 			foreach(var p in projects)
             {
 				context.Projects.Add(p);
+				context.SaveChanges();
             }
+		}
+		private static void SeedMemberOfProjects()
+        {
+			var projectMemberships = new MemberOfProject[]
+			{
+				new MemberOfProject
+				{
+					MemberId = 13,
+					ProjectId = 1
+				},
+				new MemberOfProject
+				{
+					MemberId = 14,
+					ProjectId = 1
+				},
+				new MemberOfProject
+				{
+					MemberId = 15,
+					ProjectId = 1
+				},
+				new MemberOfProject
+				{
+					MemberId = 13,
+					ProjectId = 2
+				},
+				new MemberOfProject
+				{
+					MemberId = 25,
+					ProjectId = 2
+				},
+				new MemberOfProject
+				{
+					MemberId = 16,
+					ProjectId = 3
+				},
+				new MemberOfProject
+				{
+					MemberId = 17,
+					ProjectId = 3
+				},
+				new MemberOfProject
+				{
+					MemberId = 18,
+					ProjectId = 3
+				},
+				new MemberOfProject
+				{
+					MemberId = 19,
+					ProjectId = 3
+				},
+				new MemberOfProject
+				{
+					MemberId = 19,
+					ProjectId = 4
+				},
+				new MemberOfProject
+				{
+					MemberId = 20,
+					ProjectId = 4
+				},
+				new MemberOfProject
+				{
+					MemberId = 20,
+					ProjectId = 5
+				},
+				new MemberOfProject
+				{
+					MemberId = 21,
+					ProjectId = 5
+				},
+				new MemberOfProject
+				{
+					MemberId = 21,
+					ProjectId = 6
+				},
+				new MemberOfProject
+				{
+					MemberId = 22,
+					ProjectId = 6
+				},
+				new MemberOfProject
+				{
+					MemberId = 21,
+					ProjectId = 7
+				},
+				new MemberOfProject
+				{
+					MemberId = 23,
+					ProjectId = 7
+				},
+				new MemberOfProject
+				{
+					MemberId = 24,
+					ProjectId = 7
+				},
+				new MemberOfProject
+				{
+					MemberId = 25,
+					ProjectId = 8
+				},
+				new MemberOfProject
+				{
+					MemberId = 24,
+					ProjectId = 8
+				},
+				new MemberOfProject
+				{
+					MemberId = 26,
+					ProjectId = 9
+				},
+				new MemberOfProject
+				{
+					MemberId = 19,
+					ProjectId = 9
+				},
+				new MemberOfProject
+				{
+					MemberId = 26,
+					ProjectId = 10
+				},
+				new MemberOfProject
+				{
+					MemberId = 16,
+					ProjectId = 10
+				},
+				new MemberOfProject
+				{
+					MemberId = 20,
+					ProjectId = 10
+				}
+			};
+
+			foreach (var membership in projectMemberships)
+			{
+				context.MemberOfProjects.Add(membership);
+			}
+
+			context.SaveChanges();
 		}
 		private static void SeedAcceptedEmailDomains()
         {
@@ -176,12 +387,8 @@ namespace CommonData
 			var domains = new AcceptedEmailDomain[]
 			{
 				new AcceptedEmailDomain {
-					DomainName = "inf.elte.hu",
-					OrganisationId = organisationIds[0]
-				},
-				new AcceptedEmailDomain {
-					DomainName = "caesar.elte.hu",
-					OrganisationId = organisationIds[0]
+					DomainName = "apple.com",
+					OrganisationId = organisationIds[1]
 				}
 			};
 			foreach (var d in domains)
@@ -196,72 +403,107 @@ namespace CommonData
 			var orgs = new Organisation[]
 			{
 				new Organisation {
-					Name = "Lorem",
+					Name = "Apple Inc.",
 					TypeOfStructure = TypeOfStructure.Hierarchical,
-					Description = "Lorem az valami cég.",
+					Description = "Apple Inc. is an American multinational technology company that specializes in consumer electronics, computer software and online services. ",
 					PermitNewMembers = true,
-					Address = "Egyik utca 2.",
-					AdminId = context.Users.First(u => u.UserName == "adminLorem").Id
+					Address = "Budapest, Bajcsy-Zsilinszky út 78, 1055",
+					AdminId = context.Users.First(u => u.UserName == "appleAdmin").Id
 				},
 				new Organisation {
-					Name = "Ipsum",
-					TypeOfStructure = TypeOfStructure.Hierarchical,
-					Description = "Az Ipsum az valami másik cég.",
+					Name = "Microsoft Corporation",
+					TypeOfStructure = TypeOfStructure.ProjectBased,
+					Description = "Microsoft Corporation is an American multinational technology corporation which produces computer software, consumer electronics, personal computers, and related services",
 					PermitNewMembers = false,
-					Address = "Másik utca 7.",
-					AdminId = context.Users.First(u => u.UserName == "adminIpsum").Id
+					Address = "Budapest, M épület, Graphisoft park 3, 1031",
+					AdminId = context.Users.First(u => u.UserName == "microsoftAdmin").Id
 				}
 			};
 			foreach (var o in orgs)
 			{
 				context.Organisations.Add(o);
+				context.SaveChanges();
 			}
-
-			context.SaveChanges();
 		}
+
 		private static void SeedEvents()
 		{
 			var organisationIds = context.Organisations.Select(o => o.Id).ToList();
 
-			context.Events.Add(new Event {
-				OrganisationId = organisationIds[0],
-				Name = "Első esemény",
-				DeadlineForApplication = new DateTime(2021, 03, 28),
-				StartDate = new DateTime(2021, 03, 30),
-				EndDate = new DateTime(2021, 04, 2),
-			});
-			context.Events.Add(new Event { 
-				OrganisationId = organisationIds[0],
-				Name = "Második esemény",
-				DeadlineForApplication = new DateTime(2021, 04, 28),
-				StartDate = new DateTime(2021, 04, 30),
-				EndDate = new DateTime(2021, 05, 2)
-			});
-			context.Events.Add(new Event { 
-				OrganisationId = organisationIds[0],
-				Name = "Harmadik esemény",
-				DeadlineForApplication = new DateTime(2021, 03, 28),
-				StartDate = new DateTime(2021, 03, 30),
-				EndDate = new DateTime(2021, 04, 2)
-			});
-			context.Events.Add(new Event { 
-				OrganisationId = organisationIds[1],
-				Name = "Negyedik esemény",
-				DeadlineForApplication = new DateTime(2021, 04, 28),
-				StartDate = new DateTime(2021, 04, 30),
-				EndDate = new DateTime(2021, 05, 2)
-			});
-			context.Events.Add(new Event { 
-				OrganisationId = organisationIds[1],
-				Name = "Ötödik esemény",
-				DeadlineForApplication = new DateTime(2021, 03, 28),
-				StartDate = new DateTime(2021, 03, 30),
-				EndDate = new DateTime(2021, 04, 2)
-			});
-			context.SaveChanges();
+			var events = new Event[]{
+				new Event {
+					OrganisationId = organisationIds[0],
+					Name = "Python Programming Course",
+					DeadlineForApplication = new DateTime(2022, 03, 28),
+					StartDate = new DateTime(2022, 03, 30,8,0,0),
+					EndDate = new DateTime(2022, 03, 30, 16, 0, 0),
+					Description = "This class explores advanced Python topics and skills with a focus on enterprise development. You’ll learn how to leverage OS services, code graphical application interfaces, create modules and run unit tests, define classes, interact with network series, query databases, and processes XML data. This comprehensive course provides an in-depth exploration of working with the programming language for enterprise development. At the conclusion, you will be able to use Python to complete advanced tasks in the real world."
+				},
+				new Event {
+					OrganisationId = organisationIds[0],
+					Name = "Agile Training",
+					DeadlineForApplication = new DateTime(2022, 04, 28),
+					StartDate = new DateTime(2022, 04, 30, 8, 0, 0),
+					EndDate = new DateTime(2022, 05, 2, 11, 0, 0),
+					Description = "You want to be able to deliver value frequently, learn from feedback, and then deliver changes that delight customers. Start learning how with this training."
+				},
+				new Event {
+					OrganisationId = organisationIds[0],
+					Name = "Year End Company Retrospective",
+					DeadlineForApplication = new DateTime(2022, 03, 28),
+					StartDate = new DateTime(2022, 03, 30,10,0,0),
+					EndDate = new DateTime(2022, 03, 30, 15, 30, 0),
+					Description = "Reflect on workflows and methods of development."
+				},
+				new Event {
+					OrganisationId = organisationIds[1],
+					Name = "Design Patterns Course",
+					DeadlineForApplication = new DateTime(2022, 04, 28),
+					StartDate = new DateTime(2022, 04, 30),
+					EndDate = new DateTime(2022, 05, 2),
+					Description = "The Design Patterns Library contains descriptions and examples of software design patterns that you can apply in your daily development. These patterns are time proven techniques for building long-lived, well factored software that are widely used in software development today."
+				},
+				new Event {
+					OrganisationId = organisationIds[1],
+					Name = "Q&A Session with Partners",
+					DeadlineForApplication = new DateTime(2022, 03, 28),
+					StartDate = new DateTime(2022, 03, 30, 14, 0, 0),
+					EndDate = new DateTime(2022, 04, 2, 15, 30, 0),
+					Description = "We will show the new release to our partners, and answer arising questions."
+				},
+				new Event {
+					OrganisationId = organisationIds[1],
+					Name = "Python Programming Course",
+					DeadlineForApplication = new DateTime(2022, 03, 28),
+					StartDate = new DateTime(2022, 03, 30,8,0,0),
+					EndDate = new DateTime(2022, 03, 30, 16, 0, 0),
+					Description = "This class explores advanced Python topics and skills with a focus on enterprise development. You’ll learn how to leverage OS services, code graphical application interfaces, create modules and run unit tests, define classes, interact with network series, query databases, and processes XML data. This comprehensive course provides an in-depth exploration of working with the programming language for enterprise development. At the conclusion, you will be able to use Python to complete advanced tasks in the real world."
+				},
+				new Event {
+					OrganisationId = organisationIds[1],
+					Name = "Agile Training",
+					DeadlineForApplication = new DateTime(2022, 04, 28),
+					StartDate = new DateTime(2022, 04, 30, 8, 0, 0),
+					EndDate = new DateTime(2022, 05, 2, 11, 0, 0),
+					Description = "You want to be able to deliver value frequently, learn from feedback, and then deliver changes that delight customers. Start learning how with this training."
+				},
+				new Event {
+					OrganisationId = organisationIds[1],
+					Name = "Year End Company Retrospective",
+					DeadlineForApplication = new DateTime(2022, 03, 28),
+					StartDate = new DateTime(2022, 03, 30,10,0,0),
+					EndDate = new DateTime(2022, 03, 30, 15, 30, 0),
+					Description = "Reflect on workflows and methods of development."
+				},
+			};
 
-			context.SaveChanges();
+            foreach (var e in events)
+            {
+				context.Events.Add(e);
+				context.SaveChanges();
+            }
 		}
+
 		private static void SeedMembers()
 		{
 			var organisationIds = context.Organisations.Select(o => o.Id).ToList();
@@ -270,61 +512,286 @@ namespace CommonData
 				new Member
 				{
 					OrganisationId = organisationIds[0],
-					Email = "akarki@gmail.com",
-					Name = "Nem Tomi"
+					Email = "samanda@apple.com",
+					Name = "Amanda Smith",
+					JobId = 5,
+					Department = "Research",
+					DateOfJoining = earliestJoiningDate.AddDays(randomNumberGenerator.Next(rangeOfJoiningDates))
 				},
 				new Member
 				{
 					OrganisationId = organisationIds[0],
-					Email = "akark@gmail.com",
-					Name = "Nem Tom"
+					Email = "dbrandon@apple.com",
+					Name = "Brandon Daniels",
+					JobId = 2,
+					BossId = 1,
+					Department = "Research",
+					DateOfJoining = earliestJoiningDate.AddDays(randomNumberGenerator.Next(rangeOfJoiningDates))
 				},
 				new Member
 				{
 					OrganisationId = organisationIds[0],
-					Email = "akar@gmail.com",
-					Name = "Nem To"
+					Email = "lchristina@apple.com",
+					Name = "Christina Lambert",
+					JobId = 4,
+					BossId = 1,
+					Department = "Research",
+					DateOfJoining = earliestJoiningDate.AddDays(randomNumberGenerator.Next(rangeOfJoiningDates))
+				},
+				new Member
+				{
+					OrganisationId = organisationIds[0],
+					Email = "hdavid@apple.com",
+					Name = "David Hunt",
+					JobId = 4,
+					BossId = 1,
+					Department = "Research",
+					DateOfJoining = earliestJoiningDate.AddDays(randomNumberGenerator.Next(rangeOfJoiningDates))
+				},
+				new Member
+				{
+					OrganisationId = organisationIds[0],
+					Email = "keric@apple.com",
+					Name = "Eric Kimberley",
+					JobId = 1,
+					BossId = 2,
+					Department = "Production",
+					DateOfJoining = earliestJoiningDate.AddDays(randomNumberGenerator.Next(rangeOfJoiningDates))
+				},
+				new Member
+				{
+					OrganisationId = organisationIds[0],
+					Email = "cfrank@apple.com",
+					Name = "Frank Castle",
+					JobId = 1,
+					BossId = 2,
+					Department = "Production",
+					DateOfJoining = earliestJoiningDate.AddDays(randomNumberGenerator.Next(rangeOfJoiningDates))
+				},
+				new Member
+				{
+					OrganisationId = organisationIds[0],
+					Email = "ogary@apple.com",
+					Name = "Gary Oldman",
+					JobId = 2,
+					BossId = 3,
+					Department = "Production",
+					DateOfJoining = earliestJoiningDate.AddDays(randomNumberGenerator.Next(rangeOfJoiningDates))
+				},
+				new Member
+				{
+					OrganisationId = organisationIds[0],
+					Email = "gheather@apple.com",
+					Name = "Heather Garcia",
+					JobId = 2,
+					BossId = 4,
+					Department = "Production",
+					DateOfJoining = earliestJoiningDate.AddDays(randomNumberGenerator.Next(rangeOfJoiningDates))
+				},
+				new Member
+				{
+					OrganisationId = organisationIds[0],
+					Email = "jian@apple.com",
+					Name = "Ian Jones",
+					JobId = 1,
+					BossId = 7,
+					Department = "Production",
+					DateOfJoining = earliestJoiningDate.AddDays(randomNumberGenerator.Next(rangeOfJoiningDates))
+				},
+				new Member
+				{
+					OrganisationId = organisationIds[0],
+					Email = "bkeric@apple.com",
+					Name = "Jeffery Brown",
+					JobId = 1,
+					BossId = 7,
+					Department = "Production",
+					DateOfJoining = earliestJoiningDate.AddDays(randomNumberGenerator.Next(rangeOfJoiningDates))
+				},
+				new Member
+				{
+					OrganisationId = organisationIds[0],
+					Email = "wkeric@apple.com",
+					Name = "Karen Williams",
+					JobId = 1,
+					BossId = 7,
+					Department = "Production",
+					DateOfJoining = earliestJoiningDate.AddDays(randomNumberGenerator.Next(rangeOfJoiningDates))
+				},
+				new Member
+				{
+					OrganisationId = organisationIds[0],
+					Email = "jkeric@apple.com",
+					Name = "Larry Johnson",
+					JobId = 3,
+					BossId = 7,
+					Department = "Production",
+					DateOfJoining = earliestJoiningDate.AddDays(randomNumberGenerator.Next(rangeOfJoiningDates))
 				},
 				new Member
 				{
 					OrganisationId = organisationIds[1],
-					Email = "akark@gmail.com",
-					Name = "Nem Tom"
+					Email = "samanda@microsoft.com",
+					Name = "Amanda Smith",
+					JobId = 6,
+					Department = "Production",
+					DateOfJoining = earliestJoiningDate.AddDays(randomNumberGenerator.Next(rangeOfJoiningDates))
 				},
 				new Member
 				{
 					OrganisationId = organisationIds[1],
-					Email = "akarki@gmail.com",
-					Name = "Nem Tomi"
+					Email = "dbrandon@microsoft.com",
+					Name = "Brandon Daniels",
+					JobId = 7,
+					Department = "Research",
+					DateOfJoining = earliestJoiningDate.AddDays(randomNumberGenerator.Next(rangeOfJoiningDates))
 				},
+				new Member
+				{
+					OrganisationId = organisationIds[1],
+					Email = "lchristina@microsoft.com",
+					Name = "Christina Lambert",
+					JobId = 8,
+					Department = "Production",
+					DateOfJoining = earliestJoiningDate.AddDays(randomNumberGenerator.Next(rangeOfJoiningDates))
+				},
+				new Member
+				{
+					OrganisationId = organisationIds[1],
+					Email = "hdavid@microsoft.com",
+					Name = "David Hunt",
+					JobId = 11,
+					Department = "Research",
+					DateOfJoining = earliestJoiningDate.AddDays(randomNumberGenerator.Next(rangeOfJoiningDates))
+				},
+				new Member
+				{
+					OrganisationId = organisationIds[1],
+					Email = "keric@microsoft.com",
+					Name = "Eric Kimberley",
+					JobId = 7,
+					Department = "Research",
+					DateOfJoining = earliestJoiningDate.AddDays(randomNumberGenerator.Next(rangeOfJoiningDates))
+				},
+				new Member
+				{
+					OrganisationId = organisationIds[1],
+					Email = "cfrank@microsoft.com",
+					Name = "Frank Castle",
+					JobId = 6,
+					Department = "Research",
+					DateOfJoining = earliestJoiningDate.AddDays(randomNumberGenerator.Next(rangeOfJoiningDates))
+				},
+				new Member
+				{
+					OrganisationId = organisationIds[1],
+					Email = "ogary@microsoft.com",
+					Name = "Gary Oldman",
+					JobId = 7,
+					Department = "Production",
+					DateOfJoining = earliestJoiningDate.AddDays(randomNumberGenerator.Next(rangeOfJoiningDates))
+				},
+				new Member
+				{
+					OrganisationId = organisationIds[1],
+					Email = "gheather@microsoft.com",
+					Name = "Heather Garcia",
+					JobId = 11,
+					Department = "Research",
+					DateOfJoining = earliestJoiningDate.AddDays(randomNumberGenerator.Next(rangeOfJoiningDates))
+				},
+				new Member
+				{
+					OrganisationId = organisationIds[1],
+					Email = "jian@microsoft.com",
+					Name = "Ian Jones",
+					JobId = 10,
+					Department = "Production",
+					DateOfJoining = earliestJoiningDate.AddDays(randomNumberGenerator.Next(rangeOfJoiningDates))
+				},
+				new Member
+				{
+					OrganisationId = organisationIds[1],
+					Email = "bjeffrey@microsoft.com",
+					Name = "Jeffery Brown",
+					JobId = 11,
+					Department = "Research",
+					DateOfJoining = earliestJoiningDate.AddDays(randomNumberGenerator.Next(rangeOfJoiningDates))
+				},
+				new Member
+				{
+					OrganisationId = organisationIds[1],
+					Email = "wkarenc@microsoft.com",
+					Name = "Karen Williams",
+					JobId = 6,
+					Department = "Production",
+					DateOfJoining = earliestJoiningDate.AddDays(randomNumberGenerator.Next(rangeOfJoiningDates))
+				},
+				new Member
+				{
+					OrganisationId = organisationIds[1],
+					Email = "jlarry@microsoft.com",
+					Name = "Larry Johnson",
+					JobId = 6,
+					Department = "Research",
+					DateOfJoining = earliestJoiningDate.AddDays(randomNumberGenerator.Next(rangeOfJoiningDates))
+				},
+				new Member
+				{
+					OrganisationId = organisationIds[1],
+					Email = "smonica@microsoft.com",
+					Name = "Monica Smith",
+					JobId = 9,
+					Department = "Production",
+					DateOfJoining = earliestJoiningDate.AddDays(randomNumberGenerator.Next(rangeOfJoiningDates))
+				},
+				new Member
+				{
+					OrganisationId = organisationIds[1],
+					Email = "snatasha@microsoft.com",
+					Name = "Natasha Smith",
+					JobId = 11,
+					Department = "Production",
+					DateOfJoining = earliestJoiningDate.AddDays(randomNumberGenerator.Next(rangeOfJoiningDates))
+				}
 			};
 			foreach (var member in members)
             {
 				context.Add(member);
-            }
-			context.SaveChanges();
-
-		}/*
+				context.SaveChanges();
+			}
+		}
 		private static void SeedMemberships()
         {
 			var memberships = new Membership[]
 			{
 				new Membership
 				{
-					MemberId = context.Members.ElementAt(0).Id,
-					UserId = context.Users.ElementAt(1).Id
+					MemberId = 1,
+					UserId = 2
+				},
+				new Membership
+				{
+					MemberId = 12,
+					UserId = 3
 				}
 			};
-        }*/
+
+            foreach (var membership in memberships)
+            {
+				context.Memberships.Add(membership);
+            }
+
+			context.SaveChanges();
+        }
 		private static void SeedUsers()
 		{
 			var adminUser = new User
 			{
-				UserName = "adminLorem",
-				Name = "Adminisztrátor",
-				Email = "admin@example.com",
-				PhoneNumber = "+36123456789",
-				Address = "Nevesincs utca 1."
+				UserName = "appleAdmin",
+				Name = "Sarah Hills",
+				Email = "appleadmin@apple.com",
+				PhoneNumber = "+36123456789"
 			};
 			var adminPassword = "Almafa123";
 			var adminRole = new IdentityRole<int>("administrator");
@@ -335,11 +802,10 @@ namespace CommonData
 
 			var adminUser2 = new User
 			{
-				UserName = "adminIpsum",
-				Name = "Adminisztrátor",
-				Email = "a@a.a",
-				PhoneNumber = "+36123456789",
-				Address = "Nevesincs utca 1."
+				UserName = "microsoftAdmin",
+				Name = "Sarah Hills",
+				Email = "microsoftadmin@microsoft.com",
+				PhoneNumber = "+36123456789"
 			};
 			var adminPassword2 = "Almafa123";
 
@@ -348,11 +814,10 @@ namespace CommonData
 
 			var user = new User
 			{
-				UserName = "user00",
-				Name = "Valami User",
-				Email = "user@example.com",
-				PhoneNumber = "+36123456789",
-				Address = "User utca 1."
+				UserName = "samanda",
+				Name = "Amanda Smith",
+				Email = "samanda@apple.com",
+				PhoneNumber = "+36123456789"
 			};
 			var userPassword = "Almafa123";
 			var userRole = new IdentityRole<int>("user");
@@ -360,6 +825,18 @@ namespace CommonData
 			var result6 = userManager.CreateAsync(user, userPassword).Result;
 			var result7 = roleManager.CreateAsync(userRole).Result;
 			var result8 = userManager.AddToRoleAsync(user, userRole.Name).Result;
+
+			var user2 = new User
+			{
+				UserName = "samanda",
+				Name = "Amanda Smith",
+				Email = "samanda@microsoft.com",
+				PhoneNumber = "+36123456789"
+			};
+			var userPassword2 = "Almafa123";
+
+			var result9 = userManager.CreateAsync(user2, userPassword2).Result;
+			var result10 = userManager.AddToRoleAsync(user, userRole.Name).Result;
 
 		}
 		private static void SeedVenues()
@@ -369,35 +846,35 @@ namespace CommonData
 			context.Venues.Add(
 				new Venue
 				{
-					EventId = eventIds[0],
-					Description = "Első mondat. Második mondat.",
-					Address = "1000 Budapest, Valami utca 10.",
+					EventId = eventIds[3],
+					Description = "Buffet and cloakroom available.",
+					Address = "Budapest, Pázmány Péter stny. 1c, 1117",
 					LocationX = 45.4591,
 					LocationY = 12.5068,
 					GuestLimit = 30,
-					Name = "Első helyszín"
+					Name = "Lágymányosi ELTE Campus - Southern Block"
 				});
 			context.Venues.Add(
 				new Venue
 				{
-					EventId = eventIds[0],
-					Description = "Első mondat. Második mondat.",
-					Address = "1000 Budapest, Második utca 10.",
+					EventId = eventIds[3],
+					Description = "",
+					Address = "Budapest, Infopark stny. 1i, 1117",
 					LocationX = 45.4591,
 					LocationY = 10.5068,
 					GuestLimit = 30,
-					Name = "Második helyszín"
+					Name = "Budapest, Infopark stny. 1i, 1117"
 				});
 			context.Venues.Add(
 				new Venue
 				{
-					EventId = eventIds[2],
-					Description = "Első mondat. Második mondat.",
-					Address = "1000 Budapest, Harmadik utca 10.",
+					EventId = eventIds[4],
+					Description = "Lunch included.",
+					Address = "Budapest, Petőfi híd, 1117",
 					LocationX = 46.4591,
 					LocationY = 11.5068,
 					GuestLimit = 30,
-					Name = "Harmadik helyszín"
+					Name = "A38"
 				});
 
 			context.SaveChanges();

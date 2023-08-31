@@ -124,10 +124,11 @@ namespace UnitTests.MeetingOrganiserDesktopApp
             NodeWeightedGraph graph = InitTestGraph_GeneralConnectedGraph_WithVaryingWeights();
             HashSet<int> cds = graph.ConstructConnectedDominatingSet_WithTCDS();
             HashSet<int> expectedCds = new HashSet<int>(4);
+            expectedCds.Add(10);
+            expectedCds.Add(8);
             expectedCds.Add(6);
             expectedCds.Add(9);
             expectedCds.Add(7);
-            expectedCds.Add(8);
 
             Assert.IsTrue(expectedCds.SetEquals(cds));
         }

@@ -12,6 +12,8 @@ using MeetingOrganiserDesktopApp.Model;
 using MeetingOrganiserDesktopApp.Persistence;
 using MeetingOrganiserDesktopApp.View;
 using MeetingOrganiserDesktopApp.ViewModel;
+using System.Globalization;
+using System.Threading;
 
 namespace MeetingOrganiserDesktopApp
 {
@@ -33,6 +35,9 @@ namespace MeetingOrganiserDesktopApp
 
         public App()
         {
+            System.Globalization.CultureInfo cultureInfo = new System.Globalization.CultureInfo("en-US");
+            System.Threading.Thread.CurrentThread.CurrentCulture = cultureInfo;
+            System.Threading.Thread.CurrentThread.CurrentUICulture = cultureInfo;
             Startup += new StartupEventHandler(App_Startup);
             Exit += new ExitEventHandler(App_Exit);
         }

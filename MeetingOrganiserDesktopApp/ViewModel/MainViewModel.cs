@@ -60,7 +60,10 @@ namespace MeetingOrganiserDesktopApp.ViewModel
         {
             get { return model.IsHierarchical; }
         }
-
+        public bool IsProjectBased
+        {
+            get { return !IsHierarchical; }
+        }
         public bool IsEventSelected
         {
             get { return isEventSelected; }
@@ -517,7 +520,7 @@ namespace MeetingOrganiserDesktopApp.ViewModel
                 return;
             }
 
-            if (!model.IsExistingBoss(EditedMember.Boss.Name))
+            if (EditedMember.Boss != null && EditedMember.Boss.Name != null && EditedMember.Boss.Name != "" && !model.IsExistingBoss(EditedMember.Boss.Name))
             {
                 OnMessageApplication("There is no member with name " + EditedMember.Boss.Name + ". Please provide an existing one or create a new member with this name.");
                 return;

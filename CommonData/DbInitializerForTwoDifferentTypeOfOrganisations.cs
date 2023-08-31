@@ -51,10 +51,6 @@ namespace CommonData
 			userManager = serviceProvider.GetRequiredService<UserManager<User>>();
 			roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole<int>>>();
 
-			if (context.Users.Any())
-			{
-				return;
-			}
 
 			context.Database.EnsureDeleted();
 			context.Database.EnsureCreated();
@@ -66,12 +62,12 @@ namespace CommonData
 			SeedVenueImages(imageDirectory);
 			
 			SeedJobsForProjectBasedOrganisation(maxNumberOfJobs);
-			SeedMembersForProjectBasedOrganisation(maxNumberOfMembers);
+			//SeedMembersForProjectBasedOrganisation(maxNumberOfMembers);
 			SeedProjectsForProjectBasedOrganisation(maxNumberOfProjects);
-			SeedMemberOfProjects();
+			//SeedMemberOfProjects();
 			
             SeedJobsForHierarchicalOrganisation(maxNumberOfJobs);
-			SeedMembersForHierarchicalOrganisation(maxNumberOfMembers);
+			//SeedMembersForHierarchicalOrganisation(maxNumberOfMembers);
 		}
 		private static void SeedOrganisations()
 		{

@@ -218,7 +218,7 @@ C:\Users\vozak\source\repos\Szakdolgozat\TestWebAppForMembers\obj\Debug\netcorea
 C:\Users\vozak\source\repos\Szakdolgozat\TestWebAppForMembers\obj\Debug\netcoreapp3.1\TestWebAppForMembers.AssemblyInfoInputs.cache
 C:\Users\vozak\source\repos\Szakdolgozat\TestWebAppForMembers\obj\Debug\netcoreapp3.1\TestWebAppForMembers.AssemblyInfo.cs
 C:\Users\vozak\source\repos\Szakdolgozat\TestWebAppForMembers\obj\Debug\netcoreapp3.1\TestWebAppForMembers.csproj.CoreCompileInputs.cache
+C:\Users\vozak\source\repos\Szakdolgozat\TestWebAppForMembers\obj\Debug\netcoreapp3.1\TestWebAppForMembers.csproj.CopyComplete
 C:\Users\vozak\source\repos\Szakdolgozat\TestWebAppForMembers\obj\Debug\netcoreapp3.1\TestWebAppForMembers.dll
 C:\Users\vozak\source\repos\Szakdolgozat\TestWebAppForMembers\obj\Debug\netcoreapp3.1\TestWebAppForMembers.pdb
 C:\Users\vozak\source\repos\Szakdolgozat\TestWebAppForMembers\obj\Debug\netcoreapp3.1\TestWebAppForMembers.genruntimeconfig.cache
-C:\Users\vozak\source\repos\Szakdolgozat\TestWebAppForMembers\obj\Debug\netcoreapp3.1\TestWebAppForMembers.csproj.CopyComplete

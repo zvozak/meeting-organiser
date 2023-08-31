@@ -110,9 +110,13 @@ namespace MeetingOrganiserDesktopApp.Model
             {
                 member.JobId = organisation.Jobs.FirstOrDefault(j => j.Title == member.Job.Title).Id;
             }
-            if (member.BossId == null)
+            if (member.BossId == null && member.Boss != null && member.Boss.Id != null)
             {
-                member.BossId = members.FirstOrDefault(b => b.Name == member.Boss.Name).Id;
+                var boss = members.FirstOrDefault(b => b.Name == member.Boss.Name);
+                if (boss != null)
+                {
+                    member.BossId = boss.Id;
+                }
             }
 
             member.Id = ((members.Count > 0 ? members.Max(b => b.Id) : 0) + 1); // temporary Id
@@ -275,7 +279,7 @@ namespace MeetingOrganiserDesktopApp.Model
                 memberToModify.Job = organisation.Jobs.Single(j => j.Title == member.Job.Title);
                 memberToModify.JobId = memberToModify.Job.Id;
             }
-            bool bossChanged = !members.Any(m => m.Id == member.Boss.Id && m.Name == member.Boss.Name);
+            bool bossChanged = member.Boss != null && !members.Any(m => m.Id == member.Boss.Id && m.Name == member.Boss.Name);
             if (bossChanged)
             {
                 memberToModify.Boss = members.Single(m => m.Name == member.Boss.Name);
@@ -734,7 +738,7 @@ namespace MeetingOrganiserDesktopApp.Model
         }
         private int CalculateWeightInProjectBased( EventDTO eventDTO, MemberDTO member)
         {
-            if (eventDTO.ProjectImportanceWeight == 0)
+            if (eventDTO.ProjectImportanceWeight == 0 && eventDTO.NumberOfProjectsWeight == 0)
             {
                 return 0;
             }
@@ -781,7 +785,7 @@ namespace MeetingOrganiserDesktopApp.Model
             foreach (var member in members)
             {
                 int numberOfNeighbours = graph.GetNumberOfNeighbours(member.Id);
-                CalculateWeight(numberOfNeighbours, eventDTO, member.Id);
+                graph.SetWeightOfNode(member.Id, CalculateWeight(numberOfNeighbours, eventDTO, member.Id));
             }
 
             return graph;

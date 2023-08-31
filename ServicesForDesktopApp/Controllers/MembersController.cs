@@ -83,7 +83,11 @@ namespace ServicesForDesktopApp.Controllers
         {
             if (memberDTO.BossId == null && memberDTO.Boss != null)
             {
-                memberDTO.BossId = context.Members.First(m => m.Name == memberDTO.Boss.Name).Id;
+                var boss = context.Members.FirstOrDefault(m => m.Name == memberDTO.Boss.Name);
+                if (boss != null)
+                {
+                    memberDTO.BossId = boss.Id;
+                }
             }
             if (memberDTO.JobId == null && memberDTO.Job != null)
             {

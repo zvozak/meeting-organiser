@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "vlvv2g0XwunQZm0l+1360+wrEntu2Xh1Of3uSZCzIWypQp66NcAR85eEvO/SwO4IY7HvkXCBTQA2bubN8uZsnQ==",
+  "dgSpecHash": "P88Yz7gSFbMriCubayP2oKlzaStM8UAqlkSpzcxSwlZ0RufqQhzmwE2U2y0yYTl9aIN1uDMNkCXweYIi7XDqtg==",
   "success": true,
   "projectFilePath": "C:\\Users\\vozak\\source\\repos\\Szakdolgozat\\TestWebAppForMembers\\TestWebAppForMembers.csproj",
   "expectedPackageFiles": [
@@ -84,7 +84,7 @@
     "C:\\Users\\vozak\\.nuget\\packages\\netstandard.library\\2.0.0\\netstandard.library.2.0.0.nupkg.sha512",
     "C:\\Users\\vozak\\.nuget\\packages\\newtonsoft.json\\11.0.2\\newtonsoft.json.11.0.2.nupkg.sha512",
     "C:\\Users\\vozak\\.nuget\\packages\\nuget.frameworks\\5.0.0\\nuget.frameworks.5.0.0.nupkg.sha512",
-    "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\nunit\\3.12.0\\nunit.3.12.0.nupkg.sha512",
+    "C:\\Users\\vozak\\.nuget\\packages\\nunit\\3.12.0\\nunit.3.12.0.nupkg.sha512",
     "C:\\Users\\vozak\\.nuget\\packages\\nunit3testadapter\\3.16.1\\nunit3testadapter.3.16.1.nupkg.sha512",
     "C:\\Users\\vozak\\.nuget\\packages\\runtime.native.system\\4.3.0\\runtime.native.system.4.3.0.nupkg.sha512",
     "C:\\Users\\vozak\\.nuget\\packages\\runtime.native.system.data.sqlclient.sni\\4.4.0\\runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",
