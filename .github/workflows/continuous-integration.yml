@@ -22,9 +22,9 @@ env:
   WebAppForMembers_Project_Folder: WebAppForMembers
   DotnetVersion: '3.1.x'
   Platform: 'win-x64'
-  MeetingOrganiserDesktopApp_PublishFolder: ${{MeetingOrganiserDesktopApp_Folder}}/bin/Release/netcoreapp3.1/${{Platform}}/publish
-  ServicesForDesktopApp_PublishFolder: ${{ServicesForDesktopApp_Project_Folder}}/bin/Release/netcoreapp3.1/${{Platform}}/publish
-  WebAppForMembers_PublishFolder: ${{WebAppForMembers_Project_Folder}}/bin/Release/netcoreapp3.1/${{Platform}}/publish
+  MeetingOrganiserDesktopApp_PublishFolder: MeetingOrganiserDesktopApp/bin/Release/netcoreapp3.1/win-x64/publish
+  ServicesForDesktopApp_PublishFolder: ServicesForDesktopApp/bin/Release/netcoreapp3.1/win-x64/publish
+  WebAppForMembers_PublishFolder: WebAppForMembers/bin/Release/netcoreapp3.1/win-x64/publish
 
 jobs:
 
