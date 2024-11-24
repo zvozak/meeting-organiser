@@ -69,7 +69,8 @@ jobs:
           
 
   unit_test_and_deploy_desktop_app:
-    name: Unit Test Desktop App
+    permissions: write-all
+    name: Unit Test and Deploy Desktop App
     needs:
       - setup
     if: $${{needs.setup.steps.determine_testsuite.outputs.test_desktop_app == 'True'}}
@@ -97,6 +98,7 @@ jobs:
           release-url: ${{ steps.create_release.outputs.upload_url }}
 
   deploy_services_for_desktop_app:
+    permissions: write-all
     name: Deploy Services for Desktop App
     needs:
       - setup
@@ -138,7 +140,8 @@ jobs:
         run: dotnet test ${{env.TestServicesForDesktopApp_Project_Path}}
 
   unit_test_and_deploy_web_app:
-    name: Test Web App
+    permissions: write-all
+    name: Test and Deploy Web App
     needs:
       - setup
     if: $${{needs.setup.steps.determine_testsuite.outputs.test_web_app == 'True'}}
