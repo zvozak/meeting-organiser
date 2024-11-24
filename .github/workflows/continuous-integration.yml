@@ -2,8 +2,6 @@ name:  Continuous Integration
 
 on:
   push:
-    branches:
-      - master
     paths-ignore:
       - '*.txt'
       - '*.pdf'
@@ -24,9 +22,9 @@ env:
   WebAppForMembers_Project_Folder: WebAppForMembers
   DotnetVersion: '3.1.x'
   Platform: 'win-x64'
-  MeetingOrganiserDesktopApp_PublishFolder: ${{env.MeetingOrganiserDesktopApp_Folder_Path}}/bin/Release/netcoreapp3.1/${{Platform}}/publish
-  ServicesForDesktopApp_PublishFolder: ${{env.ServicesForDesktopApp}}/bin/Release/netcoreapp3.1/${{Platform}}/publish
-  WebAppForMembers_PublishFolder: ${{env.WebAppForMembers_Project_Folder}}/bin/Release/netcoreapp3.1/${{Platform}}/publish
+  MeetingOrganiserDesktopApp_PublishFolder: ${{MeetingOrganiserDesktopApp_Folder_Path}}/bin/Release/netcoreapp3.1/${{Platform}}/publish
+  ServicesForDesktopApp_PublishFolder: ${{ServicesForDesktopApp}}/bin/Release/netcoreapp3.1/${{Platform}}/publish
+  WebAppForMembers_PublishFolder: ${{WebAppForMembers_Project_Folder}}/bin/Release/netcoreapp3.1/${{Platform}}/publish
 
 jobs:
 
