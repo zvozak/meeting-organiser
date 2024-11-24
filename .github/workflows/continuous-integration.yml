@@ -29,6 +29,7 @@ env:
 jobs:
 
   deploy_services_for_desktop_app:
+    if: startsWith(github.ref, 'refs/tags/')
     permissions: write-all
     name: Deploy Services for Desktop App
     runs-on: windows-latest
@@ -41,6 +42,5 @@ jobs:
       - run: dotnet build ${{ env.ServicesForDesktopApp_Project_Path }} -c Release --no-restore -p:PublishSingleFile=true
       - run: dotnet publish ${{ env.ServicesForDesktopApp_Project_Path }} -c Release --self-contained -r ${{env.Platform}} -p:PublishSingleFile=true --no-build
       - uses: softprops/action-gh-release@v2
-        if: startsWith(github.ref, 'refs/tags/')
         with:
           files: $${{env.ServicesForDesktopApp_PublishFolder}}/*.exe
