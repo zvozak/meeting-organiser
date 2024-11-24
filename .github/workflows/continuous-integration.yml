@@ -31,9 +31,6 @@ jobs:
   deploy_services_for_desktop_app:
     permissions: write-all
     name: Deploy Services for Desktop App
-    needs:
-      - setup
-    if: $${{needs.setup.steps.determine_testsuite.outputs.release_services_for_desktop_app == 'True'}}
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
