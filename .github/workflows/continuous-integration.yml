@@ -62,7 +62,7 @@ jobs:
             $SourceDiff = $diff | Where-Object { $_ -match '^${{env.WebAppForMembers_Project_Folder}}/' -or $_ -match '^Test${{env.WebAppForMembers_Project_Folder}}/'}
             $MustTestWebAppForMembers = $SourceDiff.Length -gt 0
           }
-          echo "test_desktop_app=$MustTestDesktopApp" >> "$GITHUB_OUTPUT"
+          echo "test_desktop_app=$MustTestDesktopApp" >> $GITHUB_OUTPUT
           echo "run_integration_tests_for_services_for_desktop_app=$MustRunIntegrationTestsForServicesForDesktopApp" >> $GITHUB_OUTPUT
           echo "test_web_app=$MustTestWebAppForMembers" >> $GITHUB_OUTPUT
           echo "release_services_for_desktop_app=$MustReleaseServicesForDesktopApp" >> $GITHUB_OUTPUT
