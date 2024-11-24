@@ -63,9 +63,9 @@ jobs:
             $MustTestWebAppForMembers = $SourceDiff.Length -gt 0
           }
           echo "test_desktop_app=$MustTestDesktopApp" >> "$GITHUB_OUTPUT"
-          echo "::set-output name=run_integration_tests_for_services_for_desktop_app::$MustRunIntegrationTestsForServicesForDesktopApp"
-          echo "::set-output name=test_web_app::$MustTestWebAppForMembers"
-          echo "::set-output name=release_services_for_desktop_app::$MustReleaseServicesForDesktopApp"
+          echo "run_integration_tests_for_services_for_desktop_app=$MustRunIntegrationTestsForServicesForDesktopApp >> "$GITHUB_OUTPUT"
+          echo "test_web_app=$MustTestWebAppForMembers >> "$GITHUB_OUTPUT"
+          echo "release_services_for_desktop_app=$MustReleaseServicesForDesktopApp >> "$GITHUB_OUTPUT"
           
 
   unit_test_and_deploy_desktop_app:
@@ -81,8 +81,7 @@ jobs:
           dotnet-version: ${{env.DotnetVersion}}
       - name: Execute Unit Tests
         run: dotnet test ${{env.TestMeetingOrganiserDesktopApp_Project_Path}}
-      - run: dotnet restore ${{ env.MeetingOrganiserDesktopApp_Project_Path }}
-      - run: dotnet build ${{ env.MeetingOrganiserDesktopApp_Project_Path }} -c Release --no-restore
+      - run: dotnet build ${{ env.MeetingOrganiserDesktopApp_Project_Path }} -c Release
       - run: dotnet publish ${{ env.MeetingOrganiserDesktopApp_Project_Path }} -c Release --self-contained -r ${{env.Platform}} -p:PublishSingleFile=true --no-build
       - uses: actions/create-release@v1
         id: create_release
