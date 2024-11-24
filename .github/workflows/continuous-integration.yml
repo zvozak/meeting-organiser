@@ -31,6 +31,8 @@ jobs:
   deploy_services_for_desktop_app:
     permissions: write-all
     name: Deploy Services for Desktop App
+    needs:
+      - setup
     if: $${{needs.setup.steps.determine_testsuite.outputs.release_services_for_desktop_app == 'True'}}
     runs-on: windows-latest
     steps:
@@ -41,15 +43,7 @@ jobs:
       - run: dotnet restore ${{ env.ServicesForDesktopApp_Project_Path }}
       - run: dotnet build ${{ env.ServicesForDesktopApp_Project_Path }} -c Release --no-restore -p:PublishSingleFile=true
       - run: dotnet publish ${{ env.ServicesForDesktopApp_Project_Path }} -c Release --self-contained -r ${{env.Platform}} -p:PublishSingleFile=true --no-build
-      - uses: actions/create-release@v1
-        id: create_release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - uses: softprops/action-gh-release@v2
+        if: startsWith(github.ref, 'refs/tags/')
         with:
-          tag_name: ${{ github.ref }}
-          release_name: ${{ github.ref }}
-      - uses: csexton/release-asset-action@v2
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          pattern: ${{env.ServicesForDesktopApp_PublishFolder}}/*.exe
-          release-url: ${{ steps.create_release.outputs.upload_url }}
+          files: $${{env.ServicesForDesktopApp_PublishFolder}}/*.exe
