@@ -108,7 +108,7 @@ jobs:
         with:
           dotnet-version: ${{env.DotnetVersion}}
       - run: dotnet restore ${{ env.ServicesForDesktopApp_Project_Path }}
-      - run: dotnet build ${{ env.ServicesForDesktopApp_Project_Path }} -c Release --no-restore
+      - run: dotnet build ${{ env.ServicesForDesktopApp_Project_Path }} -c Release --no-restore -p:PublishSingleFile=true
       - run: dotnet publish ${{ env.ServicesForDesktopApp_Project_Path }} -c Release --self-contained -r ${{env.Platform}} -p:PublishSingleFile=true --no-build
       - uses: actions/create-release@v1
         id: create_release
