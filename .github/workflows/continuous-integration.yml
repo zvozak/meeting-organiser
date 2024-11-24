@@ -45,4 +45,4 @@ jobs:
       - run: dotnet publish ${{ env.ServicesForDesktopApp_Project_Path }} -c Release --self-contained -r ${{env.Platform}} -p:PublishSingleFile=true --no-build
       - uses: softprops/action-gh-release@v2
         with:
-          files: ${{env.ServicesForDesktopApp_PublishFolder}}/*.exe
+          files: **/Release/**.exe
