@@ -1,0 +1,78 @@
+name:  Continuous Deployment
+
+on:
+    workflow_run:
+        workflows: [Continuous Integration]
+        types: [completed]
+
+env:
+  DesktopApp_Project_Path: MeetingOrganiserDesktopApp\MeetingOrganiserDesktopApp.csproj
+  ServicesForDesktopApp_Project_Path: ServicesForDesktopApp\ServicesForDesktopApp.csproj
+  WebApp_Project_Path: WebAppForMembers\WebAppForMembers.csproj
+  DesktopApp_Project_Folder: MeetingOrganiserDesktopApp
+  ServicesForDesktopApp_Project_Folder: ServicesForDesktopApp
+  WebApp_Project_Folder: WebAppForMembers
+  DotnetVersion: '3.1.x'
+  Platform: 'win-x64'
+
+jobs:
+
+  deploy_desktop_app:
+    name: Deploy Desktop App
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{env.DotnetVersion}}
+      - run: dotnet restore ${{ env.DesktopApp_Project_Path }}
+      - run: dotnet build ${{ env.DesktopApp_Project_Path }} -c Release --no-restore -p:PublishSingleFile=true
+      - run: dotnet publish ${{ env.DesktopApp_Project_Path }} -c Release --self-contained -r ${{env.Platform}} -p:PublishSingleFile=true --no-build
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{env.DesktopApp_Project_Folder}}
+          path: |
+              **/publish
+          overwrite: true
+
+  deploy_services_for_desktop_app:
+    name: Deploy Services for Desktop App
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{env.DotnetVersion}}
+      - run: dotnet restore ${{ env.ServicesForDesktopApp_Project_Path }}
+      - run: dotnet build ${{ env.ServicesForDesktopApp_Project_Path }} -c Release --no-restore -p:PublishSingleFile=true
+      - run: dotnet publish ${{ env.ServicesForDesktopApp_Project_Path }} -c Release --self-contained -r ${{env.Platform}} -p:PublishSingleFile=true --no-build
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{env.ServicesForDesktopApp_Project_Folder}}
+          path: |
+              **/publish
+          overwrite: true
+
+  deploy_web_app:
+    name: Deploy Web App
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{env.DotnetVersion}}
+      - run: dotnet restore ${{ env.WebApp_Project_Path }}
+      - run: dotnet build ${{ env.WebApp_Project_Path }} -c Release --no-restore -p:PublishSingleFile=true
+      - run: dotnet publish ${{ env.WebApp_Project_Path }} -c Release --self-contained -r ${{env.Platform}} -p:PublishSingleFile=true --no-build
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{env.WebApp_Project_Folder}}
+          path: |
+              **/publish
+          overwrite: true
