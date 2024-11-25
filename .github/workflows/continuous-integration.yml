@@ -5,20 +5,20 @@ on:
     branches:
       - master
     paths-ignore:
-      - '*.txt'
-      - '*.pdf'
+      - '**.txt'
+      - '**.pdf'
       - '**.md'
   pull_request:
     branches:
       - master
 
 env:
-  TestMeetingOrganiserDesktopApp_Project_Path: TestMeetingOrganiserDesktopApp\TestMeetingOrganiserDesktopApp.csproj
+  TestDesktopApp_Project_Path: TestMeetingOrganiserDesktopApp\TestMeetingOrganiserDesktopApp.csproj
   TestServicesForDesktopApp_Project_Path: TestServicesForDesktopApp\TestServicesForDesktopApp.csproj
-  TestWebAppForMembers_Project_Path: TestWebAppForMembers\TestWebAppForMembers.csproj
-  MeetingOrganiserDesktopApp_Folder: MeetingOrganiserDesktopApp
+  TestWebApp_Project_Path: TestWebAppForMembers\TestWebAppForMembers.csproj
+  DesktopApp_Project_Folder: MeetingOrganiserDesktopApp
   ServicesForDesktopApp_Project_Folder: ServicesForDesktopApp
-  WebAppForMembers_Project_Folder: WebAppForMembers
+  WebApp_Project_Folder: WebAppForMembers
   DotnetVersion: '3.1.x'
 
 jobs:
@@ -38,27 +38,27 @@ jobs:
           $HasCommonDiff = $SourceDiff.Length -gt 0
           $MustTestDesktopApp = $HasCommonDiff
           $MustTestServicesForDesktopApp = $HasCommonDiff
-          $MustTestWebAppForMembers = $HasCommonDiff
+          $MustTestWebApp = $HasCommonDiff
           
           if (-not $HasCommonDiff){
-            $SourceDiff = $diff | Where-Object { $_ -match '^${{env.MeetingOrganiserDesktopApp_Folder}}/'}
+            $SourceDiff = $diff | Where-Object { $_ -match '^${{env.DesktopApp_Project_Folder}}/'}
             $MustTestDesktopApp = $SourceDiff.Length -gt 0
             $MustTestServicesForDesktopApp = $MustTestDesktopApp
             
             if (-not $MustTestDesktopApp){
-              $SourceDiff = $diff | Where-Object { $_ -match '^Test${{env.MeetingOrganiserDesktopApp_Folder}}'}
+              $SourceDiff = $diff | Where-Object { $_ -match '^Test${{env.DesktopApp_Project_Folder}}'}
               $MustTestDesktopApp = $SourceDiff.Length -gt 0
   
               $SourceDiff = $diff | Where-Object { $_ -match '^${{env.ServicesForDesktopApp_Project_Folder}}/' -or $_ -match '^Test${{env.ServicesForDesktopApp_Project_Folder}}/'}
               $MustTestServicesForDesktopApp = $SourceDiff.Length -gt 0
             }
           
-            $SourceDiff = $diff | Where-Object { $_ -match '^${{env.WebAppForMembers_Project_Folder}}/' -or $_ -match '^Test${{env.WebAppForMembers_Project_Folder}}/'}
-            $MustTestWebAppForMembers = $SourceDiff.Length -gt 0
+            $SourceDiff = $diff | Where-Object { $_ -match '^${{env.WebApp_Project_Folder}}/' -or $_ -match '^Test${{env.WebApp_Project_Folder}}/'}
+            $MustTestWebApp = $SourceDiff.Length -gt 0
           }
           echo "test_desktop_app=$MustTestDesktopApp" >> "$GITHUB_OUTPUT"
           echo "::set-output name=test_services_for_desktop_app::$MustTestServicesForDesktopApp"
-          echo "::set-output name=test_web_app::$MustTestWebAppForMembers"
+          echo "::set-output name=test_web_app::$MustTestWebApp"
           
 
   unit_test_desktop_app:
@@ -73,7 +73,7 @@ jobs:
         with:
           dotnet-version: ${{env.DotnetVersion}}
       - name: Execute Unit Tests
-        run: dotnet test ${{env.TestMeetingOrganiserDesktopApp_Project_Path}}
+        run: dotnet test ${{env.TestDesktopApp_Project_Path}}
 
   integration_test_desktop_app_and_services:
     name: Integration Test Desktop App with Services
@@ -101,4 +101,4 @@ jobs:
         with:
           dotnet-version: ${{env.DotnetVersion}}
       - name: Execute Unit Tests
-        run: dotnet test ${{env.TestWebAppForMembers_Project_Path}}
+        run: dotnet test ${{env.TestWebApp_Project_Path}}

@@ -44,12 +44,7 @@ namespace MeetingOrganiserDesktopApp
 
         private void App_Startup(object sender, StartupEventArgs e)
         {
-            IConfigurationBuilder configBuilder = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
-            IConfigurationRoot configuration = configBuilder.Build();
-
-            model = new MeetingApplicationModel(new MeetingApplicationServicePersistence(configuration["BaseAddress"]));
+            model = new MeetingApplicationModel(new MeetingApplicationServicePersistence(ConfigurationManager.AppSettings["baseAddress"]));
 
             loginViewModel = new LoginViewModel(model);
             loginViewModel.ExitApplication += new EventHandler(ViewModel_ExitApplication);
